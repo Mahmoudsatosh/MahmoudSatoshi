@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; media-src blob: mediastream: data:; connect-src https://buvixsokavrxuwpikefl.supabase.co; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#06142B">
+<link rel="icon" href="data:,">
+<meta name="robots" content="noindex,nofollow">
+<title>اتصل بالمحل — Gomla4U</title>
+<style>
+:root{--bg0:#050D1F;--bg1:#0A1E44;--cy:#2DE2E6;--bl:#3B82F6;--ok:#34D399;--bad:#F87171;--tx:#EAF2FF;--tx2:#9FB3D6;--glass:rgba(255,255,255,.06);--gl-b:rgba(255,255,255,.12)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(120% 80% at 80% -10%,#12356F 0%,transparent 55%),radial-gradient(90% 60% at 0% 110%,#0B5A66 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg0));color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,"Noto Sans Arabic",Arial,sans-serif;overflow:hidden}
+#net{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.55}
+main{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:max(22px,env(safe-area-inset-top)) 20px max(22px,env(safe-area-inset-bottom));text-align:center}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;letter-spacing:.3px;color:var(--tx2);font-size:14px}
+.brand i{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cy),var(--bl));color:#031024;font-style:normal;font-weight:900;font-size:14px}
+.stage{display:flex;flex-direction:column;align-items:center;gap:16px;width:100%;max-width:420px}
+.shop{font-size:27px;font-weight:800;line-height:1.3;margin:0;word-break:break-word}
+.desc{color:var(--tx2);font-size:15px;line-height:1.8;margin:0;max-width:320px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:var(--glass);border:1px solid var(--gl-b);font-size:13.5px;font-weight:700;backdrop-filter:blur(6px)}
+.dot{width:9px;height:9px;border-radius:50%;background:#7C8CA8}
+.chip.on .dot{background:var(--ok);box-shadow:0 0 0 0 rgba(52,211,153,.7);animation:blink 1.8s infinite}
+.chip.off .dot{background:var(--bad)}
+@keyframes blink{70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.callwrap{position:relative;width:190px;height:190px;display:grid;place-items:center;margin:8px 0}
+.callwrap::before,.callwrap::after{content:"";pointer-events:none;position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(45,226,230,.45);animation:ring 2.6s ease-out infinite}
+.callwrap::after{animation-delay:1.3s}
+.callwrap.idle::before,.callwrap.idle::after{animation:none;opacity:0}
+@keyframes ring{0%{transform:scale(.62);opacity:.9}100%{transform:scale(1.25);opacity:0}}
+.callbtn{position:relative;width:132px;height:132px;border-radius:50%;border:0;color:#021022;cursor:pointer;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#8FF6F8,var(--cy) 40%,#1E9BE9 100%);box-shadow:0 0 0 6px rgba(45,226,230,.14),0 14px 44px rgba(45,226,230,.45),inset 0 2px 0 rgba(255,255,255,.55);transition:transform .15s}
+.callbtn:active{transform:scale(.95)}
+.callbtn:disabled{filter:grayscale(.9) brightness(.7);box-shadow:none;cursor:not-allowed}
+.callbtn svg{width:54px;height:54px}
+.cta{font-size:19px;font-weight:800}
+.hint{font-size:12.5px;color:var(--tx2);line-height:1.8}
+.link{background:none;border:0;color:var(--cy);font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;padding:6px}
+.nm{width:100%;max-width:260px;padding:11px 14px;border-radius:14px;border:1px solid var(--gl-b);background:var(--glass);color:var(--tx);font-size:15px;text-align:center;outline:none}
+.nm:focus{border-color:var(--cy)}
+.msg{padding:12px 16px;border-radius:14px;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:#FFD5D5;font-size:14px;line-height:1.8;max-width:340px}
+.msg.info{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.45);color:#D6E6FF}
+.foot{font-size:11.5px;color:#6C7FA3}
+.hide{display:none!important}
+/* شاشة المكالمة */
+.avatar{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-size:38px;font-weight:900;color:#031024;background:linear-gradient(135deg,var(--cy),var(--bl));box-shadow:0 10px 36px rgba(45,226,230,.35)}
+.timer{font-variant-numeric:tabular-nums;font-size:34px;font-weight:300;letter-spacing:2px;min-height:44px}
+.status{font-size:15px;color:var(--tx2);min-height:24px}
+.wave{display:flex;align-items:center;justify-content:center;gap:5px;height:64px}
+.wave b{width:5px;height:8px;border-radius:5px;background:linear-gradient(180deg,var(--cy),var(--bl));transition:height .09s linear}
+.wave.ring b{animation:wv 1.2s ease-in-out infinite}
+.wave.ring b:nth-child(2n){animation-delay:.2s}.wave.ring b:nth-child(3n){animation-delay:.4s}.wave.ring b:nth-child(5n){animation-delay:.6s}
+@keyframes wv{0%,100%{height:8px;opacity:.5}50%{height:30px;opacity:1}}
+.endbtn{width:74px;height:74px;border-radius:50%;border:0;background:linear-gradient(180deg,#FB7185,#E11D48);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(225,29,72,.5)}
+.endbtn svg{width:34px;height:34px;transform:rotate(135deg)}
+.endlbl{font-size:13px;color:var(--tx2);margin-top:6px}
+.btn2{padding:13px 26px;border-radius:99px;border:1px solid var(--gl-b);background:var(--glass);color:var(--tx);font-size:16px;font-weight:800;cursor:pointer}
+.btn2.p{background:linear-gradient(135deg,var(--cy),var(--bl));color:#031024;border:0}
+@media (prefers-reduced-motion:reduce){.callwrap::before,.callwrap::after,.chip.on .dot,.wave.ring b{animation:none}}
+@media (max-height:640px){.callwrap{transform:scale(.82);margin:-8px 0}.shop{font-size:23px}}
+</style>
+</head>
+<body>
+<canvas id="net" aria-hidden="true"></canvas>
+<audio id="remote" autoplay playsinline></audio>
+<main>
+  <div class="brand"><i>G</i><span>Gomla4U</span></div>
+
+  <!-- شاشة المحل -->
+  <section class="stage" id="home">
+    <h1 class="shop" id="shop">…</h1>
+    <p class="desc">عندك استفسار؟ اتواصل مع المحل مباشرة عبر الإنترنت</p>
+    <span class="chip" id="avail"><span class="dot"></span><span id="availTx">بنجهّز الاتصال…</span></span>
+    <div class="callwrap idle" id="cw"><button class="callbtn" id="callBtn" disabled aria-label="اتصل بالمحل"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></button></div>
+    <div class="cta" id="cta">اتصل بالمحل</div>
+    <div id="nmBox"><button class="link" id="nmLink" type="button">إضافة اسمك (اختياري)</button><input class="nm hide" id="nm" maxlength="40" placeholder="اسمك" autocomplete="name"></div>
+    <div class="msg hide" id="err" role="alert"></div>
+    <div class="hint">المكالمة عن طريق الإنترنت وماتستهلكش رصيد مكالمات.<br>هنطلب إذن الميكروفون لما تضغط على الزر.</div>
+  </section>
+
+  <!-- شاشة المكالمة -->
+  <section class="stage hide" id="call">
+    <div class="avatar" id="av">م</div>
+    <h2 class="shop" id="cshop" style="font-size:24px"></h2>
+    <div class="timer" id="timer"></div>
+    <div class="status" id="status"></div>
+    <div class="wave ring" id="wave"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+    <div><button class="endbtn" id="endBtn" aria-label="إنهاء المكالمة"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></button><div class="endlbl" id="endLbl">إنهاء</div></div>
+  </section>
+
+  <!-- بعد المكالمة -->
+  <section class="stage hide" id="done">
+    <div class="avatar" style="background:linear-gradient(135deg,#34D399,#2DE2E6)">✓</div>
+    <h2 class="shop" style="font-size:24px" id="doneT">انتهت المكالمة</h2>
+    <p class="desc" id="doneD"></p>
+    <button class="btn2 p" id="back">رجوع لشاشة المحل</button>
+  </section>
+
+  <div class="foot">Gomla4U · مكالمة صوتية مباشرة · بدون تسجيل</div>
+</main>
+<script>
+(function(){
+'use strict';
+const SUPA='https://buvixsokavrxuwpikefl.supabase.co', KEY='sb_publishable_UzXzPaiuLgDhjVtsFVXeYQ_XlpDbUvN';
+const $=id=>document.getElementById(id);
+const TOKEN=(new URLSearchParams(location.search).get('s')||'').trim();
+let shopName='المحل', ice=[{urls:['stun:stun.l.google.com:19302']}], avail=false, S=null; /* S = حالة المكالمة الحالية */
+const T=(k,v)=>{ try{ return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v); }catch(_){ return null; } };
+
+/* ---------- RPC ---------- */
+async function rpc(name,args,keep){
+  const r=await fetch(SUPA+'/rest/v1/rpc/'+name,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(args||{}),keepalive:!!keep});
+  let j=null; try{ j=await r.json(); }catch(_){}
+  if(!r.ok){ const e=new Error((j&&(j.message||j.hint))||('HTTP '+r.status)); e.code=(j&&j.message)||''; throw e; }
+  return j;
+}
+
+/* ---------- خلفية الشبكة (خفيفة) ---------- */
+(function(){ const c=$('net'), x=c.getContext('2d'); let w,h,P=[],raf,on=true;
+  function size(){ const d=Math.min(devicePixelRatio||1,2); w=c.width=innerWidth*d; h=c.height=innerHeight*d; x.setTransform(1,0,0,1,0,0); P=[]; const n=Math.round(Math.min(46,innerWidth*innerHeight/22000)); for(let i=0;i<n;i++) P.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25*d,vy:(Math.random()-.5)*.25*d}); }
+  function draw(){ if(!on) return; x.clearRect(0,0,w,h); const L=150*(devicePixelRatio||1);
+    for(let i=0;i<P.length;i++){ const p=P[i]; p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1;
+      for(let j=i+1;j<P.length;j++){ const q=P[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy); if(d<L){ x.strokeStyle='rgba(45,226,230,'+(.22*(1-d/L))+')'; x.lineWidth=1; x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke(); } }
+      x.fillStyle='rgba(143,246,248,.7)'; x.beginPath(); x.arc(p.x,p.y,1.6*(devicePixelRatio||1),0,7); x.fill(); }
+    raf=requestAnimationFrame(draw); }
+  addEventListener('resize',size); document.addEventListener('visibilitychange',()=>{ on=!document.hidden; if(on) draw(); else cancelAnimationFrame(raf); });
+  size(); if(!matchMedia('(prefers-reduced-motion:reduce)').matches) draw();
+})();
+
+/* ---------- شاشة المحل ---------- */
+function show(id){ ['home','call','done'].forEach(s=>$(s).classList.toggle('hide',s!==id)); }
+function showErr(m,info){ const e=$('err'); e.textContent=m||''; e.classList.toggle('hide',!m); e.classList.toggle('info',!!info); }
+let busyFlag=false;
+function paintAvail(){ const ok=avail&&!busyFlag; const a=$('avail'); a.className='chip '+(ok?'on':'off'); $('availTx').textContent=ok?'المحل متاح للرد دلوقتي':(avail&&busyFlag?'المحل على مكالمة تانية دلوقتي':'المحل غير متاح حالياً'); $('callBtn').disabled=!ok||!!S; $('cw').classList.toggle('idle',!ok||!!S); }
+let infoBusy=false;
+async function loadInfo(){
+  if(infoBusy||S) return; infoBusy=true;
+  try{
+    if(!TOKEN){ showErr('رابط المحل غير مكتمل. اطلب من المحل يبعتلك الرابط الصحيح.'); $('shop').textContent='رابط غير صالح'; avail=false; paintAvail(); return; }
+    const d=await rpc('call_shop_info',{p_token:TOKEN});
+    if(!d||!d.ok){ $('shop').textContent='المحل مش متاح'; showErr('الرابط ده غير صالح أو المكالمات متوقفة عند المحل.'); avail=false; paintAvail(); return; }
+    shopName=d.name||'المحل'; if(Array.isArray(d.ice)&&d.ice.length) ice=d.ice; $('shop').textContent=shopName; avail=!!d.available; busyFlag=!!d.busy; paintAvail(); if(!$('err').classList.contains('info')||avail) showErr('');
+  }catch(e){ $('availTx').textContent='مفيش اتصال بالإنترنت'; $('avail').className='chip off'; $('callBtn').disabled=true; }
+  finally{ infoBusy=false; }
+}
+$('nmLink').onclick=()=>{ $('nmLink').classList.add('hide'); const n=$('nm'); n.classList.remove('hide'); n.value=T('gm_call_name')||''; n.focus(); };
+{ const sv=T('gm_call_name'); if(sv){ $('nmLink').textContent='الاسم: '+sv+' (تعديل)'; } }
+
+/* ---------- WebRTC ---------- */
+const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function gather(pc,ms){ return new Promise(res=>{ if(pc.iceGatheringState==='complete') return res(); const t=setTimeout(done,ms); function done(){ clearTimeout(t); pc.removeEventListener('icegatheringstatechange',chk); res(); } function chk(){ if(pc.iceGatheringState==='complete') done(); } pc.addEventListener('icegatheringstatechange',chk); }); }
+function setStatus(t){ $('status').textContent=t; }
+function cleanup(){
+  if(!S) return; const s=S; S=null;
+  clearInterval(s.poll); clearInterval(s.tick); clearTimeout(s.to); clearInterval(s.lv);
+  try{ s.pc&&s.pc.close(); }catch(_){}
+  try{ s.stream&&s.stream.getTracks().forEach(t=>t.stop()); }catch(_){}   /* الميكروفون يتقفل فوراً */
+  try{ s.ac&&s.ac.close(); }catch(_){}
+  $('remote').srcObject=null;
+}
+function finish(title,desc,okIcon){
+  const dur=S&&S.t0?Math.round((Date.now()-S.t0)/1000):0;
+  cleanup(); show('done'); $('doneT').textContent=title; $('doneD').textContent=desc||(dur?'مدة المكالمة '+mmss(dur):'');
+  document.querySelector('#done .avatar').textContent=okIcon===false?'!':'✓';
+  document.querySelector('#done .avatar').style.background=okIcon===false?'linear-gradient(135deg,#FB7185,#F59E0B)':'linear-gradient(135deg,#34D399,#2DE2E6)';
+}
+async function endByUser(){ if(!S) return; const s=S; const ringing=!s.connected; try{ await rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true); }catch(_){} finish(ringing?'اتلغى الاتصال':'انتهت المكالمة',ringing?'لو لسه محتاج المحل، جرّب تتصل تاني.':''); }
+const MAP={NOT_AVAILABLE:'المحل مش متاح للرد دلوقتي. جرّب بعد شوية.',BUSY:'المحل على مكالمة تانية دلوقتي. جرّب بعد دقيقة.',RATE_LIMIT:'محاولات كتير ورا بعض. استنى دقيقة وجرّب تاني.',NOT_FOUND:'الرابط ده غير صالح أو المكالمات متوقفة عند المحل.',BAD_OFFER:'حصلت مشكلة في بدء الاتصال. جرّب تاني.'};
+async function startCall(){
+  if(S) return; showErr('');
+  if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.RTCPeerConnection){ showErr('المتصفح ده مش بيدعم المكالمات الصوتية، أو الصفحة مش مفتوحة برابط آمن (https). افتح الرابط من Chrome.'); return; }
+  const nm=($('nm').value||'').trim().slice(0,40)||T('gm_call_name')||''; if(nm) T('gm_call_name',nm);
+  S={connected:false}; paintAvail();
+  const s=S;
+  let stream;
+  try{ stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false}); }
+  catch(e){ S=null; paintAvail(); const n=e&&e.name; showErr(n==='NotAllowedError'||n==='SecurityError'?'محتاجين إذن الميكروفون عشان تتكلم مع المحل. اسمح بالميكروفون من أيقونة 🔒 جنب الرابط ثم جرّب تاني.':n==='NotFoundError'?'مفيش ميكروفون شغّال على الجهاز.':'تعذّر تشغيل الميكروفون.'); return; }
+  s.stream=stream;
+  $('cshop').textContent=shopName; $('av').textContent=(shopName.trim()[0]||'م'); $('timer').textContent=''; setStatus('بنتصل بالمحل…'); $('wave').className='wave ring'; show('call');
+  try{
+    const pc=new RTCPeerConnection({iceServers:ice}); s.pc=pc;
+    stream.getTracks().forEach(t=>pc.addTrack(t,stream));
+    pc.ontrack=e=>{ const a=$('remote'); a.srcObject=e.streams[0]; a.play&&a.play().catch(()=>{}); levels(e.streams[0]); };
+    pc.onconnectionstatechange=()=>{ if(S!==s) return; const st=pc.connectionState;
+      if(st==='connected'){ if(!s.connected){ s.connected=true; s.t0=Date.now(); setStatus('متصل'); $('wave').className='wave'; s.tick=setInterval(()=>{ $('timer').textContent=mmss(Math.round((Date.now()-s.t0)/1000)); },500); $('timer').textContent='00:00'; } clearTimeout(s.dc); setStatus('متصل'); }
+      else if(st==='disconnected'){ setStatus('الاتصال ضعيف… بنحاول نرجّعه'); clearTimeout(s.dc); s.dc=setTimeout(()=>{ if(S===s&&pc.connectionState!=='connected'){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('انقطع الاتصال','النت عندك أو عند المحل ضعيف. جرّب تتصل تاني.',false); } },10000); }
+      else if(st==='failed'){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('تعذّر توصيل الصوت','الشبكة بتمنع الاتصال المباشر. جرّب من واي فاي تاني أو بيانات الموبايل.',false); } };
+    const offer=await pc.createOffer({offerToReceiveAudio:true}); await pc.setLocalDescription(offer); await gather(pc,4000);
+    if(S!==s) return;
+    const r=await rpc('call_start',{p_token:TOKEN,p_offer:{type:'offer',sdp:pc.localDescription.sdp},p_name:nm||null});
+    if(S!==s){ rpc('call_end_caller',{p_id:r.id,p_secret:r.secret},true).catch(()=>{}); return; }
+    s.id=r.id; s.secret=r.secret; setStatus('بيرنّ عند المحل…');
+    s.to=setTimeout(()=>{ if(S===s&&!s.connected&&!s.answered){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('محدش رد','المحل مارداش دلوقتي. جرّب تتصل تاني بعد شوية.',false); } },46000);
+    let busyPoll=false;
+    s.poll=setInterval(async()=>{ if(S!==s||busyPoll) return; busyPoll=true; try{
+      const p=await rpc('call_poll',{p_id:s.id,p_secret:s.secret}); if(S!==s) return;
+      if(p.status==='answered'&&p.answer&&!s.answered){ s.answered=true; clearTimeout(s.to); setStatus('بنوصّل الصوت…'); await pc.setRemoteDescription({type:'answer',sdp:p.answer.sdp}); }
+      else if(p.status==='rejected'){ finish('المحل مش قادر يرد','المحل رفض المكالمة دلوقتي. جرّب بعد شوية.',false); }
+      else if(p.status==='missed'||p.status==='cancelled'){ finish('محدش رد','المحل مارداش دلوقتي. جرّب تاني بعد شوية.',false); }
+      else if(p.status==='ended'||p.status==='gone'){ finish(s.connected?'انتهت المكالمة':'اتقفل الاتصال',''); }
+    }catch(e){ s.fail=(s.fail||0)+1; if(s.fail>=8){ finish('انقطع الاتصال بالإنترنت','اتأكد من النت وجرّب تاني.',false); } else if(S===s) setStatus('مشكلة في الشبكة… بنحاول'); } finally{ busyPoll=false; if(S===s&&s.fail&&s.connected) s.fail=0; } },1000);
+  }catch(e){
+    const code=String(e&&(e.code||e.message)||''); const k=Object.keys(MAP).find(x=>code.includes(x));
+    const m=k?MAP[k]:'تعذّر بدء المكالمة. اتأكد من النت وجرّب تاني.';
+    cleanup(); show('home'); showErr(m,k==='BUSY'||k==='NOT_AVAILABLE'); loadInfo();
+  }
+}
+/* موجة الصوت: من مستوى صوت التاجر الفعلي */
+function levels(stream){
+  const s=S; if(!s) return; try{
+    const AC=window.AudioContext||window.webkitAudioContext; const ac=new AC(); s.ac=ac; const src=ac.createMediaStreamSource(stream); const an=ac.createAnalyser(); an.fftSize=64; src.connect(an);
+    const data=new Uint8Array(an.frequencyBinCount); const bars=[...document.querySelectorAll('#wave b')];
+    s.lv=setInterval(()=>{ an.getByteFrequencyData(data); bars.forEach((b,i)=>{ const v=data[Math.min(data.length-1,i+1)]/255; b.style.height=(8+v*52)+'px'; }); },90);
+  }catch(_){}
+}
+$('callBtn').onclick=startCall;
+$('endBtn').onclick=endByUser;
+$('back').onclick=()=>{ show('home'); $('err').classList.add('hide'); loadInfo(); };
+addEventListener('pagehide',()=>{ if(S&&S.id){ try{ rpc('call_end_caller',{p_id:S.id,p_secret:S.secret},true); }catch(_){} } cleanup(); });
+window.__call={get state(){return S;},startCall,loadInfo};
+loadInfo(); setInterval(()=>{ if(!document.hidden) loadInfo(); },15000);
+})();
+</script>
+</body>
+</html>
