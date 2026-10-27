@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; media-src blob: mediastream: data:; connect-src https://buvixsokavrxuwpikefl.supabase.co; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#06142B">
+<link rel="icon" href="data:,">
+<meta name="robots" content="noindex,nofollow">
+<title>اتصل بالمحل — Gomla4U</title>
+<style>
+:root{--bg0:#0B0820;--bg1:#1E1250;--cy:#B9A0FF;--bl:#6D3FD1;--ok:#14A36F;--ok2:#0E8A5B;--bad:#F87171;--warn:#FBBF24;--tx:#EAF2FF;--tx2:#9DB1D3;--tx3:#6C7FA3;--glass:rgba(255,255,255,.055);--gl-b:rgba(255,255,255,.11);--card:rgba(20,12,56,.6)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(110% 70% at 80% -10%,#4A2A9E 0%,transparent 58%),radial-gradient(90% 60% at 0% 110%,#2B1A6B 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg0));color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,"Noto Sans Arabic",Arial,sans-serif;overflow:hidden}
+#net{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.5}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+main{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:stretch;padding:max(14px,env(safe-area-inset-top)) 16px max(14px,env(safe-area-inset-bottom));max-width:460px;margin:0 auto;gap:12px}
+/* شريط الحالة العلوي */
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:16px;background:var(--glass);border:1px solid var(--gl-b);backdrop-filter:blur(8px)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14.5px;color:var(--tx)}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cy),var(--bl));color:#fff;font-style:normal;font-weight:900;font-size:15px;box-shadow:0 4px 14px rgba(185,160,255,.35)}
+.brand small{display:block;font-weight:600;font-size:10.5px;color:var(--tx3);letter-spacing:.3px;margin-top:1px}
+.sec{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--tx2)}
+.sec svg{width:14px;height:14px;color:var(--cy)}
+.scr{flex:1;display:flex;flex-direction:column;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.hide{display:none!important}
+/* بطاقة الخدمة */
+.card{margin:auto 0;border-radius:26px;padding:22px 18px 18px;text-align:center;background:linear-gradient(180deg,rgba(60,36,132,.5),var(--card));border:1px solid var(--gl-b);box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;gap:14px}
+.logo{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;font-size:32px;font-weight:900;color:#031024;background:linear-gradient(135deg,var(--cy),var(--bl));box-shadow:0 12px 30px rgba(185,160,255,.35),inset 0 2px 0 rgba(255,255,255,.5)}
+.dept{font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--cy)}
+.shop{font-size:26px;font-weight:800;line-height:1.3;margin:0;word-break:break-word}
+.desc{color:var(--tx2);font-size:14.5px;line-height:1.8;margin:0;max-width:310px}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--gl-b);font-size:13.5px;font-weight:800}
+.dot{width:10px;height:10px;border-radius:50%;background:#7C8CA8;flex:none}
+.chip.on{border-color:rgba(34,197,94,.55);background:rgba(34,197,94,.12);color:#BBF7D0}
+.chip.on .dot{background:var(--ok);animation:blink 1.8s infinite}
+.chip.off{border-color:rgba(248,113,113,.45);background:rgba(248,113,113,.1);color:#FECACA}
+.chip.off .dot{background:var(--bad)}
+@keyframes blink{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}70%,100%{box-shadow:0 0 0 9px rgba(34,197,94,0)}}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.feats div{padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);font-size:11.5px;font-weight:700;color:var(--tx2);line-height:1.5}
+.feats b{display:block;font-size:17px;margin-bottom:2px}
+/* زر الاتصال */
+.callwrap{position:relative;width:100%;max-width:340px;margin:4px 0 0}
+.callwrap::before,.callwrap::after{content:"";pointer-events:none;position:absolute;inset:0;border-radius:99px;border:2px solid rgba(34,197,94,.55);animation:ring 2.4s ease-out infinite}
+.callwrap::after{animation-delay:1.2s}
+.callwrap.idle::before,.callwrap.idle::after{animation:none;opacity:0}
+@keyframes ring{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.14,1.5);opacity:0}}
+.callbtn{position:relative;width:100%;height:68px;border-radius:99px;border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:14px;font-size:20px;font-weight:800;letter-spacing:.2px;background:linear-gradient(180deg,#34D679 0%,var(--ok) 45%,var(--ok2) 100%);box-shadow:0 12px 32px rgba(34,197,94,.45),inset 0 2px 0 rgba(255,255,255,.4),inset 0 -3px 0 rgba(0,0,0,.14);transition:transform .12s,box-shadow .12s,filter .2s}
+.callbtn .ico{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);flex:none}
+.callbtn .ico svg{width:23px;height:23px}
+.callbtn .lbl{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25}
+.callbtn .lbl small{font-size:11.5px;font-weight:600;opacity:.9}
+.callbtn:active:not(:disabled){transform:scale(.97);box-shadow:0 6px 18px rgba(34,197,94,.4),inset 0 2px 0 rgba(255,255,255,.3)}
+.callbtn:disabled{background:linear-gradient(180deg,#46536E,#37425A);color:#AAB6CE;box-shadow:inset 0 2px 0 rgba(255,255,255,.12);cursor:not-allowed}
+.callbtn:disabled .ico{background:rgba(255,255,255,.1)}
+.hint{font-size:12px;color:var(--tx3);line-height:1.9}
+.link{background:none;border:0;color:var(--cy);font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;padding:8px;min-height:40px}
+.nm{width:100%;max-width:260px;padding:12px 14px;border-radius:14px;border:1px solid var(--gl-b);background:rgba(255,255,255,.06);color:var(--tx);font-size:15px;text-align:center;outline:none}
+.nm:focus{border-color:var(--cy)}
+.msg{padding:12px 16px;border-radius:14px;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:#FFD5D5;font-size:14px;line-height:1.8;width:100%}
+.msg.info{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.45);color:#D6E6FF}
+.foot{text-align:center;font-size:11px;color:var(--tx3)}
+/* شاشة المكالمة */
+.live{margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.livebar{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--gl-b);font-size:12.5px;font-weight:800;color:var(--tx2)}
+.livebar .dot{background:var(--warn)}.livebar.up .dot{background:var(--ok);animation:blink 1.8s infinite}
+.q{display:inline-flex;align-items:flex-end;gap:2px;height:14px;margin-inline-start:6px}.q i{width:4px;background:rgba(255,255,255,.25);border-radius:2px}.q i:nth-child(1){height:5px}.q i:nth-child(2){height:9px}.q i:nth-child(3){height:14px}
+.q.l1 i:nth-child(-n+1),.q.l2 i:nth-child(-n+2),.q.l3 i{background:var(--ok)}.q.l1 i:nth-child(1){background:var(--warn)}
+.avatar{position:relative;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;font-size:42px;font-weight:900;color:#fff;background:linear-gradient(135deg,#8B5CF6,var(--bl));box-shadow:0 10px 36px rgba(185,160,255,.35)}
+.avatar.rip::before,.avatar.rip::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(185,160,255,.5);animation:rip 2.2s ease-out infinite}
+.avatar.rip::after{animation-delay:1.1s}
+@keyframes rip{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+.timer{font-variant-numeric:tabular-nums;font-size:40px;font-weight:300;letter-spacing:3px;min-height:50px;direction:ltr}
+.status{font-size:15px;color:var(--tx2);min-height:24px}
+.diag{font-size:13px;line-height:1.7;min-height:22px;max-width:320px;color:var(--tx2)}.diag.warn{color:#FDE68A}.diag.good{color:#86EFAC}
+.wave{display:flex;align-items:center;justify-content:center;gap:5px;height:60px}
+.wave b{width:5px;height:8px;border-radius:5px;background:linear-gradient(180deg,var(--cy),var(--bl));transition:height .09s linear}
+.wave.ring b{animation:wv 1.2s ease-in-out infinite}
+.wave.ring b:nth-child(2n){animation-delay:.2s}.wave.ring b:nth-child(3n){animation-delay:.4s}.wave.ring b:nth-child(5n){animation-delay:.6s}
+@keyframes wv{0%,100%{height:8px;opacity:.5}50%{height:30px;opacity:1}}
+.ctl{display:flex;gap:30px;align-items:flex-start;justify-content:center;margin-top:6px}
+.ctl>div{display:flex;flex-direction:column;align-items:center;gap:8px}
+.rb{width:68px;height:68px;border-radius:50%;border:1px solid var(--gl-b);background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;cursor:pointer}
+.rb svg{width:28px;height:28px}
+.rb.on{background:#fff;color:#0A1E44}
+.endbtn{width:76px;height:76px;border-radius:50%;border:0;background:linear-gradient(180deg,#FB7185,#E11D48);display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 30px rgba(225,29,72,.5),inset 0 2px 0 rgba(255,255,255,.3)}
+.endbtn svg{width:34px;height:34px;transform:rotate(135deg);color:#fff}
+.endlbl{font-size:12.5px;color:var(--tx2)}
+.btn2{padding:14px 28px;border-radius:99px;border:1px solid var(--gl-b);background:var(--glass);color:var(--tx);font-size:16px;font-weight:800;cursor:pointer;min-height:48px}
+.btn2.p{background:linear-gradient(135deg,#8B5CF6,var(--bl));color:#fff;border:0}
+/* بعد المكالمة */
+.sum{display:flex;gap:10px;width:100%}.sum div{flex:1;padding:12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}.sum b{display:block;font-size:18px}.sum small{color:var(--tx3);font-size:11.5px}
+
+/* هيرو الصفحة الرئيسية (مستوحى من مواقع مراكز الاتصال) */
+#home .card{background:none;border:0;box-shadow:none;backdrop-filter:none;padding:6px 4px 4px;gap:14px}
+.hero{position:relative;width:132px;height:132px;display:grid;place-items:center;margin-bottom:2px}
+.hero::before{content:"";position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.55),rgba(139,92,246,0) 68%);filter:blur(4px)}
+.hero i{position:relative;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 18px 40px rgba(20,8,70,.6)}
+.hero svg{width:62px;height:62px;color:#fff}
+.hero em{position:absolute;bottom:2px;inset-inline-end:2px;min-width:34px;height:34px;padding:0 6px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:16px;background:linear-gradient(135deg,#8B5CF6,var(--bl));color:#fff;border:2px solid #1E1250}
+#home .shop{font-size:32px;font-weight:900;letter-spacing:-.2px}
+#home .dept{color:#C4B0FF;font-size:12.5px}
+#home .desc{font-size:15.5px;color:#C9BFEA}
+.callbtn{height:64px;justify-content:center;gap:12px;font-size:19px;box-shadow:0 12px 30px rgba(14,138,91,.5),inset 0 2px 0 rgba(255,255,255,.28)}
+.callbtn .ico{width:38px;height:38px;background:rgba(0,0,0,.2)}
+.callwrap::before,.callwrap::after{border-color:rgba(20,163,111,.6)}
+.feats div{background:rgba(255,255,255,.05)}
+.meters{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:6px 8px;align-items:center;width:100%;max-width:330px;font-size:11.5px;color:var(--tx3)}
+.mt{height:7px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden}.mt b{display:block;height:100%;width:2%;border-radius:5px;background:linear-gradient(90deg,#8B5CF6,#34D399);transition:width .1s linear}
+.rep{position:fixed;inset:auto 10px 10px 10px;z-index:9;max-height:55vh;overflow:auto;margin:0;padding:12px;border-radius:14px;background:#0B0820;border:1px solid var(--gl-b);color:#D9E4FF;font-size:11px;line-height:1.6;white-space:pre-wrap;direction:ltr;text-align:left}
+@media (prefers-reduced-motion:reduce){.callwrap::before,.callwrap::after,.chip.on .dot,.wave.ring b,.avatar.rip::before,.avatar.rip::after,.livebar.up .dot{animation:none}}
+@media (max-height:700px){.hero{transform:scale(.8);margin:-10px 0}.shop{font-size:22px}.card{padding:16px 14px 14px;gap:10px}.callbtn{height:60px}.feats{display:none}}
+@media (max-height:560px){.desc{display:none}.avatar{width:80px;height:80px;font-size:32px}.timer{font-size:32px;min-height:40px}.wave{height:40px}}
+</style>
+</head>
+<body>
+<canvas id="net" aria-hidden="true"></canvas>
+<audio id="remote" autoplay playsinline></audio>
+<main>
+  <header class="top">
+    <div class="brand"><i>G</i><div>Gomla4U<small>مركز الاتصال</small></div></div>
+    <div class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>اتصال مشفّر</div>
+  </header>
+
+  <!-- شاشة المحل -->
+  <section class="scr" id="home">
+   <div class="card">
+    <div class="hero"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6.5" rx="1.8"/><rect x="17.5" y="13" width="4" height="6.5" rx="1.8"/><path d="M19.5 19.5c0 1.4-1.6 2-4 2h-2"/></svg></i><em id="logo">م</em></div>
+    <div><div class="dept">خدمة العملاء المباشرة</div><h1 class="shop" id="shop">…</h1></div>
+    <p class="desc">عندك استفسار؟ اتواصل مع المحل مباشرة عبر الإنترنت — مجاناً وبدون رصيد</p>
+    <span class="chip" id="avail"><span class="dot"></span><span id="availTx">بنجهّز الاتصال…</span></span>
+    <div class="callwrap idle" id="cw"><button class="callbtn" id="callBtn" disabled aria-label="اتصل بالمحل"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></span><span class="lbl">اتصل بالمحل مباشرة</span></button></div>
+    <div class="feats"><div><b>🎙️</b>صوت مباشر</div><div><b>💸</b>بدون رصيد</div><div><b>🔒</b>من غير تسجيل</div></div>
+    <div id="nmBox"><button class="link" id="nmLink" type="button">إضافة اسمك (اختياري)</button><input class="nm hide" id="nm" maxlength="40" placeholder="اسمك" autocomplete="name"></div>
+    <div class="msg hide" id="err" role="alert"></div>
+    <div class="hint">هنطلب إذن الميكروفون لما تضغط على الزر.<br>المكالمة مش بتتسجّل.</div>
+   </div>
+  </section>
+
+  <!-- شاشة المكالمة -->
+  <section class="scr hide" id="call">
+   <div class="live">
+    <div class="livebar" id="lb"><span class="dot"></span><span id="lbTx">مكالمة جارية</span><span class="q" id="qual" title="جودة الاتصال"><i></i><i></i><i></i></span></div>
+    <div class="avatar rip" id="av">م</div>
+    <div><div class="dept">خدمة العملاء</div><h2 class="shop" id="cshop" style="font-size:24px"></h2></div>
+    <div class="timer" id="timer"></div>
+    <div class="status" id="status"></div>
+    <div class="diag" id="diag"></div>
+    <button class="btn2 p hide" id="unmute" type="button">🔊 اضغط لتشغيل الصوت</button>
+    <div class="meters" id="meters"><span>صوتك</span><div class="mt"><b id="mylvl"></b></div><span>صوت المحل</span><div class="mt"><b id="rmlvl"></b></div></div>
+    <div class="wave ring" id="wave"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+    <div class="ctl">
+      <div><button class="rb" id="muteBtn" type="button" aria-label="كتم الميكروفون" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><div class="endlbl" id="muteLbl">كتم</div></div>
+      <div><button class="endbtn" id="endBtn" aria-label="إنهاء المكالمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></button><div class="endlbl" id="endLbl">إنهاء</div></div>
+    </div>
+   </div>
+  </section>
+
+  <!-- بعد المكالمة -->
+  <section class="scr hide" id="done">
+   <div class="card">
+    <div class="avatar" style="background:linear-gradient(135deg,#34D399,#2DE2E6)">✓</div>
+    <h2 class="shop" style="font-size:24px" id="doneT">انتهت المكالمة</h2>
+    <p class="desc" id="doneD"></p>
+    <button class="btn2 p" id="back">رجوع لشاشة المحل</button>
+   </div>
+  </section>
+
+  <pre class="rep hide" id="repOut" title="اضغط للإغلاق"></pre>
+  <div class="foot"><button class="link" id="rep" type="button" style="padding:2px 6px;min-height:0;font-size:11.5px">📋 تقرير الصوت (للدعم)</button><br>Gomla4U · مكالمة صوتية مباشرة · بدون تسجيل</div>
+</main>
+<script>
+(function(){
+'use strict';
+const SUPA='https://buvixsokavrxuwpikefl.supabase.co', KEY='sb_publishable_UzXzPaiuLgDhjVtsFVXeYQ_XlpDbUvN';
+const $=id=>document.getElementById(id);
+const TOKEN=(new URLSearchParams(location.search).get('s')||'').trim();
+let shopName='المحل', ice=[{urls:['stun:stun.l.google.com:19302']}], avail=false, S=null; /* S = حالة المكالمة الحالية */
+const T=(k,v)=>{ try{ return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v); }catch(_){ return null; } };
+
+/* ---------- RPC ---------- */
+async function rpc(name,args,keep){
+  const r=await fetch(SUPA+'/rest/v1/rpc/'+name,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(args||{}),keepalive:!!keep});
+  let j=null; try{ j=await r.json(); }catch(_){}
+  if(!r.ok){ const e=new Error((j&&(j.message||j.hint))||('HTTP '+r.status)); e.code=(j&&j.message)||''; throw e; }
+  return j;
+}
+
+/* ---------- خلفية الشبكة (خفيفة) ---------- */
+(function(){ const c=$('net'), x=c.getContext('2d'); let w,h,P=[],raf,on=true;
+  function size(){ const d=Math.min(devicePixelRatio||1,2); w=c.width=innerWidth*d; h=c.height=innerHeight*d; x.setTransform(1,0,0,1,0,0); P=[]; const n=Math.round(Math.min(46,innerWidth*innerHeight/22000)); for(let i=0;i<n;i++) P.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25*d,vy:(Math.random()-.5)*.25*d}); }
+  function draw(){ if(!on) return; x.clearRect(0,0,w,h); const L=150*(devicePixelRatio||1);
+    for(let i=0;i<P.length;i++){ const p=P[i]; p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1;
+      for(let j=i+1;j<P.length;j++){ const q=P[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy); if(d<L){ x.strokeStyle='rgba(185,160,255,'+(.22*(1-d/L))+')'; x.lineWidth=1; x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke(); } }
+      x.fillStyle='rgba(214,200,255,.7)'; x.beginPath(); x.arc(p.x,p.y,1.6*(devicePixelRatio||1),0,7); x.fill(); }
+    raf=requestAnimationFrame(draw); }
+  addEventListener('resize',size); document.addEventListener('visibilitychange',()=>{ on=!document.hidden; if(on) draw(); else cancelAnimationFrame(raf); });
+  size(); if(!matchMedia('(prefers-reduced-motion:reduce)').matches) draw();
+})();
+
+/* ---------- شاشة المحل ---------- */
+function show(id){ ['home','call','done'].forEach(s=>$(s).classList.toggle('hide',s!==id)); }
+function lbar(up,t){ const b=$('lb'); b.classList.toggle('up',!!up); $('lbTx').textContent=t; }
+function showErr(m,info){ const e=$('err'); e.textContent=m||''; e.classList.toggle('hide',!m); e.classList.toggle('info',!!info); }
+let busyFlag=false;
+function paintAvail(){ const ok=avail&&!busyFlag; const a=$('avail'); a.className='chip '+(ok?'on':'off'); $('availTx').textContent=ok?'المحل متاح للرد دلوقتي':(avail&&busyFlag?'المحل على مكالمة تانية دلوقتي':'المحل غير متاح حالياً'); $('callBtn').disabled=!ok||!!S; $('cw').classList.toggle('idle',!ok||!!S); }
+let infoBusy=false;
+async function loadInfo(){
+  if(infoBusy||S) return; infoBusy=true;
+  try{
+    if(!TOKEN){ showErr('رابط المحل غير مكتمل. اطلب من المحل يبعتلك الرابط الصحيح.'); $('shop').textContent='رابط غير صالح'; avail=false; paintAvail(); return; }
+    const d=await rpc('call_shop_info',{p_token:TOKEN});
+    if(!d||!d.ok){ $('shop').textContent='المحل مش متاح'; showErr('الرابط ده غير صالح أو المكالمات متوقفة عند المحل.'); avail=false; paintAvail(); return; }
+    shopName=d.name||'المحل'; if(Array.isArray(d.ice)&&d.ice.length) ice=d.ice; $('shop').textContent=shopName; $('logo').textContent=(shopName.trim()[0]||'م'); avail=!!d.available; busyFlag=!!d.busy; paintAvail(); if(!$('err').classList.contains('info')||avail) showErr('');
+  }catch(e){ $('availTx').textContent='مفيش اتصال بالإنترنت'; $('avail').className='chip off'; $('callBtn').disabled=true; }
+  finally{ infoBusy=false; }
+}
+$('nmLink').onclick=()=>{ $('nmLink').classList.add('hide'); const n=$('nm'); n.classList.remove('hide'); n.value=T('gm_call_name')||''; n.focus(); };
+{ const sv=T('gm_call_name'); if(sv){ $('nmLink').textContent='الاسم: '+sv+' (تعديل)'; } }
+
+/* ---------- WebRTC ---------- */
+const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function gather(pc,ms){ return new Promise(res=>{ if(pc.iceGatheringState==='complete') return res(); const t=setTimeout(done,ms); function done(){ clearTimeout(t); pc.removeEventListener('icegatheringstatechange',chk); res(); } function chk(){ if(pc.iceGatheringState==='complete') done(); } pc.addEventListener('icegatheringstatechange',chk); }); }
+/* تشخيص الصوت: بيوضّح لو المايك مش بيبعت أو الصوت مش واصل أو المتصفح منع التشغيل */
+function diag(s){
+  const pc=s.pc, el=$('remote'), d=$('diag'); let last={rx:0,tx:0}, still=0;
+  s.dg=setInterval(async()=>{ if(S!==s||pc.connectionState!=='connected') return;
+    try{ const st=await pc.getStats(); let rx=0,tx=0; st.forEach(r=>{ if(r.type==='inbound-rtp'&&r.kind==='audio') rx+=r.bytesReceived||0; if(r.type==='outbound-rtp'&&r.kind==='audio') tx+=r.bytesSent||0; });
+      let rtt=null; st.forEach(r=>{ if(r.type==='candidate-pair'&&(r.nominated||r.selected)&&r.currentRoundTripTime!=null) rtt=r.currentRoundTripTime; }); if(rtt!=null) $('qual').className='q '+(rtt<0.15?'l3':rtt<0.4?'l2':'l1');
+      const mic=s.stream&&s.stream.getAudioTracks()[0]; const micOk=mic&&mic.readyState==='live'&&!mic.muted;
+      if(el.srcObject&&el.paused){ el.play().catch(()=>{ $('unmute').classList.remove('hide'); }); } else $('unmute').classList.add('hide');
+      still=(rx>last.rx)?0:still+1; last={rx,tx};
+      if(!micOk){ d.className='diag warn'; d.textContent='الميكروفون عندك مش شغّال. اتأكد إنه مش مستخدم في تطبيق أو تبويب تاني.'; }
+      else if(rx===0&&still>=3){ d.className='diag warn'; d.textContent='لسه مفيش صوت واصل من المحل. لو المحل بيتكلم، ممكن الميكروفون عنده مقفول.'; }
+      else if(rx>0){ d.className='diag good'; d.textContent='الصوت شغّال ✓ ميكروفونك بيبعت'; }
+      else { d.className='diag'; d.textContent=''; }
+    }catch(_){} },1000);
+}
+$('muteBtn').onclick=()=>{ if(!S||!S.stream) return; const on=!$('muteBtn').classList.contains('on'); $('muteBtn').classList.toggle('on',on); $('muteBtn').setAttribute('aria-pressed',String(on)); $('muteLbl').textContent=on?'إلغاء الكتم':'كتم'; S.stream.getAudioTracks().forEach(t=>t.enabled=!on); };
+$('unmute').onclick=()=>{ const el=$('remote'); el.muted=false; el.volume=1; el.play().then(()=>$('unmute').classList.add('hide')).catch(()=>{}); };
+function setStatus(t){ $('status').textContent=t; }
+function cleanup(){
+  if(!S) return; const s=S; window.__last=s; S=null;
+  clearInterval(s.poll); clearInterval(s.dg); clearInterval(s.tick); clearTimeout(s.to); clearInterval(s.lv);
+  try{ s.pc&&s.pc.close(); }catch(_){}
+  try{ s.stream&&s.stream.getTracks().forEach(t=>t.stop()); }catch(_){}   /* الميكروفون يتقفل فوراً */
+  try{ s.ac&&s.ac.close(); s.ac=null; }catch(_){}
+  $('remote').srcObject=null;
+}
+function finish(title,desc,okIcon){
+  const dur=S&&S.t0?Math.round((Date.now()-S.t0)/1000):0;
+  cleanup(); show('done'); $('doneT').textContent=title; $('doneD').textContent=desc||(dur?'مدة المكالمة '+mmss(dur):'');
+  document.querySelector('#done .avatar').textContent=okIcon===false?'!':'✓';
+  document.querySelector('#done .avatar').style.background=okIcon===false?'linear-gradient(135deg,#FB7185,#F59E0B)':'linear-gradient(135deg,#34D399,#2DE2E6)';
+}
+async function endByUser(){ if(!S) return; const s=S; const ringing=!s.connected; try{ await rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true); }catch(_){} finish(ringing?'اتلغى الاتصال':'انتهت المكالمة',ringing?'لو لسه محتاج المحل، جرّب تتصل تاني.':''); }
+const MAP={NOT_AVAILABLE:'المحل مش متاح للرد دلوقتي. جرّب بعد شوية.',BUSY:'المحل على مكالمة تانية دلوقتي. جرّب بعد دقيقة.',RATE_LIMIT:'محاولات كتير ورا بعض. استنى دقيقة وجرّب تاني.',NOT_FOUND:'الرابط ده غير صالح أو المكالمات متوقفة عند المحل.',BAD_OFFER:'حصلت مشكلة في بدء الاتصال. جرّب تاني.'};
+async function startCall(){
+  if(S) return; showErr('');
+  if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.RTCPeerConnection){ showErr('المتصفح ده مش بيدعم المكالمات الصوتية، أو الصفحة مش مفتوحة برابط آمن (https). افتح الرابط من Chrome.'); return; }
+  const nm=($('nm').value||'').trim().slice(0,40)||T('gm_call_name')||''; if(nm) T('gm_call_name',nm);
+  S={connected:false}; paintAvail();
+  const s=S;
+  let stream;
+  try{ stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false}); }
+  catch(e){ S=null; paintAvail(); const n=e&&e.name; showErr(n==='NotAllowedError'||n==='SecurityError'?'محتاجين إذن الميكروفون عشان تتكلم مع المحل. اسمح بالميكروفون من أيقونة 🔒 جنب الرابط ثم جرّب تاني.':n==='NotFoundError'?'مفيش ميكروفون شغّال على الجهاز.':'تعذّر تشغيل الميكروفون.'); return; }
+  s.stream=stream;
+  $('cshop').textContent=shopName; $('av').textContent=(shopName.trim()[0]||'م'); $('av').className='avatar rip'; $('timer').textContent=''; setStatus('بنتصل بالمحل…'); lbar(false,'جاري الاتصال…'); $('qual').className='q'; $('muteBtn').classList.remove('on'); $('muteBtn').setAttribute('aria-pressed','false'); $('muteLbl').textContent='كتم'; $('wave').className='wave ring'; show('call');
+  try{
+    const pc=new RTCPeerConnection({iceServers:ice}); s.pc=pc;
+    stream.getTracks().forEach(t=>pc.addTrack(t,stream));
+    pc.ontrack=e=>{ const a=$('remote'); a.muted=false; a.volume=1; a.srcObject=e.streams[0]; a.play&&a.play().catch(()=>{ $('unmute').classList.remove('hide'); }); levels(e.streams[0]); };
+    pc.onconnectionstatechange=()=>{ if(S!==s) return; const st=pc.connectionState;
+      if(st==='connected'){ if(!s.connected){ s.connected=true; s.t0=Date.now(); diag(s); lbar(true,'مكالمة جارية'); $('av').className='avatar'; setStatus('متصل'); $('wave').className='wave'; s.tick=setInterval(()=>{ $('timer').textContent=mmss(Math.round((Date.now()-s.t0)/1000)); },500); $('timer').textContent='00:00'; } clearTimeout(s.dc); setStatus('متصل'); }
+      else if(st==='disconnected'){ setStatus('الاتصال ضعيف… بنحاول نرجّعه'); clearTimeout(s.dc); s.dc=setTimeout(()=>{ if(S===s&&pc.connectionState!=='connected'){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('انقطع الاتصال','النت عندك أو عند المحل ضعيف. جرّب تتصل تاني.',false); } },10000); }
+      else if(st==='failed'){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('تعذّر توصيل الصوت','الشبكة بتمنع الاتصال المباشر. جرّب من واي فاي تاني أو بيانات الموبايل.',false); } };
+    const offer=await pc.createOffer({offerToReceiveAudio:true}); await pc.setLocalDescription(offer); await gather(pc,4000);
+    if(S!==s) return;
+    const r=await rpc('call_start',{p_token:TOKEN,p_offer:{type:'offer',sdp:pc.localDescription.sdp},p_name:nm||null});
+    if(S!==s){ rpc('call_end_caller',{p_id:r.id,p_secret:r.secret},true).catch(()=>{}); return; }
+    s.id=r.id; s.secret=r.secret; setStatus('بيرنّ عند المحل…');
+    s.to=setTimeout(()=>{ if(S===s&&!s.connected&&!s.answered){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('محدش رد','المحل مارداش دلوقتي. جرّب تتصل تاني بعد شوية.',false); } },46000);
+    let busyPoll=false;
+    s.poll=setInterval(async()=>{ if(S!==s||busyPoll) return; busyPoll=true; try{
+      const p=await rpc('call_poll',{p_id:s.id,p_secret:s.secret}); if(S!==s) return;
+      if(p.status==='answered'&&p.answer&&!s.answered){ s.answered=true; clearTimeout(s.to); setStatus('بنوصّل الصوت…'); await pc.setRemoteDescription({type:'answer',sdp:p.answer.sdp}); }
+      else if(p.status==='rejected'){ finish('المحل مش قادر يرد','المحل رفض المكالمة دلوقتي. جرّب بعد شوية.',false); }
+      else if(p.status==='missed'||p.status==='cancelled'){ finish('محدش رد','المحل مارداش دلوقتي. جرّب تاني بعد شوية.',false); }
+      else if(p.status==='ended'||p.status==='gone'){ finish(s.connected?'انتهت المكالمة':'اتقفل الاتصال',''); }
+    }catch(e){ s.fail=(s.fail||0)+1; if(s.fail>=8){ finish('انقطع الاتصال بالإنترنت','اتأكد من النت وجرّب تاني.',false); } else if(S===s) setStatus('مشكلة في الشبكة… بنحاول'); } finally{ busyPoll=false; if(S===s&&s.fail&&s.connected) s.fail=0; } },1000);
+  }catch(e){
+    const code=String(e&&(e.code||e.message)||''); const k=Object.keys(MAP).find(x=>code.includes(x));
+    const m=k?MAP[k]:'تعذّر بدء المكالمة. اتأكد من النت وجرّب تاني.';
+    cleanup(); show('home'); showErr(m,k==='BUSY'||k==='NOT_AVAILABLE'); loadInfo();
+  }
+}
+/* موجة الصوت: من مستوى صوت التاجر الفعلي */
+function ctx(s){ if(!s.ac){ const AC=window.AudioContext||window.webkitAudioContext; s.ac=new AC(); } if(s.ac.state==='suspended') s.ac.resume().catch(()=>{}); return s.ac; }
+function an(s,stream){ const ac=ctx(s); const a=ac.createAnalyser(); a.fftSize=64; ac.createMediaStreamSource(stream).connect(a); return a; }
+function levels(stream){
+  const s=S; if(!s) return; try{
+    const ar=an(s,stream); s.ar=ar; const al=s.stream?an(s,s.stream):null;
+    const dr=new Uint8Array(ar.frequencyBinCount), dl=al?new Uint8Array(al.frequencyBinCount):null; const bars=[...document.querySelectorAll('#wave b')];
+    const avg=d=>{ let t=0; for(let i=0;i<d.length;i++) t+=d[i]; return t/d.length/255; };
+    s.lv=setInterval(()=>{ ar.getByteFrequencyData(dr); bars.forEach((b,i)=>{ const v=dr[Math.min(dr.length-1,i+1)]/255; b.style.height=(8+v*52)+'px'; });
+      $('rmlvl').style.width=Math.max(2,Math.min(100,avg(dr)*400))+'%'; if(al){ al.getByteFrequencyData(dl); $('mylvl').style.width=Math.max(2,Math.min(100,avg(dl)*400))+'%'; } },90);
+  }catch(_){}
+}
+/* تقرير تشخيص الصوت: بيتنسخ ويتعرض عشان يتبعت للدعم */
+async function report(){
+  const L=[]; const s=S||window.__last; L.push('Gomla4U call report (customer) '+new Date().toISOString()); L.push('UA: '+navigator.userAgent);
+  L.push('secure='+window.isSecureContext+' visible='+document.visibilityState);
+  if(!s||!s.pc){ L.push('no active call'); return L.join('\n'); }
+  const pc=s.pc; L.push('conn='+pc.connectionState+' ice='+pc.iceConnectionState+' sig='+pc.signalingState+' gather='+pc.iceGatheringState);
+  try{ const st=await pc.getStats(); const by={}; st.forEach(r=>by[r.id]=r); st.forEach(r=>{
+    if(r.type==='inbound-rtp'&&r.kind==='audio') L.push('IN  bytes='+r.bytesReceived+' packets='+r.packetsReceived+' lost='+r.packetsLost+' jitter='+r.jitter+' level='+r.audioLevel+' energy='+r.totalAudioEnergy);
+    if(r.type==='outbound-rtp'&&r.kind==='audio') L.push('OUT bytes='+r.bytesSent+' packets='+r.packetsSent);
+    if(r.type==='candidate-pair'&&(r.nominated||r.selected)){ const l=by[r.localCandidateId], m=by[r.remoteCandidateId]; L.push('PAIR '+(l?l.candidateType+'/'+l.protocol:'?')+' <-> '+(m?m.candidateType+'/'+m.protocol:'?')+' rtt='+r.currentRoundTripTime); } }); }catch(e){ L.push('stats err '+e.message); }
+  const t=s.stream&&s.stream.getAudioTracks()[0]; L.push('MIC '+(t?('label='+t.label+' enabled='+t.enabled+' muted='+t.muted+' state='+t.readyState):'none'));
+  const a=$('remote'); L.push('AUDIO paused='+a.paused+' muted='+a.muted+' vol='+a.volume+' ready='+a.readyState+' hasStream='+!!a.srcObject+' tracks='+(a.srcObject?a.srcObject.getAudioTracks().map(x=>x.readyState+'/'+x.muted).join(','):'-'));
+  L.push('ACTX '+(s.ac?s.ac.state:'none')+' | myLevel='+$('mylvl').style.width+' remoteLevel='+$('rmlvl').style.width);
+  return L.join('\n');
+}
+$('repOut').onclick=()=>$('repOut').classList.add('hide');
+$('rep').onclick=async()=>{ const o=$('repOut'); if(!o.classList.contains('hide')){ o.classList.add('hide'); return; } const t=await report(); o.textContent=t; o.classList.remove('hide'); try{ await navigator.clipboard.writeText(t); }catch(_){} };
+$('callBtn').onclick=startCall;
+$('endBtn').onclick=endByUser;
+$('back').onclick=()=>{ show('home'); $('err').classList.add('hide'); loadInfo(); };
+addEventListener('pagehide',()=>{ if(S&&S.id){ try{ rpc('call_end_caller',{p_id:S.id,p_secret:S.secret},true); }catch(_){} } cleanup(); });
+window.__call={get state(){return S;},startCall,loadInfo};
+loadInfo(); setInterval(()=>{ if(!document.hidden) loadInfo(); },15000);
+})();
+</script>
+</body>
+</html>
