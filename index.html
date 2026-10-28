@@ -10569,7 +10569,10 @@ function pageOv(){
       else if(a==='share'){ if(navigator.share) await navigator.share({title:'اتصل بالمحل',text:'اتصل بالمحل مباشرة عبر الإنترنت',url:linkUrl()}); else { await copy(linkUrl()); C.msg='اتنسخ الرابط ✓'; } }
       else if(a==='regen'){ if(!confirm('تغيير الرابط هيوقّف الرابط القديم (أي حد معاه الرابط القديم مش هيقدر يتصل). متأكد؟')) return; await setCfg({p_regen:true}); C.msg='اتغيّر الرابط. ابعت الرابط الجديد للعملاء.'; }
       else if(a==='test'){ const w=window.open(linkUrl(),'_blank'); void w; }
-    }catch(err){ C.msg=sqlMissing(err)?SQLMSG:(err&&err.message==='OWNER_ONLY'?'ده للمالك فقط':'حصلت مشكلة، حاول تاني'); }
+      else if(a==='saveprof'){ const g=id=>{ const e=document.getElementById(id); return e?e.value:''; };
+        const{data,error}=await sb.rpc('shop_profile_set',{p_address:g('cl-pf-ad'),p_hours:g('cl-pf-hr'),p_whatsapp:g('cl-pf-wa')});
+        if(error) throw error; C.prof=data; C.pfDraft=null; C.msg='اتحفظت بيانات صفحة العملاء ✓'; }
+    }catch(err){ C.msg=sqlMissing(err)?SQLMSG:(err&&err.message==='OWNER_ONLY'?'ده للمالك فقط':(err&&/BAD_WHATSAPP/.test(err.message||'')?'رقم الواتساب مش صحيح. اكتبه بالشكل 01012345678':'حصلت مشكلة، حاول تاني')); }
     pagePaint();
   });
   return o;
@@ -10580,6 +10583,7 @@ function linkUrl(){ const u=new URL('call.html',location.href); u.search='?s='+e
 async function loadHist(quiet){ try{ const{data,error}=await sb.rpc('call_history'); if(error) throw error; C.hist=data||[]; }catch(_){ if(!quiet) C.hist=[]; } if(document.getElementById('cl-ov')&&document.getElementById('cl-ov').classList.contains('on')) pagePaint(); }
 function pagePaint(){
   const b=document.getElementById('cl-body'); if(!b) return; const c=C.cfg;
+  try{ const g=id=>{ const e=document.getElementById(id); return e?e.value:undefined; }; if(document.getElementById('cl-pf-ad')) C.pfDraft={ad:g('cl-pf-ad'),hr:g('cl-pf-hr'),wa:g('cl-pf-wa')}; }catch(_){}
   if(!c){ b.innerHTML=`<div class="iv-empty">${E(C.err||'جاري التحميل…')}</div>`; return; }
   const https=G.isSecureContext, o=own();
   let h=(C.msg?`<div class="rch-msg">${E(C.msg)}</div>`:'');
@@ -10590,6 +10594,13 @@ function pagePaint(){
     h+='<div class="iv-empty" style="padding:6px 4px;font-size:12.5px;text-align:right;line-height:1.8">الرنين شغّال طول ما التطبيق مفتوح على جهازك (وجهاز أي موظف مسجّل). سيب التطبيق مفتوح وإنت مستني مكالمات.</div>';
     if(o&&c.token){ h+=`<h4>رابط محلك للعملاء</h4><div class="cl-link">${E(linkUrl())}</div><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="iv-open" data-a="copy">📋 نسخ</button><button type="button" class="iv-open" data-a="share">📤 مشاركة</button><button type="button" class="iv-open" data-a="test">🧪 جرّب</button><button type="button" class="iv-open" data-a="regen">🔄 رابط جديد</button></div>`; }
   }
+  if(o&&c.enabled&&C.prof){ const p=C.prof, d=C.pfDraft||{}; const v=(k,x)=>E(d[k]!==undefined?d[k]:(x||''));
+    h+=`<h4 style="margin-top:16px">بيانات صفحة العملاء</h4><div class="iv-empty" style="padding:2px 4px 8px;font-size:12.5px;text-align:right;line-height:1.8">دي اللي هتظهر للعميل في الشات. سيب أي خانة فاضية لو مش عايز تعرضها.</div>
+    <label style="display:block;font-size:12.5px;margin:6px 0 3px">العنوان</label><input id="cl-pf-ad" maxlength="200" value="${v('ad',p.address)}" style="width:100%;padding:10px;border:1px solid #cfd8d3;border-radius:10px;font:inherit">
+    <label style="display:block;font-size:12.5px;margin:8px 0 3px">مواعيد العمل</label><input id="cl-pf-hr" maxlength="200" placeholder="مثال: يوميًا من 10 ص لـ 11 م" value="${v('hr',p.hours)}" style="width:100%;padding:10px;border:1px solid #cfd8d3;border-radius:10px;font:inherit">
+    <label style="display:block;font-size:12.5px;margin:8px 0 3px">رقم واتساب للعملاء</label><input id="cl-pf-wa" inputmode="tel" maxlength="30" placeholder="01012345678" value="${v('wa',p.whatsapp)}" style="width:100%;padding:10px;border:1px solid #cfd8d3;border-radius:10px;font:inherit;direction:ltr;text-align:right">
+    <div class="iv-empty" style="padding:4px;font-size:12px;text-align:right">${p.effective_whatsapp?'الرقم الظاهر للعملاء حاليًا: '+E(p.effective_whatsapp):'مفيش رقم واتساب ظاهر للعملاء لسه (زر واتساب مخفي).'}</div>
+    <button type="button" class="iv-open" data-a="saveprof" style="margin-top:6px">💾 حفظ</button>`; }
   h+='<h4 style="margin-top:16px">آخر المكالمات</h4>';
   const L=C.hist; if(!L) h+='<div class="rc-load"><i></i><span>جاري التحميل…</span></div>';
   else if(!L.length) h+='<div class="iv-empty">مفيش مكالمات لسه.</div>';
@@ -10600,6 +10611,7 @@ G.openCalls=async function(){
   try{ document.getElementById('ai-panel').classList.remove('open'); }catch(_){}
   const o=pageOv(); o.classList.add('on'); document.body.classList.add('rch-lock'); C.msg=''; pagePaint();
   await loadCfg(); pagePaint(); loadHist();
+  try{ const{data,error}=await sb.rpc('shop_profile_get'); if(!error&&data){ C.prof=data; pagePaint(); } }catch(_){}
 };
 
 /* ---------- ربط بالتطبيق ---------- */
@@ -10615,6 +10627,176 @@ const _so=G.signOut||G.doLogout||G.logout;
 document.addEventListener('visibilitychange',()=>{ if(!document.hidden&&C.cfg&&C.cfg.enabled&&!C.hb) startLoops(); });
 if(typeof sb!=='undefined'&&sb.auth&&sb.auth.onAuthStateChange){ try{ sb.auth.onAuthStateChange((ev)=>{ if(ev==='SIGNED_OUT'){ stopLoops(); C.cfg=null; if(C.cur) endUi(''); hideRing(); } }); }catch(_){} }
 G.addEventListener('pagehide',()=>{ try{ if(C.cur) sb.rpc('call_end',{p_id:C.cur.id}); }catch(_){} });
+})();
+
+</script>
+<script id="gomla-v5">
+/* ============================================================
+   Gomla4U v5 — تطوير الشات بطبقة حواليه (من غير ما نغيّر محرك الأوامر القديم)
+   القواعد:
+   • كل دالة قديمة بتتلفّ (wrap) وبتتنادى بنفس طريقتها؛ أي حاجة الطبقة دي ما تفهمهاش بتروح للمحرك القديم زي ما هي.
+   • الطبقة دي ما بتنفّذش أي عملية (بيع/مصروف/مخزون) بنفسها: بتعيد صياغة جملة أو بتشرح أو بتسأل، والتنفيذ بيفضل للدوال القديمة.
+   • زر الطوارئ: localStorage.gm_v5_off='1' بيوقف الطبقة كلها فوراً (والتطبيق يرجع للسلوك القديم).
+   ============================================================ */
+(function(){
+if(window.__gomlaV5) return; window.__gomlaV5=true;
+const G=window;
+try{ if(localStorage.getItem('gm_v5_off')==='1'){ G.__gomlaV5off=true; return; } }catch(_){}
+const N=s=>String(s==null?'':s).toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[؟?!.,،:؛"'()]+/g,' ').replace(/\s+/g,' ').trim();
+const emp=()=>{ try{ return isEmployeeRole(); }catch(_){ return false; } };
+const A=()=>{ try{ return G.__act.ACTS[G.__act.key]||{}; }catch(_){ return {}; } };
+const blocks=()=>{ const a=A(); return !!(a.noRecharge||a.noEwallet); };
+const NAMEACT=()=>A().name||'';
+const box=()=>document.getElementById('ai-msgs');
+const say=(t)=>{ try{ aiSay(t); }catch(_){} };
+const choices=(t,c)=>{ try{ aiSayChoices(t,c); }catch(_){ say(t); } };
+const open=(f)=>()=>{ try{ f(); }catch(e){ try{ dlog('v5 open',e); }catch(_){} } };
+
+/* ---------- 1) إعادة صياغة جمل معروف إن المحرك القديم بيفهمها غلط ---------- */
+const FILL='(?:انا|عايز|عاوز|عايزه|عاوزه|محتاج|نفسي|ممكن|لو سمحت|يلا|خلينا|تعال|اقدر|هو انا)';
+function canon(raw){
+  const n=N(raw); if(!n) return raw;
+  /* عايز أبيع X  →  بعت X  (القديم كان بيفهمها استعلام مبيعات أو بيرفضها) */
+  let m=new RegExp('^(?:'+FILL+'\\s+)*(?:ان\\s+)?(?:ا|)بيع(?:لك)?(?:\\s+(.+))?$').exec(n);
+  if(m && /(^|\s)ابيع(\s|$)/.test(n)) return 'بعت'+(m[1]?' '+m[1]:'');
+  /* عندي كام قطعة من X / كام عندي من X / فاضل كام من X  →  X موجود منه كام */
+  const U='(?:قطعه|حته|وحده|حبه|علبه|كيس|كرتونه|حاجه)';
+  const pats=[
+    new RegExp('^(?:عندي|معايا|عندنا|فاضل|متاح|موجود)\\s+كام\\s+'+U+'?\\s*(?:من|في|ف)?\\s*(.+)$'),
+    new RegExp('^كام\\s+'+U+'?\\s*(?:عندي|معايا|فاضل|موجود|متاح)\\s*(?:من|في|ف)?\\s*(.+)$'),
+    new RegExp('^فاضل\\s+(?:من|في)\\s+(.+)$'),
+    new RegExp('^(?:كام|عدد)\\s+(.+?)\\s+(?:عندي|موجود|فاضل|معايا|متاح)$')
+  ];
+  for(const p of pats){ const mm=p.exec(n); if(mm&&mm[1]){ const x=mm[1].replace(new RegExp('^'+U+'\\s+'),'').replace(/\s+(?:عندي|معايا)$/,'').trim(); if(x&&x.split(' ').length<=4&&!/(كام|ايه|اي)$/.test(x)) return x+' موجود منه كام'; } }
+  return raw;
+}
+
+/* ---------- 2) ذاكرة الاختيارات: رد مكتوب على «أي منتج تقصد؟» ---------- */
+let CH=null;   /* {at,items:[{label,onClick,toks}],miss} */
+const STOP=new Set('ال هو ده دي دا اللي الي ال ب من في ف علي على عايز عاوز قصدي قصده اقصد تقصد منتج صنف نوع حاجه بتاع بتاعه اه ايوه لا'.split(' '));
+const toks=s=>N(s).split(' ').map(w=>w.replace(/^ال/,'')).filter(w=>w&&!STOP.has(w)&&!/^\d+$/.test(w)||/^\d{1,2}$/.test(w)&&false);
+const ORD={'الاول':0,'اول':0,'الاولي':0,'الثاني':1,'التاني':1,'تاني':1,'ثاني':1,'الثالث':2,'التالت':2,'تالت':2,'الرابع':3,'الرابعه':3,'الاخير':-1,'الاخيره':-1};
+const _asc=G.aiSayChoices;
+if(typeof _asc==='function') G.aiSayChoices=function(text,ch){
+  const r=_asc.apply(this,arguments);
+  try{ if(Array.isArray(ch)&&ch.length>=2&&/(اي منتج|أي منتج|انهي|أنهي|بيطابقوا)/.test(String(text))&&ch.every(c=>c&&typeof c.onClick==='function')){ CH={at:Date.now(),text:String(text),items:ch.map(c=>({label:c.label,onClick:c.onClick,t:toks(String(c.label).split('—')[0])})),miss:0}; } }catch(_){}
+  return r;
+};
+function fromChoice(raw){
+  if(!CH||Date.now()-CH.at>180000){ CH=null; return false; }
+  const n=N(raw); if(!n||n.split(' ').length>4){ return false; }
+  const busy=!!(state.advFlow||state.walletFlow||state.acctFlow||state.debtFlow||state.guidedFlow||state.aiPending); if(busy) return false;
+  const items=CH.items; let hit=[];
+  if(Object.prototype.hasOwnProperty.call(ORD,n)){ const i=ORD[n]; const k=i<0?items.length-1:i; if(items[k]) hit=[k]; }
+  else{ const q=toks(raw); if(!q.length) return false; hit=items.map((it,i)=>i).filter(i=>q.every(w=>items[i].t.some(x=>x===w||(w.length>=3&&x.includes(w))||(x.length>=3&&w.includes(x))))); }
+  if(!hit.length){ CH.miss++; if(CH.miss>=2) CH=null; return false; }
+  if(hit.length>1){ const sub=hit.map(i=>({label:items[i].label,onClick:items[i].onClick})); CH=null; choices('لسه أكتر من واحد بيطابقوا 🤔 اختار:',sub.map(c=>c)); return true; }
+  const it=items[hit[0]]; CH=null; try{ it.onClick(); }catch(e){ try{ dlog('v5 choice',e); }catch(_){} } return true;
+}
+
+/* ---------- 3) شرح الاستخدام (قاعدة معرفة بسيطة — بتشرح بس وما بتنفّذش) ---------- */
+const HOWQ=/(^|\s)(ازاي|كيف|طريقه|طريقة|خطوات|اشرحلي|اشرح|شرح|فين|يعني ايه|اعمل ايه|بيشتغل|ممكن اعرف ازاي)(\s|$)/;
+const ACTV=(id)=>{ const a=A(); return { newprod:a.sizes?'منتج جديد (بالمقاسات)':a.imei?'موبايل / منتج جديد':'منتج جديد' }[id]||id; };
+const KB=[
+ {id:'addprod',re:/(اضيف|اضافه|ضيف|اسجل|اعمل|ادخل).*(منتج|صنف|بضاعه|موبايل|جهاز)|(منتج|صنف).*(جديد|اضيفه)/,
+  text:()=>{ const a=A(); return 'إضافة منتج جديد:\n1) من الرئيسية اضغط «'+ACTV('newprod')+'» (أو اكتب في الشات: «ضيف منتج»).\n2) اكتب الاسم والكمية وسعر الشراء وسعر البيع.\n'+(a.sizes?'3) اختار المقاسات والكمية لكل مقاس (واللون لو عايز) — كل مقاس بيتسجّل منتج مستقل.\n4) احفظ.':a.imei?'3) اختار الحالة (جديد/مستعمل) واكتب الباركود أو IMEI لو عايز.\n4) احفظ.':'3) احفظ.'); },
+  act:()=>[{label:'➕ ابدأ إضافة منتج',variant:'primary',onClick:open(()=>openProductModal(null))}]},
+ {id:'sell',re:/(ابيع|بيع|اسجل بيعه|اعمل بيعه|فاتوره|كاشير|اسجل فاتوره)/,
+  text:()=>'تسجيل بيعة:\n• أسرع طريقة: اكتب في الشات «بعت كابل» (قطعة واحدة بسعر البيع المسجّل) أو «بعت كابل 2 ب 40» (الكمية والسعر).\n• أو افتح «الكاشير السريع»، اختار الأصناف واضغط تأكيد.\n• لو فيه أكتر من منتج بنفس الاسم، هسألك تقصد أنهي واحد.\n• لو غلطت: «مرتجع بيع» وتختار الفاتورة.',
+  act:()=>[{label:'⚡ افتح الكاشير السريع',variant:'primary',onClick:open(()=>openQuickPos())}]},
+ {id:'return',re:/(مرتجع|ارجع|ارجاع|استرجاع)/,
+  text:()=>'مرتجع بيع:\n1) اكتب في الشات «مرتجع» (أو اضغط زر المرتجع).\n2) اختار الفاتورة اللي فيها المرتجع.\n3) حدّد الأصناف والكميات واضغط تأكيد (بتتأكد مرتين عشان ماتتسجلش بالغلط).\nالمخزون والخزنة بيتعدّلوا تلقائي.',
+  act:()=>[{label:'↩️ فتح المرتجع',variant:'primary',onClick:open(()=>G.handleSaleReturn&&G.handleSaleReturn(''))}]},
+ {id:'stock',re:/(المخزون|مخزون|جرد|ناقص|نواقص|اعرف.*(كميه|رصيد).*(منتج|صنف))/,
+  text:()=>'المخزون:\n• اكتب «المخزون» عشان تشوف كل الأصناف (الخلصان والناقص بيظهروا الأول).\n• «الكابل موجود منه كام؟» بيجيبلك الرصيد وسعر البيع.\n• «النواقص» بيعرض اللي قرّب يخلص.\n• تعديل كمية أو سعر من صفحة المخزون.',
+  act:()=>[{label:'📦 المخزون',variant:'primary',onClick:open(()=>handleShowInventory())}]},
+ {id:'expense',re:/(مصروف|مصاريف|اسجل مصروف|دفعت)/,
+  text:()=>'تسجيل مصروف:\nاكتب في الشات مثلاً «مصروف إيجار 500» أو «دفعت كهربا 300»، وهسألك تخصمها من أنهي خزنة لو لسه مش محدد. المصاريف بتتحسب في الأرباح.',
+  act:()=>[]},
+ {id:'debt',re:/(دين|ديون|مديون|اجل|آجل|سلفه)/,
+  text:()=>'الديون:\n• تسجيل دين على عميل: «سجل دين على أحمد 200».\n• «مين عليه فلوس؟» بيعرض المديونين.\n• تسديد: «أحمد دفع 100».\n• السلف والأمانات ليها قسم مستقل في القايمة.',
+  act:()=>[]},
+ {id:'wallets',svc:true,re:/(محفظه|محافظ|فودافون كاش|ايداع|سحب|خزنه)/,
+  text:()=>blocks()?null:'المحافظ:\n• «حط 500 في فودافون» للإيداع، «اسحب 200 من اتصالات» للسحب.\n• العمولة بتتحسب تلقائي حسب نظام المحفظة.\n• «رصيد فودافون كام؟» بيعرض الرصيد.',
+  act:()=>[]},
+ {id:'recharge',svc:true,re:/(شحن|كارت فكه|رصيد المكنه|مكنه)/,
+  text:()=>blocks()?null:'الشحن:\n1) افتح «الشحن» من الرئيسية.\n2) اختار النوع (على الهوا / كروت / باقات / فواتير) والمبلغ والرقم واضغط بيع.\n3) رصيد المكنة بيتخصم تلقائي، والربح بيتسجّل.\n• لو المندوب بعتلك رصيد: تبويب «تزويد».',
+  act:()=>blocks()?[]:[{label:'🔌 فتح الشحن',variant:'primary',onClick:open(()=>G.openRecharge&&G.openRecharge())}]},
+ {id:'reports',re:/(ارباح|ربح|تقرير|تقارير|مبيعات|ميزان|قائمه الدخل|ميزانيه)/,
+  text:()=>emp()?'الأرباح والتقارير المالية متاحة للمالك فقط. اللي تقدر تشوفه: مبيعاتك ومخزونك.':'التقارير والأرباح:\n• «مبيعات النهارده» / «أرباح الشهر» / «مصروفات الأسبوع» بتعرض كروت بالأرقام.\n• «قائمة الدخل» و«الميزانية» و«ميزان المراجعة» من نفس الشات.\n• الأرقام كلها من نفس حسابات لوحة التحكم.',
+  act:()=>[]},
+ {id:'repair',re:/(صيانه|تصليح|اصلح|ورشه)/,
+  text:()=>A().repair?'الصيانة:\n1) افتح «صيانة» (أو اكتب «صيانة» في الشات).\n2) «جهاز جديد»: اسم العميل والموبايل والعطل والعربون.\n3) غيّر الحالة: مستلم ← تحت الصيانة ← جاهز.\n4) «تسليم وتحصيل» بيسجّل الباقي في الخزنة.':'الصيانة متاحة لمحلات الموبايلات بس.',
+  act:()=>A().repair?[{label:'🔧 فتح الصيانة',variant:'primary',onClick:open(()=>G.openRepair())}]:[]},
+ {id:'sizes',re:/(مقاس|مقاسات|لون|الوان)/,
+  text:()=>A().sizes?'المقاسات:\nلما تضيف منتج بيظهرلك اختيار المقاسات (حروف/أرقام/أطفال/أحذية). اكتب كمية كل مقاس، وبعدين احفظ. في المخزون هتلاقي الموديل واحد وتحته شرائح المقاسات، وتقدر تضيف مقاس جديد لموديل موجود.':'المقاسات متاحة لمحلات الملابس.',
+  act:()=>A().sizes?[{label:'👕 إضافة منتج بالمقاسات',variant:'primary',onClick:open(()=>openProductModal(null))}]:[]},
+ {id:'calls',re:/(مكالمه|مكالمات|اتصال|اتصل|رقم المحل|رابط المحل)/,
+  text:()=>'المكالمات:\nمن القايمة اختار «المكالمات»، شغّل «استقبال المكالمات»، وانسخ رابط محلك وابعته للعملاء. العميل بيفتح الرابط من المتصفح ويضغط «اتصل بالمحل» من غير تسجيل. سيب التطبيق مفتوح عشان المكالمة ترنّ عندك.',
+  act:()=>typeof G.openCalls==='function'?[{label:'📞 فتح المكالمات',variant:'primary',onClick:open(()=>G.openCalls())}]:[]},
+ {id:'intro',re:/(التطبيق|النظام|اعمل ايه|تعمل ايه|بتعمل ايه|تساعدني)/,
+  text:()=>{ const a=A(); const l=['البيع والمرتجعات والكاشير السريع','المخزون والنواقص وأسعار الأصناف'+(a.sizes?' والمقاسات':''),emp()?'حضورك ومرتبك':'الأرباح والمصروفات والتقارير والموظفين','الديون والموردين وكشف الحساب']; if(!blocks()) l.splice(2,0,'الشحن والمحافظ'); if(a.repair) l.splice(2,0,'صيانة الأجهزة'); return 'أقدر أساعدك في:\n• '+l.join('\n• ')+'\nاسألني «ازاي أضيف منتج؟» أو «ازاي أعمل مرتجع؟» وهشرحلك الخطوات.'; },
+  act:()=>[]}
+];
+function kbAnswer(raw){
+  const n=N(raw); if(!HOWQ.test(n)||/\d/.test(n)) return false;
+  /* أسئلة الموظفين/الحضور/المرتبات بيعالجها المحرك القديم */
+  if(/(حضور|انصراف|غياب|مرتب|مرتبات|موظف|موظفين|اجازه|سلف)/.test(n)) return false;
+  const e=KB.find(x=>x.re.test(n)); if(!e) return false;
+  const t=e.text();
+  if(t===null){ say('الخدمة دي مش موجودة في نظام '+NAMEACT()+'.\nاللي عندك: المبيعات والمخزون والخزنة والمصروفات والديون والمرتجعات.'); return true; }
+  const a=e.act(); if(a.length) choices(t,a); else say(t);
+  return true;
+}
+
+/* ---------- 4) أسئلة توضيحية لرسائل غامضة (بدل التخمين) ---------- */
+function clarify(raw){
+  const n=N(raw); if(!n) return false;
+  const sugg=()=>{ const c=[{label:'💰 مبيعات النهارده',onClick:()=>G.handleSalesQuery&&G.handleSalesQuery('النهارده')},{label:'📦 المخزون',onClick:()=>handleShowInventory()},{label:'📅 تحركاتي اليومية',onClick:()=>G.handleDailyReport&&G.handleDailyReport('')}]; if(!blocks()) c.push({label:'🔌 الشحن',onClick:()=>G.handleRecharge&&G.handleRecharge()}); return c; };
+  if(/^(فلوس|الفلوس|كام|حساب|حسابي|الحساب|حاجه|ايه|اي حاجه)$/.test(n)){
+    const o=[{label:'💵 رصيد الخزنة/المحافظ',onClick:()=>G.__shopChat?(window.quickChatAction?quickChatAction('wallets'):0):0},{label:'💰 مبيعات النهارده',onClick:()=>G.handleSalesQuery&&G.handleSalesQuery('النهارده')}]; if(!emp()) o.push({label:'📊 أرباح النهارده',onClick:()=>G.handleProfitQuery&&G.handleProfitQuery('النهارده')}); o.push({label:'📒 الديون',onClick:()=>handleDebtQuery('الديون')});
+    choices('تقصد إيه بالظبط؟ 🤔 اختار:',o); return true; }
+  if(/^(\d+|واحد|اتنين|تلاته|اربعه|خمسه|عشره|نص|ربع)$/.test(n)){
+    choices('الرقم ده لوحده مش واضح 🤔 تقصد كمية؟ اكتب مع اسم المنتج، مثلاً «بعت كابل 2 ب 40»، أو اختار:',sugg().slice(0,3)); return true; }
+  return false;
+}
+
+/* ---------- ربط الطبقة بالمحرك (من بره، بالترتيب: صياغة ← اختيار ← شرح ← المحرك القديم) ---------- */
+function stockNotFound(c){
+  const m=/^(.+) موجود منه كام$/.exec(c); if(!m||c===undefined) return false;
+  const q=m[1].split(' ').map(w=>w.replace(/^ال/,'')).join(' '); try{ if(typeof findProductMatches==='function'&&(findProductMatches(q).length||findProductMatches(m[1]).length)) return false; }catch(_){ return false; }
+  choices('مش لاقي منتج اسمه «'+q+'» في المخزون 🤔 تأكد من الاسم، أو:',[{label:'📦 شوف المخزون',onClick:()=>handleShowInventory()},{label:'➕ إضافة منتج',onClick:()=>{ try{ startGuidedFlow('ADD'); }catch(_){} }}]); return true; }
+const front=async(raw)=>{ if(fromChoice(raw)) return {done:true}; if(kbAnswer(raw)) return {done:true}; if(clarify(raw)) return {done:true}; const c=canon(raw); if(c!==raw&&stockNotFound(c)) return {done:true}; return {done:false,raw:c}; };
+const sc=G.__shopChat;
+if(sc&&typeof sc.answer==='function'){ const _a=sc.answer.bind(sc);
+  sc.answer=async function(raw){ try{ const r=await front(raw); if(r.done) return ''; return _a(r.raw); }catch(e){ try{ dlog('v5 answer',e); }catch(_){} return _a(raw); } }; }
+const _hac=G.handleAiCommand;
+if(typeof _hac==='function') G.handleAiCommand=async function(raw){
+  let out=raw; try{ const busy=!!(state.advFlow||state.walletFlow||state.acctFlow||state.debtFlow||state.guidedFlow||state.aiPending); if(!busy){ const r=await front(raw); if(r.done) return; out=r.raw; } }catch(e){ try{ dlog('v5 hac',e); }catch(_){} }
+  return _hac.call(this,out);
+};
+
+/* ---------- 5) حماية من التنفيذ المزدوج: رسالة واحدة في المرة + تجاهل الضغطة المكررة ---------- */
+const _send=G.sendAiMessage;
+if(typeof _send==='function'){
+  let inflight=false, last={t:'',at:0};
+  G.sendAiMessage=async function(){
+    const el=document.getElementById('ai-input'); const t=(el&&el.value||'').trim(); if(!t) return;
+    const now=Date.now();
+    if(t===last.t&&now-last.at<1200){ if(el) el.value=''; return; }          /* ضغطة/إرسال مكرر */
+    let w=0; while(inflight&&w<150){ await new Promise(r=>setTimeout(r,100)); w++; }   /* رسالة بتتنفّذ دلوقتي: استنى */
+    if(el&&el.value.trim()!==t) return;                                                  /* اتغيّرت أثناء الانتظار */
+    inflight=true; last={t,at:now};
+    const b=box(), n0=b?b.childElementCount:0;
+    try{ const r=await _send.apply(this,arguments);
+      /* لو مفيش أي رد بعد ثانية ونص: سؤال توضيحي مناسب للنشاط (بدل الرد العام) */
+      setTimeout(()=>{ try{ if(b&&b.childElementCount<=n0+1&&!document.getElementById('typing-indicator')&&!b.querySelector('.rc-load,.skel')){ choices('مش متأكد فهمت قصدك 🤔 اكتب بطريقة تانية، أو اختار:',[{label:'💰 مبيعات النهارده',onClick:()=>G.handleSalesQuery&&G.handleSalesQuery('النهارده')},{label:'📦 المخزون',onClick:()=>handleShowInventory()},{label:'📅 تحركاتي اليومية',onClick:()=>G.handleDailyReport&&G.handleDailyReport('')},...(blocks()?[]:[{label:'🔌 الشحن',onClick:()=>G.handleRecharge&&G.handleRecharge()}])]); } }catch(_){} },1400);
+      return r; }
+    finally{ inflight=false; }
+  };
+  const bt=document.getElementById('ai-send'); if(bt) bt.onclick=G.sendAiMessage;
+}
+G.__chatV5={canon,kb:KB,fromChoice,kbAnswer};
 })();
 
 </script>

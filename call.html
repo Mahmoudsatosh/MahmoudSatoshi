@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; media-src blob: mediastream: data:; connect-src https://buvixsokavrxuwpikefl.supabase.co; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: https:; media-src blob: mediastream: data:; connect-src https://buvixsokavrxuwpikefl.supabase.co; base-uri 'none'; form-action 'none'">
 <meta name="theme-color" content="#06142B">
 <link rel="icon" href="data:,">
 <meta name="robots" content="noindex,nofollow">
-<title>اتصل بالمحل — Gomla4U</title>
+<title>خدمة العملاء — Gomla4U</title>
 <style>
 :root{--bg0:#0B0820;--bg1:#1E1250;--cy:#B9A0FF;--bl:#6D3FD1;--ok:#14A36F;--ok2:#0E8A5B;--bad:#F87171;--warn:#FBBF24;--tx:#EAF2FF;--tx2:#9DB1D3;--tx3:#6C7FA3;--glass:rgba(255,255,255,.055);--gl-b:rgba(255,255,255,.11);--card:rgba(20,12,56,.6)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -114,30 +114,120 @@ main{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;
 @media (prefers-reduced-motion:reduce){.callwrap::before,.callwrap::after,.chip.on .dot,.wave.ring b,.avatar.rip::before,.avatar.rip::after,.livebar.up .dot{animation:none}}
 @media (max-height:700px){.hero{transform:scale(.8);margin:-10px 0}.shop{font-size:22px}.card{padding:16px 14px 14px;gap:10px}.callbtn{height:60px}.feats{display:none}}
 @media (max-height:560px){.desc{display:none}.avatar{width:80px;height:80px;font-size:32px}.timer{font-size:32px;min-height:40px}.wave{height:40px}}
+
+/* ===== واجهة العميل: متجر + خدمة عملاء (إضافة فوق نظام الاتصال) ===== */
+.deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.deco .shelf{position:absolute;inset:0;opacity:.9;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'%3E%3Cg fill='none' stroke='%23B9A0FF' stroke-opacity='.10' stroke-width='1.4'%3E%3Cpath d='M0 118h220'/%3E%3Crect x='14' y='84' width='30' height='34' rx='5'/%3E%3Cpath d='M14 96h30'/%3E%3Crect x='52' y='70' width='24' height='48' rx='6'/%3E%3Crect x='56' y='76' width='16' height='5' rx='2'/%3E%3Crect x='86' y='92' width='38' height='26' rx='4'/%3E%3Cpath d='M86 102h38M105 92v10'/%3E%3Crect x='134' y='78' width='20' height='40' rx='5'/%3E%3Ccircle cx='144' cy='90' r='3'/%3E%3Crect x='164' y='96' width='34' height='22' rx='4'/%3E%3Cpath d='M170 96v-6a11 11 0 0 1 22 0v6'/%3E%3C/g%3E%3C/svg%3E");background-size:220px 150px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)}
+.deco .glow1,.deco .glow2{position:absolute;border-radius:50%;filter:blur(60px)}
+.deco .glow1{width:340px;height:340px;top:-110px;inset-inline-end:-90px;background:rgba(124,77,255,.34)}
+.deco .glow2{width:300px;height:300px;bottom:-100px;inset-inline-start:-90px;background:rgba(37,99,235,.30)}
+main{max-width:480px}
+@media (min-width:900px){ main{max-width:560px} }
+#home{overflow:hidden;gap:9px;min-height:0}
+.shophead{position:relative;display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:18px;background:linear-gradient(135deg,rgba(124,77,255,.28),rgba(37,99,235,.18));border:1px solid var(--gl-b);overflow:hidden;flex:none}
+.shophead .wv{position:absolute;inset:auto 0 0 0;height:26px;opacity:.5;pointer-events:none}
+.shophead .wv svg{width:200%;height:100%;animation:wvx 9s linear infinite}
+@keyframes wvx{to{transform:translateX(50%)}}
+.shophead .lg{position:relative;width:46px;height:46px;border-radius:15px;flex:none;display:grid;place-items:center;font-size:22px;font-weight:900;font-style:normal;color:#fff;background:linear-gradient(135deg,#8B5CF6,#2563EB);box-shadow:0 6px 18px rgba(99,70,230,.45),inset 0 1px 0 rgba(255,255,255,.3);overflow:hidden}
+.shophead .tt{position:relative;min-width:0;flex:1}
+.shophead .dept{font-size:11px;letter-spacing:.3px}
+.shophead .shop,#home .shophead .shop{font-size:19px;font-weight:800;margin:1px 0 0;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shophead .chip{position:relative;padding:5px 10px;font-size:11.5px;gap:6px;flex:none;max-width:44%;text-align:start}
+.shophead .chip .dot{width:8px;height:8px}
+#chat{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:9px;padding:4px 2px 6px;scroll-behavior:smooth}
+.mrow{display:flex;gap:8px;align-items:flex-end;max-width:100%}
+.mrow.u{justify-content:flex-start;flex-direction:row-reverse}
+.av2{width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;background:linear-gradient(135deg,#8B5CF6,#2563EB);color:#fff}
+.av2 svg{width:16px;height:16px}
+.bub{max-width:86%;padding:10px 13px;border-radius:16px;font-size:14.5px;line-height:1.85;white-space:pre-wrap;word-break:break-word;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);color:#F3F0FF;border-end-start-radius:5px;backdrop-filter:blur(6px)}
+.mrow.u .bub{background:linear-gradient(135deg,#7C4DFF,#4F46E5);border-color:transparent;color:#fff;border-end-start-radius:16px;border-end-end-radius:5px}
+.bub b{color:#fff}
+.typing{display:inline-flex;gap:4px;padding:6px 2px}.typing i{width:7px;height:7px;border-radius:50%;background:#C9B8FF;animation:tp 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 0 0;width:100%}
+.qb{display:flex;align-items:center;gap:8px;text-align:start;padding:10px 11px;min-height:46px;border-radius:14px;border:1px solid rgba(185,160,255,.35);background:rgba(124,77,255,.14);color:#F3EEFF;font-size:13px;font-weight:700;line-height:1.4;cursor:pointer}
+.qb:active{transform:scale(.97)}.qb .e{font-size:18px;flex:none}
+.qb:disabled{opacity:.5}
+.qstrip{display:flex;gap:7px;overflow-x:auto;padding:2px 1px 4px;flex:none;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.qstrip::-webkit-scrollbar{display:none}
+.qstrip .qb{min-height:36px;padding:6px 12px;border-radius:99px;white-space:nowrap;font-size:12.5px}
+.opts{display:flex;flex-direction:column;gap:7px;margin-top:8px;width:100%}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:start;padding:10px 12px;min-height:46px;border-radius:13px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font-size:13.5px;font-weight:700;cursor:pointer}
+.opt small{color:#C9B8FF;font-weight:700;white-space:nowrap}
+.opt:active{transform:scale(.98)}
+.pc{width:100%;margin-top:8px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.98),#F2EEFF);color:#1B1340;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.pc .pr{display:flex;gap:12px;padding:12px;align-items:center}
+.pc .im{width:72px;height:72px;border-radius:13px;flex:none;background:#E8E1FF;display:grid;place-items:center;color:#7C4DFF;overflow:hidden}
+.pc .im img{width:100%;height:100%;object-fit:cover;display:block}
+.pc .im svg{width:34px;height:34px}
+.pc .in{min-width:0;flex:1}
+.pc .nm2{font-size:14.5px;font-weight:800;line-height:1.5;margin:0 0 2px;word-break:break-word}
+.pc .ds{font-size:12px;color:#5B5380;line-height:1.6;margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc .pp{font-size:19px;font-weight:900;color:#4F2BD0}
+.pc .pp.na{font-size:13px;font-weight:700;color:#6B6290}
+.st{display:inline-flex;align-items:center;gap:5px;margin-inline-start:8px;padding:2px 9px;border-radius:99px;font-size:11.5px;font-weight:800;vertical-align:middle}
+.st.ok{background:#DCFCE7;color:#15803D}.st.no{background:#FEE2E2;color:#B91C1C}
+.pc .pa{display:flex;gap:8px;padding:0 12px 12px;flex-wrap:wrap}
+.pa a,.pa button,.ibtn{flex:1;min-width:120px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 10px;min-height:42px;border-radius:11px;border:0;font-size:12.5px;font-weight:800;text-decoration:none;cursor:pointer}
+.pa .w,.ibtn.w{background:#25D366;color:#053B1B}
+.pa .g{background:#EDE7FF;color:#4F2BD0}
+.ibtn{flex:none;margin-top:8px;width:100%}.ibtn.c{background:linear-gradient(135deg,#14A36F,#0E8A5B);color:#fff}.ibtn svg{width:18px;height:18px;flex:none}
+.acts{display:flex;flex-direction:column;gap:8px;flex:none}
+.callwrap{max-width:none;margin:0}
+.callbtn{height:56px;font-size:17px;gap:10px}
+.callbtn .ico{width:34px;height:34px}.callbtn .ico svg{width:19px;height:19px}
+.callbtn .lbl{align-items:center;line-height:1.15}
+.wabtn{display:flex;align-items:center;justify-content:center;gap:9px;height:48px;border-radius:99px;background:linear-gradient(180deg,#2BE073,#18B955);color:#04301A;font-weight:800;font-size:14.5px;text-decoration:none;box-shadow:0 8px 22px rgba(37,211,102,.32),inset 0 2px 0 rgba(255,255,255,.35)}
+.wabtn:active{transform:scale(.98)}
+.wabtn svg{width:22px;height:22px;flex:none}
+.qf{display:flex;gap:8px;flex:none}
+.qf input{flex:1;min-width:0;height:46px;padding:0 16px;border-radius:99px;border:1px solid var(--gl-b);background:rgba(255,255,255,.09);color:#fff;font-size:15px;outline:none;font-family:inherit}
+.qf input::placeholder{color:#A99AD8}.qf input:focus{border-color:var(--cy);background:rgba(255,255,255,.13)}
+.qf button{width:46px;height:46px;border-radius:50%;border:0;flex:none;background:linear-gradient(135deg,#8B5CF6,#4F46E5);color:#fff;display:grid;place-items:center;cursor:pointer}
+.qf button svg{width:21px;height:21px;transform:scaleX(-1)}
+.qf button:disabled{opacity:.5}
+.mini{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none;min-height:0}
+.mini .hint{font-size:11px;line-height:1.5;margin:0}
+#nmBox{flex:none}
+#nmBox .link{font-size:11.5px;padding:2px 6px;min-height:0}
+#nmBox .nm{max-width:150px;padding:6px 10px;font-size:13px}
+#err{flex:none;padding:9px 12px;font-size:13px}
+#home .err0{display:none}
+@media (max-height:700px){ .foot .ft,.mini .hint{display:none} .mini{justify-content:center} }
+@media (max-height:680px){ .top{padding:6px 12px}.shophead{padding:7px 10px}.shophead .lg{width:38px;height:38px;font-size:18px}.callbtn{height:50px}.wabtn{height:42px}.qf input,.qf button{height:42px}.qf button{width:42px}.bub{font-size:14px;line-height:1.7} .brand small{display:none} }
+@media (prefers-reduced-motion:reduce){ .shophead .wv svg,.typing i{animation:none} #chat{scroll-behavior:auto} }
 </style>
 </head>
 <body>
+<div class="deco" aria-hidden="true"><div class="shelf"></div><div class="glow1"></div><div class="glow2"></div></div>
 <canvas id="net" aria-hidden="true"></canvas>
 <audio id="remote" autoplay playsinline></audio>
 <main>
   <header class="top">
-    <div class="brand"><i>G</i><div>Gomla4U<small>مركز الاتصال</small></div></div>
+    <div class="brand"><i>G</i><div>Gomla4U<small>مركز خدمة العملاء</small></div></div>
     <div class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>اتصال مشفّر</div>
   </header>
 
-  <!-- شاشة المحل -->
+  <!-- شاشة المحل: شات خدمة العملاء + أزرار الاتصال وواتساب -->
   <section class="scr" id="home">
-   <div class="card">
-    <div class="hero"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6.5" rx="1.8"/><rect x="17.5" y="13" width="4" height="6.5" rx="1.8"/><path d="M19.5 19.5c0 1.4-1.6 2-4 2h-2"/></svg></i><em id="logo">م</em></div>
-    <div><div class="dept">خدمة العملاء المباشرة</div><h1 class="shop" id="shop">…</h1></div>
-    <p class="desc">عندك استفسار؟ اتواصل مع المحل مباشرة عبر الإنترنت — مجاناً وبدون رصيد</p>
+   <div class="shophead">
+    <div class="wv" aria-hidden="true"><svg viewBox="0 0 400 26" preserveAspectRatio="none"><path d="M0 13Q25 1 50 13T100 13T150 13T200 13T250 13T300 13T350 13T400 13" fill="none" stroke="#C9B8FF" stroke-width="1.6" stroke-opacity=".8"/><path d="M0 13Q25 22 50 13T100 13T150 13T200 13T250 13T300 13T350 13T400 13" fill="none" stroke="#7DD3FC" stroke-width="1.2" stroke-opacity=".6"/></svg></div>
+    <i class="lg" id="logo">م</i>
+    <div class="tt"><div class="dept">مساعد العملاء</div><h1 class="shop" id="shop">…</h1></div>
     <span class="chip" id="avail"><span class="dot"></span><span id="availTx">بنجهّز الاتصال…</span></span>
-    <div class="callwrap idle" id="cw"><button class="callbtn" id="callBtn" disabled aria-label="اتصل بالمحل"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></span><span class="lbl">اتصل بالمحل مباشرة</span></button></div>
-    <div class="feats"><div><b>🎙️</b>صوت مباشر</div><div><b>💸</b>بدون رصيد</div><div><b>🔒</b>من غير تسجيل</div></div>
-    <div id="nmBox"><button class="link" id="nmLink" type="button">إضافة اسمك (اختياري)</button><input class="nm hide" id="nm" maxlength="40" placeholder="اسمك" autocomplete="name"></div>
-    <div class="msg hide" id="err" role="alert"></div>
-    <div class="hint">هنطلب إذن الميكروفون لما تضغط على الزر.<br>المكالمة مش بتتسجّل.</div>
    </div>
+   <div id="chat" role="log" aria-live="polite" aria-label="محادثة مع مساعد المحل"></div>
+   <div class="qstrip hide" id="qstrip" aria-label="أسئلة سريعة"></div>
+   <div class="msg hide" id="err" role="alert"></div>
+   <div class="acts">
+    <div class="callwrap idle" id="cw"><button class="callbtn" id="callBtn" disabled aria-label="اتصل بالمحل الآن"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></span><span class="lbl">اتصل بالمحل الآن</span></button></div>
+    <a class="wabtn hide" id="waBtn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.18-3.1.82.83-3.02-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.26.28-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.95 4.35 2.45.97 2.95.78 3.48.73.53-.05 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.14-.2.29-.74.93-.9 1.12-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.6-2-.17-.3-.02-.45.12-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.36-.02-.5-.07-.15-.65-1.58-.9-2.16-.23-.56-.47-.49-.65-.5h-.55z"/></svg>تواصل مع صاحب المحل عبر واتساب</a>
+   </div>
+   <div class="mini">
+    <div id="nmBox"><button class="link" id="nmLink" type="button">إضافة اسمك للمكالمة (اختياري)</button><input class="nm hide" id="nm" maxlength="40" placeholder="اسمك" autocomplete="name"></div>
+    <div class="hint">المكالمة مجانية وبدون رصيد، ومش بتتسجّل.</div>
+   </div>
+   <form class="qf" id="qf" autocomplete="off"><input id="q" maxlength="120" placeholder="اكتب اسم المنتج أو سؤالك…" enterkeyhint="send" aria-label="اكتب سؤالك"><button type="submit" id="qsend" aria-label="إرسال"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 21 3l-6.5 18-3-7.5z"/><path d="M11.5 13.5 21 3"/></svg></button></form>
   </section>
 
   <!-- شاشة المكالمة -->
@@ -170,7 +260,7 @@ main{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;
   </section>
 
   <pre class="rep hide" id="repOut" title="اضغط للإغلاق"></pre>
-  <div class="foot"><button class="link" id="rep" type="button" style="padding:2px 6px;min-height:0;font-size:11.5px">📋 تقرير الصوت (للدعم)</button><br>Gomla4U · مكالمة صوتية مباشرة · بدون تسجيل</div>
+  <div class="foot"><button class="link" id="rep" type="button" style="padding:2px 6px;min-height:0;font-size:11.5px">📋 تقرير الصوت (للدعم)</button><span class="ft"><br>Gomla4U · مكالمة صوتية مباشرة · بدون تسجيل</span></div>
 </main>
 <script>
 (function(){
@@ -332,6 +422,246 @@ $('back').onclick=()=>{ show('home'); $('err').classList.add('hide'); loadInfo()
 addEventListener('pagehide',()=>{ if(S&&S.id){ try{ rpc('call_end_caller',{p_id:S.id,p_secret:S.secret},true); }catch(_){} } cleanup(); });
 window.__call={get state(){return S;},startCall,loadInfo};
 loadInfo(); setInterval(()=>{ if(!document.hidden) loadInfo(); },15000);
+})();
+</script>
+<script>
+/* ===== شات العميل (إضافة): بحث في منتجات المحل صاحب اللينك فقط، بدون أي كتابة أو عمليات مالية =====
+   مش بيلمس منطق المكالمة. بيكلّم دوال القراءة shop_* بس (storefront.sql). */
+(function(){
+'use strict';
+const SUPA='https://buvixsokavrxuwpikefl.supabase.co', KEY='sb_publishable_UzXzPaiuLgDhjVtsFVXeYQ_XlpDbUvN';
+const $=id=>document.getElementById(id);
+const TOKEN=(new URLSearchParams(location.search).get('s')||'').trim();
+const chat=$('chat'), inp=$('q'), sendBtn=$('qsend');
+let info=null, shop='المحل', wa=null, mode='search', last=null, busy=false, off=false, started=false;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- شبكة ---------- */
+async function rpc(name,args){
+  const ac=new AbortController(), t=setTimeout(()=>ac.abort(),12000);
+  try{
+    const r=await fetch(SUPA+'/rest/v1/rpc/'+name,{method:'POST',signal:ac.signal,headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(args||{})});
+    let j=null; try{ j=await r.json(); }catch(_){}
+    if(!r.ok){ const e=new Error((j&&(j.message||j.hint))||('HTTP '+r.status)); e.status=r.status; e.code=(j&&j.code)||''; throw e; }
+    return j;
+  } finally{ clearTimeout(t); }
+}
+const missingFn=e=>e&&(e.code==='PGRST202'||e.status===404||/Could not find the function|does not exist/i.test(e.message||''));
+
+/* ---------- عرض ---------- */
+const SVG_HEAD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6.5" rx="1.8"/><rect x="17.5" y="13" width="4" height="6.5" rx="1.8"/></svg>';
+const SVG_BOX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
+const SVG_CALL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg>';
+function el(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+function scroll(){ requestAnimationFrame(()=>{ chat.scrollTop=chat.scrollHeight; }); }
+function trimChat(){ while(chat.children.length>70) chat.removeChild(chat.firstChild); }
+function botRow(){ const r=el('div','mrow'); const a=el('span','av2'); a.innerHTML=SVG_HEAD; const b=el('div','bub'); r.append(a,b); chat.appendChild(r); trimChat(); return b; }
+function say(text){ const b=botRow(); b.textContent=text; scroll(); return b; }
+function userSay(text){ const r=el('div','mrow u'); r.appendChild(el('div','bub',text)); chat.appendChild(r); trimChat(); scroll(); if(!started){ started=true; $('qstrip').classList.remove('hide'); } }
+function typing(){ const b=botRow(); b.innerHTML='<span class="typing"><i></i><i></i><i></i></span>'; scroll(); const row=b.parentNode; return ()=>row.remove(); }
+const price=p=>{ const n=Number(p); return (isFinite(n)&&n>0)?n.toLocaleString('en-US',{maximumFractionDigits:2})+' ج.م':null; };
+const waDigits=()=>/^\d{10,15}$/.test(wa||'')?wa:null;
+function waUrl(extra){ const d=waDigits(); if(!d) return null; const t='أهلًا، وصلت لحضرتك من صفحة '+shop+' على جملة فور يو وعايز أستفسر عن '+(extra?('المنتج: '+extra):'أحد المنتجات')+'.'; return 'https://wa.me/'+d+'?text='+encodeURIComponent(t); }
+function safeImg(u){ try{ const x=new URL(String(u||'')); return x.protocol==='https:'?x.href:null; }catch(_){ return null; } }
+
+/* ---------- أزرار الأسئلة الجاهزة ---------- */
+const QS=[['search','🛍️','أبحث عن منتج'],['price','💰','أريد معرفة سعر منتج'],['avail','📦','ما المنتجات المتاحة؟'],['alt','🔄','أبحث عن بديل لمنتج'],['info','🕒','معلومات المحل ومواعيد العمل'],['contact','👤','أريد التواصل مع صاحب المحل']];
+const QSHORT={search:'ابحث عن منتج',price:'سعر منتج',avail:'المنتجات المتاحة',alt:'بديل لمنتج',info:'مواعيد المحل',contact:'تواصل مع المحل'};
+function qBtn(k,strip){ const b=el('button','qb'); b.type='button'; b.dataset.k=k; const q=QS.find(x=>x[0]===k); if(!strip){ b.appendChild(el('span','e',q[1])); b.appendChild(el('span','',q[2])); } else b.textContent=q[1]+' '+QSHORT[k]; return b; }
+function fillStrip(){ const s=$('qstrip'); s.textContent=''; QS.forEach(q=>s.appendChild(qBtn(q[0],true))); }
+
+/* ---------- أزرار التواصل داخل الشات ---------- */
+function contactBtns(parent,extra){
+  const u=waUrl(extra);
+  if(u){ const a=el('a','ibtn w'); a.href=u; a.target='_blank'; a.rel='noopener noreferrer'; a.appendChild(document.createTextNode('تواصل مع صاحب المحل عبر واتساب')); parent.appendChild(a); }
+  const c=el('button','ibtn c'); c.type='button'; c.dataset.call='1'; c.innerHTML=SVG_CALL; c.appendChild(document.createTextNode('اتصل بالمحل الآن')); parent.appendChild(c);
+}
+
+/* ---------- بطاقة منتج ---------- */
+function card(b,p){
+  last=p; const c=el('div','pc'); const pr=el('div','pr'); const im=el('div','im'); const u=safeImg(p.image);
+  if(u){ const i=document.createElement('img'); i.alt=p.name||''; i.loading='lazy'; i.decoding='async'; i.referrerPolicy='no-referrer'; i.src=u; i.onerror=()=>{ im.textContent=''; im.innerHTML=SVG_BOX; }; im.appendChild(i); } else im.innerHTML=SVG_BOX;
+  const inn=el('div','in'); inn.appendChild(el('p','nm2',p.name||'')); if(p.description) inn.appendChild(el('p','ds',p.description));
+  const line=el('div'); const pp=price(p.price); const pe=el('span','pp'+(pp?'':' na'),pp||'السعر عند المحل'); line.appendChild(pe);
+  line.appendChild(el('span','st '+(p.in_stock?'ok':'no'),p.in_stock?'✓ متوفر':'غير متوفر حاليًا')); inn.appendChild(line);
+  pr.append(im,inn); c.appendChild(pr);
+  const pa=el('div','pa'); const u2=waUrl(p.name);
+  if(u2){ const a=el('a','w','اسأل عن المنتج على واتساب'); a.href=u2; a.target='_blank'; a.rel='noopener noreferrer'; pa.appendChild(a); }
+  const g=el('button','g',p.in_stock?'منتجات مشابهة':'شوف البدائل المتاحة'); g.type='button'; g.dataset.alt=p.id; pa.appendChild(g);
+  c.appendChild(pa); b.appendChild(c); scroll();
+}
+const seen=new Map(); const keep=items=>items.forEach(p=>seen.set(p.id,p));
+function options(b,items,alt){
+  const o=el('div','opts'); items.forEach(p=>{ const x=el('button','opt'); x.type='button'; x.dataset.id=p.id; if(alt) x.dataset.altmode='1'; x.appendChild(el('span','',p.name)); const pp=price(p.price); x.appendChild(el('small','',(p.in_stock?'':'غير متوفر · ')+(pp||''))); o.appendChild(x); }); b.appendChild(o); scroll();
+}
+
+/* ---------- فهم الكلام (مطابقة كلمات ومرادفات، بدون أي خدمة خارجية) ---------- */
+const norm=t=>String(t||'').toLowerCase().replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/[ىئ]/g,'ي').replace(/ؤ/g,'و').replace(/[ً-ٰٟـ]/g,'').replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[؟?!.,،؛:;"'()\[\]{}«»\\\/]+/g,' ').replace(/\s+/g,' ').trim();
+const STOP=new Set('عندكم عندك عندكو عايز عاوز عاوزه عايزه محتاج محتاجه ابغي ابغى بكام بكم كام سعر سعره سعرها اسعار ثمن متوفر متوفره موجود موجوده هل في فيه ده دي دا هذا هذه ازاي اللي الي انا ممكن لو سمحت من علي على عن مع يا ايه اي ابحث ابحثلي دورلي دور لاقي لقيت اشتري اطلب نفسي منتج المنتج منتجات حاجه حاجات شيء حابب اعرف اسأل اسال عايزين عاوزين كنت بدور بدوّر بس كمان تاني برضو او وكمان والله طيب ياريت يعني بتاع بتاعكم عليه عليها'.split(' '));
+const SYN=[['شاحن','شواحن','شاحنات','شاحنه','charger','chargers'],['كابل','كابلات','كيبل','كيبلات','cable','cables','سلك'],['سماعه','سماعات','هيدفون','headphone','headphones','earphone','earbuds','ايربودز','airpods'],['موبايل','موبايلات','هاتف','جوال','mobile','smartphone'],['جراب','جرابات','كفر','اغطيه','case','cover'],['ايفون','iphone'],['سامسونج','سامسونغ','samsung'],['هواوي','huawei'],['شاومي','xiaomi','ريدمي','redmi'],['اوبو','oppo'],['ريلمي','realme'],['شاشه','سكرينه','سكرين','screen','protector','حمايه'],['باور','power'],['بطاريه','بطاريات','battery'],['ماوس','mouse','فاره'],['كيبورد','keyboard'],['فلاش','فلاشه','flash'],['لايتنج','لايتننج','lightning']];
+const PHR=[[/(تايب|تيب|type)\s*-?\s*(سي|c)\b/g,'§tc',['تايب سي','تيب سي','type c','typec','type-c','usb c','usb-c','usbc']],[/باور\s*بانك|power\s*bank|powerbank/g,'§pb',['باور بانك','power bank','powerbank','شاحن متنقل','بطاريه متنقله']]];
+function toQuery(n){
+  let s=' '+n+' '; PHR.forEach(p=>{ s=s.replace(p[0],' '+p[1]+' '); });
+  const groups=[], used=new Set();
+  s.split(' ').filter(Boolean).forEach(t=>{
+    let alts=null; const ph=PHR.find(p=>p[1]===t);
+    if(ph) alts=ph[2];
+    else{
+      if(STOP.has(t)||(t.length>2&&t[0]==='و'&&STOP.has(t.slice(1)))) return; if(t.length<2) return;
+      let b=t.length>3&&t.startsWith('ال')?t.slice(2):t; if(STOP.has(b)) return;
+      const e=SYN.find(g=>g.includes(b)||g.includes(t)); alts=e?e.slice():[b];
+      if(!e&&b.length>4&&b.endsWith('ات')) alts.push(b.slice(0,-2));
+    }
+    alts=alts.map(a=>a.replace(/[,|]/g,' ').trim()).filter(a=>a.length>=2||/^\d$/.test(a));
+    if(!alts.length) return; const key=alts[0]; if(used.has(key)) return; used.add(key); groups.push(alts);
+  });
+  const g=groups.slice(0,6); return {groups:g,str:g.map(a=>a.join('|')).join(',')};
+}
+const RX={
+  hello:/^(ا?هلا|اهلا|مرحبا|مرحبتين|هاي|هلو|السلام عليكم|سلام عليكم|صباح الخير|مساء الخير|ازيك|ازيكم|يا هلا)( .{0,12})?$/,
+  thanks:/(شكرا|تسلم|متشكر|الله يكرمك|ميرسي)/,
+  hours:/(مواعيد|ساعات (العمل|الشغل)|بتفتح|بتقفل|تفتحوا|تقفلوا|فاتحين|مفتوح|الدوام|امتي (تفتح|تقفل|بتفتحوا|بتقفلوا))/,
+  addr:/(عنوان|لوكيشن|موقعكم|موقع المحل|مكانكم|مكان المحل|فين المحل|فينكم|فين مكان|ازاي اجيلكم|اجيلكم)/,
+  contact:/(واتس|whats|تواصل|صاحب المحل|صاحب المتجر|اكلم|كلم|مكالم|اتصل|رقم (المحل|صاحب|التواصل|الواتس|التليفون|الموبايل)|رقمكم|رقم تليفون)/,
+  cats:/(ايه المنتجات|المنتجات المتاح|المنتجات المتوفر|عندكم ايه|ايه المتاح|ايه اللي عندكم|اقسام|تصنيفات|كل المنتجات|المتاح عندكم)/,
+  alt:/(بديل|بدائل|شبه|حاجه تانيه|حاجه مشابهه|مشابه)/,
+  priceq:/(سعر|بكام|بكم|كام ثمن|ثمن|كام)/,
+  stockq:/(متوفر|موجود|فيه|عندكم|لسه)/
+};
+
+/* ---------- ردود ---------- */
+async function reply(build){ const rm=typing(); try{ await sleep(260); } finally{ rm(); } await build(); }
+function failMsg(e){
+  const b=botRow();
+  b.textContent=missingFn(e)?'خدمة البحث في منتجات المحل لسه مش متفعّلة. تقدر تتواصل مع المحل مباشرة:':'حصلت مشكلة في الوصول لبيانات المحل دلوقتي. جرّب تاني بعد شوية، أو تواصل مع المحل مباشرة:';
+  contactBtns(b); scroll();
+}
+function notFound(raw){
+  const b=botRow(); const w=String(raw||'').trim().slice(0,40);
+  b.appendChild(document.createTextNode('مش لاقي «'+w+'» في منتجات المحل دلوقتي. جرّب تكتب الاسم بشكل تاني، أو شوف الأقسام المتاحة، أو اسأل صاحب المحل مباشرة.'));
+  const o=el('div','opts'); const x=el('button','opt'); x.type='button'; x.dataset.k='avail'; x.appendChild(el('span','','📦 شوف الأقسام المتاحة')); o.appendChild(x); b.appendChild(o);
+  contactBtns(b,null); scroll();
+}
+function clarify(){
+  const b=botRow(); b.textContent='ممكن توضّحلي أكتر؟ اكتب اسم المنتج اللي محتاجه (مثال: شاحن سامسونج)، أو اختار من الأسئلة الجاهزة تحت.'; scroll();
+}
+async function search(raw,kind){
+  const q=toQuery(norm(raw));
+  if(!q.groups.length){
+    if(last&&(RX.priceq.test(norm(raw))||RX.stockq.test(norm(raw)))) return showOne(last,kind||(RX.priceq.test(norm(raw))?'price':'search'));
+    return clarify();
+  }
+  const r=await rpc('shop_search_products',{p_token:TOKEN,p_q:q.str,p_limit:12});
+  if(!r||!r.ok) throw new Error('NOT_OK');
+  let items=Array.isArray(r.items)?r.items:[]; if(!items.length) return notFound(raw);
+  const best=Math.max.apply(null,items.map(i=>i.score||0)); items=items.filter(i=>(i.score||0)===best); keep(items);
+  const exact=best>=(r.groups||q.groups.length);
+  if(items.length===1) return showOne(items[0],kind,!exact);
+  const b=botRow(); const shown=items.slice(0,6);
+  b.appendChild(document.createTextNode((exact?'لقيت '+items.length+' منتجات مناسبة. تقصد أنهي؟':'مفيش مطابق بالظبط، دي أقرب منتجات عندنا. تقصد أنهي؟')+(r.total>shown.length||items.length>shown.length?'\nولو كتبت تفاصيل أدق (الماركة أو الموديل) هضيّق النتائج.':'')));
+  options(b,shown,kind==='alt');
+}
+function showOne(p,kind,approx){
+  const b=botRow(); const pp=price(p.price);
+  if(kind==='alt'){ b.textContent='تمام، هدورلك على بدائل متاحة لـ «'+p.name+'»…'; scroll(); return alternatives(p); }
+  let t=approx?'مش لاقي بالظبط اللي كتبته، أقرب منتج عندنا:\n':'';
+  if(kind==='price') t+=pp?('سعر «'+p.name+'»: '+pp+(p.in_stock?' — ومتوفر ✅':' — لكنه غير متوفر حاليًا')):('«'+p.name+'» موجود في المحل بس السعر مش مسجّل. اسأل صاحب المحل مباشرة.');
+  else t+=p.in_stock?('«'+p.name+'» متوفر عندنا ✅'+(pp?' وسعره '+pp:'')):('«'+p.name+'» غير متوفر حاليًا'+(pp?' (سعره المسجّل '+pp+')':'')+'. ممكن أوريك بدائل متاحة.');
+  b.textContent=t; card(b,p);
+}
+async function alternatives(p){
+  const args={p_token:TOKEN,p_exclude:p.id,p_limit:6,p_instock:true};
+  if(p.category_id) args.p_cat=p.category_id; else { const q=toQuery(norm(p.name)); if(q.groups.length) args.p_q=q.groups[0].join('|'); }
+  const r=(args.p_cat||args.p_q)?await rpc('shop_search_products',args):{ok:true,items:[]};
+  const items=(r&&r.items)||[]; keep(items); const b=botRow();
+  if(!items.length){ b.appendChild(document.createTextNode('مفيش بدائل متوفرة مسجّلة دلوقتي لـ «'+p.name+'». اسأل صاحب المحل مباشرة، يمكن عنده حاجة مناسبة.')); contactBtns(b,p.name); scroll(); return; }
+  b.appendChild(document.createTextNode('دي بدائل متاحة قريبة من «'+p.name+'»:')); options(b,items.slice(0,6));
+}
+async function categories(){
+  const r=await rpc('shop_categories',{p_token:TOKEN}); const b=botRow();
+  if(!Array.isArray(r)||!r.length){ b.textContent='لسه مفيش أقسام مسجّلة. اكتب اسم المنتج اللي محتاجه وأدورلك عليه.'; scroll(); return; }
+  b.appendChild(document.createTextNode('دي أقسام المحل المتاحة. اختار قسم وأوريك المنتجات المتوفرة فيه:'));
+  const o=el('div','opts'); r.forEach(c=>{ const x=el('button','opt'); x.type='button'; x.dataset.cat=c.id; x.dataset.cn=c.name||''; x.appendChild(el('span','',c.name||'قسم')); x.appendChild(el('small','',(c.n||0)+' منتج')); o.appendChild(x); }); b.appendChild(o); scroll();
+}
+async function inCategory(id,name){
+  const r=await rpc('shop_search_products',{p_token:TOKEN,p_cat:id,p_instock:true,p_limit:8}); const items=(r&&r.items)||[]; keep(items); const b=botRow();
+  if(!items.length){ b.textContent='مفيش منتجات متوفرة في قسم «'+name+'» دلوقتي.'; scroll(); return; }
+  b.appendChild(document.createTextNode('المتوفر في «'+name+'»:'+(r.total>items.length?'\nفيه منتجات أكتر، اكتب اسم المنتج لو بتدور على حاجة معينة.':''))); options(b,items);
+}
+function showInfo(){
+  const b=botRow(); const L=[]; const a=info&&info.address, h=info&&info.hours;
+  if(a) L.push('📍 العنوان: '+a); if(h) L.push('🕒 مواعيد العمل: '+h);
+  if(!L.length){ b.appendChild(document.createTextNode('صاحب المحل لسه ما سجّلش العنوان ولا المواعيد هنا. تقدر تسأله مباشرة:')); contactBtns(b); }
+  else { b.appendChild(document.createTextNode(L.join('\n')+((!a||!h)?'\n(باقي البيانات لسه مش مسجّلة، اسأل صاحب المحل مباشرة.)':''))); contactBtns(b); }
+  scroll();
+}
+function showContact(){
+  const b=botRow(); b.appendChild(document.createTextNode(waDigits()?'تقدر تتواصل مع صاحب المحل بالطريقة اللي تريحك:':'رقم واتساب مش متاح حاليًا. تقدر تتصل بالمحل مباشرة من هنا:')); contactBtns(b); scroll();
+}
+
+/* ---------- تنفيذ الأزرار والنصوص ---------- */
+const PROMPT={search:'اكتب اسم المنتج اللي بتدور عليه (مثال: شاحن سامسونج تايب سي).',price:'اكتب اسم المنتج وأقولك سعره المسجّل.',alt:'اكتب اسم المنتج وأدورلك على بدائل متاحة.'};
+const PH={search:'اكتب اسم المنتج أو سؤالك…',price:'اسم المنتج اللي عايز تعرف سعره…',alt:'اسم المنتج اللي عايز له بديل…'};
+function setMode(m){ mode=m; inp.placeholder=PH[m]||PH.search; }
+async function guarded(fn){
+  if(busy) return; busy=true; sendBtn.disabled=true;
+  try{ await reply(fn); }
+  catch(e){ failMsg(e); }
+  finally{ busy=false; sendBtn.disabled=false; }
+}
+function doKey(k){
+  if(off) return; const q=QS.find(x=>x[0]===k); userSay(q[2]);
+  if(PROMPT[k]){ setMode(k); guarded(async()=>{ say(PROMPT[k]); }).then(()=>{ try{ inp.focus(); }catch(_){} }); return; }
+  setMode('search');
+  if(k==='avail') guarded(categories); else if(k==='info') guarded(async()=>showInfo()); else if(k==='contact') guarded(async()=>showContact());
+}
+function handleText(raw){
+  if(off) return; const n=norm(raw); if(!n) return; userSay(raw.trim()); const m=mode; setMode('search');
+  guarded(async()=>{
+    if(RX.hello.test(n)) return void say('أهلًا بيك في '+shop+' 👋 اكتب اسم المنتج اللي بتدور عليه، أو اختار من الأسئلة الجاهزة.');
+    if(RX.thanks.test(n)&&n.split(' ').length<=4) return void say('العفو! لو محتاج أي حاجة تانية أنا هنا 🙌');
+    if(RX.hours.test(n)||RX.addr.test(n)) return showInfo();
+    if(RX.contact.test(n)) return showContact();
+    if(RX.cats.test(n)) return categories();
+    if(m==='alt'||RX.alt.test(n)){
+      const q=toQuery(n); if(!q.groups.length&&last) return alternatives(last);
+      return search(raw,'alt');
+    }
+    return search(raw,m==='price'||(RX.priceq.test(n)&&!/(متوفر|موجود)/.test(n))?'price':'search');
+  });
+}
+chat.addEventListener('click',e=>{
+  const t=e.target.closest('button'); if(!t) return;
+  if(t.dataset.k){ doKey(t.dataset.k); return; }
+  if(t.dataset.call){ const cb=$('callBtn'); if(cb&&!cb.disabled) cb.click(); else guarded(async()=>say('المحل مش متاح للرد على المكالمات دلوقتي. جرّب واتساب أو ارجع بعد شوية.')); return; }
+  if(t.dataset.cat){ if(busy) return; userSay(t.dataset.cn||'القسم'); const id=t.dataset.cat, nm=t.dataset.cn||''; guarded(()=>inCategory(id,nm)); return; }
+  if(t.dataset.id){ const p=seen.get(t.dataset.id); if(!p||busy) return; userSay(p.name); if(t.dataset.altmode) guarded(()=>alternatives(p)); else guarded(async()=>showOne(p,'search')); return; }
+  if(t.dataset.alt){ const p=seen.get(t.dataset.alt)||last; if(!p||busy) return; userSay(p.in_stock?'منتجات مشابهة':'شوف البدائل المتاحة'); guarded(()=>alternatives(p)); }
+});
+$('qstrip').addEventListener('click',e=>{ const t=e.target.closest('button[data-k]'); if(t) doKey(t.dataset.k); });
+$('qf').addEventListener('submit',e=>{ e.preventDefault(); const v=inp.value; if(!v.trim()||busy) return; inp.value=''; handleText(v); });
+
+/* ---------- الإقلاع ---------- */
+function disable(msg){ off=true; inp.disabled=true; sendBtn.disabled=true; inp.placeholder=msg; }
+async function init(){
+  fillStrip();
+  if(!TOKEN){ say('رابط المحل غير مكتمل. اطلب من المحل يبعتلك الرابط الصحيح.'); disable('الشات غير متاح'); return; }
+  try{
+    info=await rpc('shop_public_info',{p_token:TOKEN});
+    if(!info||!info.ok){ say('الرابط ده غير صالح أو الصفحة متوقفة عند المحل.'); disable('الشات غير متاح'); return; }
+    shop=info.name||shop; wa=info.whatsapp||null; $('shop').textContent=shop; $('logo').textContent=(shop.trim()[0]||'م');
+    const u=waUrl(null); if(u){ const a=$('waBtn'); a.href=u; a.classList.remove('hide'); }
+    const b=botRow(); b.textContent='أهلًا بيك في '+shop+' 👋\n\nنورتنا! أنا هنا أساعدك تلاقي المنتج اللي بتدور عليه، وأجاوبك عن الأسعار والمنتجات المتاحة ومعلومات المحل.\n\nتحب أساعدك في إيه؟';
+    const g=el('div','qgrid'); QS.forEach(q=>g.appendChild(qBtn(q[0],false))); b.appendChild(g); chat.scrollTop=0;
+  }catch(e){
+    for(let i=0;i<20&&$('shop').textContent.trim()==='…';i++) await sleep(150);
+    const nm=$('shop').textContent.trim(); if(nm&&nm!=='…') shop=nm;
+    if(missingFn(e)){ say('أهلًا بيك في '+shop+' 👋\nخدمة البحث في المنتجات لسه مش متفعّلة عند المحل، بس تقدر تتصل بالمحل مباشرة من الزر تحت.'); disable('البحث غير متاح حاليًا'); }
+    else { const b=botRow(); b.textContent='مقدرتش أوصل لبيانات المحل دلوقتي. اتأكد من النت وجرّب تاني.'; const r=el('button','ibtn c'); r.type='button'; r.textContent='🔄 إعادة المحاولة'; r.onclick=()=>{ chat.textContent=''; started=false; init(); }; b.appendChild(r); }
+  }
+}
+window.__store={init,toQuery,norm,get shop(){return shop;}};
+init();
 })();
 </script>
 </body>
