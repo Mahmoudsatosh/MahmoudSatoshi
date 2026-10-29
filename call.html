@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: https:; media-src blob: mediastream: data:; connect-src https://buvixsokavrxuwpikefl.supabase.co; base-uri 'none'; form-action 'none'">
+<meta name="theme-color" content="#06142B">
+<link rel="icon" href="data:,">
+<meta name="robots" content="noindex,nofollow">
+<title>خدمة العملاء — Gomla4U</title>
+<style>
+:root{--bg0:#0B0820;--bg1:#1E1250;--cy:#B9A0FF;--bl:#6D3FD1;--ok:#14A36F;--ok2:#0E8A5B;--bad:#F87171;--warn:#FBBF24;--tx:#EAF2FF;--tx2:#9DB1D3;--tx3:#6C7FA3;--glass:rgba(255,255,255,.055);--gl-b:rgba(255,255,255,.11);--card:rgba(20,12,56,.6)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(110% 70% at 80% -10%,#4A2A9E 0%,transparent 58%),radial-gradient(90% 60% at 0% 110%,#2B1A6B 0%,transparent 60%),linear-gradient(180deg,var(--bg1),var(--bg0));color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,"Noto Sans Arabic",Arial,sans-serif;overflow:hidden}
+#net{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.5}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+main{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:stretch;padding:max(14px,env(safe-area-inset-top)) 16px max(14px,env(safe-area-inset-bottom));max-width:460px;margin:0 auto;gap:12px}
+/* شريط الحالة العلوي */
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-radius:16px;background:var(--glass);border:1px solid var(--gl-b);backdrop-filter:blur(8px)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14.5px;color:var(--tx)}
+.brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cy),var(--bl));color:#fff;font-style:normal;font-weight:900;font-size:15px;box-shadow:0 4px 14px rgba(185,160,255,.35)}
+.brand small{display:block;font-weight:600;font-size:10.5px;color:var(--tx3);letter-spacing:.3px;margin-top:1px}
+.sec{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--tx2)}
+.sec svg{width:14px;height:14px;color:var(--cy)}
+.scr{flex:1;display:flex;flex-direction:column;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch}
+.hide{display:none!important}
+/* بطاقة الخدمة */
+.card{margin:auto 0;border-radius:26px;padding:22px 18px 18px;text-align:center;background:linear-gradient(180deg,rgba(60,36,132,.5),var(--card));border:1px solid var(--gl-b);box-shadow:0 24px 60px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:center;gap:14px}
+.logo{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;font-size:32px;font-weight:900;color:#031024;background:linear-gradient(135deg,var(--cy),var(--bl));box-shadow:0 12px 30px rgba(185,160,255,.35),inset 0 2px 0 rgba(255,255,255,.5)}
+.dept{font-size:12px;font-weight:800;letter-spacing:.6px;color:var(--cy)}
+.shop{font-size:26px;font-weight:800;line-height:1.3;margin:0;word-break:break-word}
+.desc{color:var(--tx2);font-size:14.5px;line-height:1.8;margin:0;max-width:310px}
+.chip{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--gl-b);font-size:13.5px;font-weight:800}
+.dot{width:10px;height:10px;border-radius:50%;background:#7C8CA8;flex:none}
+.chip.on{border-color:rgba(34,197,94,.55);background:rgba(34,197,94,.12);color:#BBF7D0}
+.chip.on .dot{background:var(--ok);animation:blink 1.8s infinite}
+.chip.off{border-color:rgba(248,113,113,.45);background:rgba(248,113,113,.1);color:#FECACA}
+.chip.off .dot{background:var(--bad)}
+@keyframes blink{0%{box-shadow:0 0 0 0 rgba(34,197,94,.7)}70%,100%{box-shadow:0 0 0 9px rgba(34,197,94,0)}}
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.feats div{padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);font-size:11.5px;font-weight:700;color:var(--tx2);line-height:1.5}
+.feats b{display:block;font-size:17px;margin-bottom:2px}
+/* زر الاتصال */
+.callwrap{position:relative;width:100%;max-width:340px;margin:4px 0 0}
+.callwrap::before,.callwrap::after{content:"";pointer-events:none;position:absolute;inset:0;border-radius:99px;border:2px solid rgba(34,197,94,.55);animation:ring 2.4s ease-out infinite}
+.callwrap::after{animation-delay:1.2s}
+.callwrap.idle::before,.callwrap.idle::after{animation:none;opacity:0}
+@keyframes ring{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.14,1.5);opacity:0}}
+.callbtn{position:relative;width:100%;height:68px;border-radius:99px;border:0;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:14px;font-size:20px;font-weight:800;letter-spacing:.2px;background:linear-gradient(180deg,#34D679 0%,var(--ok) 45%,var(--ok2) 100%);box-shadow:0 12px 32px rgba(34,197,94,.45),inset 0 2px 0 rgba(255,255,255,.4),inset 0 -3px 0 rgba(0,0,0,.14);transition:transform .12s,box-shadow .12s,filter .2s}
+.callbtn .ico{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.22);flex:none}
+.callbtn .ico svg{width:23px;height:23px}
+.callbtn .lbl{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25}
+.callbtn .lbl small{font-size:11.5px;font-weight:600;opacity:.9}
+.callbtn:active:not(:disabled){transform:scale(.97);box-shadow:0 6px 18px rgba(34,197,94,.4),inset 0 2px 0 rgba(255,255,255,.3)}
+.callbtn:disabled{background:linear-gradient(180deg,#46536E,#37425A);color:#AAB6CE;box-shadow:inset 0 2px 0 rgba(255,255,255,.12);cursor:not-allowed}
+.callbtn:disabled .ico{background:rgba(255,255,255,.1)}
+.hint{font-size:12px;color:var(--tx3);line-height:1.9}
+.link{background:none;border:0;color:var(--cy);font-size:13px;font-weight:700;text-decoration:underline;cursor:pointer;padding:8px;min-height:40px}
+.nm{width:100%;max-width:260px;padding:12px 14px;border-radius:14px;border:1px solid var(--gl-b);background:rgba(255,255,255,.06);color:var(--tx);font-size:15px;text-align:center;outline:none}
+.nm:focus{border-color:var(--cy)}
+.msg{padding:12px 16px;border-radius:14px;background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.4);color:#FFD5D5;font-size:14px;line-height:1.8;width:100%}
+.msg.info{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.45);color:#D6E6FF}
+.foot{text-align:center;font-size:11px;color:var(--tx3)}
+/* شاشة المكالمة */
+.live{margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.livebar{display:flex;align-items:center;gap:8px;padding:6px 14px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--gl-b);font-size:12.5px;font-weight:800;color:var(--tx2)}
+.livebar .dot{background:var(--warn)}.livebar.up .dot{background:var(--ok);animation:blink 1.8s infinite}
+.q{display:inline-flex;align-items:flex-end;gap:2px;height:14px;margin-inline-start:6px}.q i{width:4px;background:rgba(255,255,255,.25);border-radius:2px}.q i:nth-child(1){height:5px}.q i:nth-child(2){height:9px}.q i:nth-child(3){height:14px}
+.q.l1 i:nth-child(-n+1),.q.l2 i:nth-child(-n+2),.q.l3 i{background:var(--ok)}.q.l1 i:nth-child(1){background:var(--warn)}
+.avatar{position:relative;width:104px;height:104px;border-radius:50%;display:grid;place-items:center;font-size:42px;font-weight:900;color:#fff;background:linear-gradient(135deg,#8B5CF6,var(--bl));box-shadow:0 10px 36px rgba(185,160,255,.35)}
+.avatar.rip::before,.avatar.rip::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(185,160,255,.5);animation:rip 2.2s ease-out infinite}
+.avatar.rip::after{animation-delay:1.1s}
+@keyframes rip{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.7);opacity:0}}
+.timer{font-variant-numeric:tabular-nums;font-size:40px;font-weight:300;letter-spacing:3px;min-height:50px;direction:ltr}
+.status{font-size:15px;color:var(--tx2);min-height:24px}
+.diag{font-size:13px;line-height:1.7;min-height:22px;max-width:320px;color:var(--tx2)}.diag.warn{color:#FDE68A}.diag.good{color:#86EFAC}
+.wave{display:flex;align-items:center;justify-content:center;gap:5px;height:60px}
+.wave b{width:5px;height:8px;border-radius:5px;background:linear-gradient(180deg,var(--cy),var(--bl));transition:height .09s linear}
+.wave.ring b{animation:wv 1.2s ease-in-out infinite}
+.wave.ring b:nth-child(2n){animation-delay:.2s}.wave.ring b:nth-child(3n){animation-delay:.4s}.wave.ring b:nth-child(5n){animation-delay:.6s}
+@keyframes wv{0%,100%{height:8px;opacity:.5}50%{height:30px;opacity:1}}
+.ctl{display:flex;gap:30px;align-items:flex-start;justify-content:center;margin-top:6px}
+.ctl>div{display:flex;flex-direction:column;align-items:center;gap:8px}
+.rb{width:68px;height:68px;border-radius:50%;border:1px solid var(--gl-b);background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;cursor:pointer}
+.rb svg{width:28px;height:28px}
+.rb.on{background:#fff;color:#0A1E44}
+.endbtn{width:76px;height:76px;border-radius:50%;border:0;background:linear-gradient(180deg,#FB7185,#E11D48);display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 30px rgba(225,29,72,.5),inset 0 2px 0 rgba(255,255,255,.3)}
+.endbtn svg{width:34px;height:34px;transform:rotate(135deg);color:#fff}
+.endlbl{font-size:12.5px;color:var(--tx2)}
+.btn2{padding:14px 28px;border-radius:99px;border:1px solid var(--gl-b);background:var(--glass);color:var(--tx);font-size:16px;font-weight:800;cursor:pointer;min-height:48px}
+.btn2.p{background:linear-gradient(135deg,#8B5CF6,var(--bl));color:#fff;border:0}
+/* بعد المكالمة */
+.sum{display:flex;gap:10px;width:100%}.sum div{flex:1;padding:12px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}.sum b{display:block;font-size:18px}.sum small{color:var(--tx3);font-size:11.5px}
+
+/* هيرو الصفحة الرئيسية (مستوحى من مواقع مراكز الاتصال) */
+#home .card{background:none;border:0;box-shadow:none;backdrop-filter:none;padding:6px 4px 4px;gap:14px}
+.hero{position:relative;width:132px;height:132px;display:grid;place-items:center;margin-bottom:2px}
+.hero::before{content:"";position:absolute;inset:-18px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.55),rgba(139,92,246,0) 68%);filter:blur(4px)}
+.hero i{position:relative;width:112px;height:112px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 18px 40px rgba(20,8,70,.6)}
+.hero svg{width:62px;height:62px;color:#fff}
+.hero em{position:absolute;bottom:2px;inset-inline-end:2px;min-width:34px;height:34px;padding:0 6px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:16px;background:linear-gradient(135deg,#8B5CF6,var(--bl));color:#fff;border:2px solid #1E1250}
+#home .shop{font-size:32px;font-weight:900;letter-spacing:-.2px}
+#home .dept{color:#C4B0FF;font-size:12.5px}
+#home .desc{font-size:15.5px;color:#C9BFEA}
+.callbtn{height:64px;justify-content:center;gap:12px;font-size:19px;box-shadow:0 12px 30px rgba(14,138,91,.5),inset 0 2px 0 rgba(255,255,255,.28)}
+.callbtn .ico{width:38px;height:38px;background:rgba(0,0,0,.2)}
+.callwrap::before,.callwrap::after{border-color:rgba(20,163,111,.6)}
+.feats div{background:rgba(255,255,255,.05)}
+.meters{display:grid;grid-template-columns:auto 1fr auto 1fr;gap:6px 8px;align-items:center;width:100%;max-width:330px;font-size:11.5px;color:var(--tx3)}
+.mt{height:7px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden}.mt b{display:block;height:100%;width:2%;border-radius:5px;background:linear-gradient(90deg,#8B5CF6,#34D399);transition:width .1s linear}
+.rep{position:fixed;inset:auto 10px 10px 10px;z-index:9;max-height:55vh;overflow:auto;margin:0;padding:12px;border-radius:14px;background:#0B0820;border:1px solid var(--gl-b);color:#D9E4FF;font-size:11px;line-height:1.6;white-space:pre-wrap;direction:ltr;text-align:left}
+@media (prefers-reduced-motion:reduce){.callwrap::before,.callwrap::after,.chip.on .dot,.wave.ring b,.avatar.rip::before,.avatar.rip::after,.livebar.up .dot{animation:none}}
+@media (max-height:700px){.hero{transform:scale(.8);margin:-10px 0}.shop{font-size:22px}.card{padding:16px 14px 14px;gap:10px}.callbtn{height:60px}.feats{display:none}}
+@media (max-height:560px){.desc{display:none}.avatar{width:80px;height:80px;font-size:32px}.timer{font-size:32px;min-height:40px}.wave{height:40px}}
+
+/* ===== واجهة العميل: متجر + خدمة عملاء (إضافة فوق نظام الاتصال) ===== */
+.deco{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.deco .shelf{position:absolute;inset:0;opacity:.9;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='150' viewBox='0 0 220 150'%3E%3Cg fill='none' stroke='%23B9A0FF' stroke-opacity='.10' stroke-width='1.4'%3E%3Cpath d='M0 118h220'/%3E%3Crect x='14' y='84' width='30' height='34' rx='5'/%3E%3Cpath d='M14 96h30'/%3E%3Crect x='52' y='70' width='24' height='48' rx='6'/%3E%3Crect x='56' y='76' width='16' height='5' rx='2'/%3E%3Crect x='86' y='92' width='38' height='26' rx='4'/%3E%3Cpath d='M86 102h38M105 92v10'/%3E%3Crect x='134' y='78' width='20' height='40' rx='5'/%3E%3Ccircle cx='144' cy='90' r='3'/%3E%3Crect x='164' y='96' width='34' height='22' rx='4'/%3E%3Cpath d='M170 96v-6a11 11 0 0 1 22 0v6'/%3E%3C/g%3E%3C/svg%3E");background-size:220px 150px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 18%,#000 82%,transparent 100%)}
+.deco .glow1,.deco .glow2{position:absolute;border-radius:50%;filter:blur(60px)}
+.deco .glow1{width:340px;height:340px;top:-110px;inset-inline-end:-90px;background:rgba(124,77,255,.34)}
+.deco .glow2{width:300px;height:300px;bottom:-100px;inset-inline-start:-90px;background:rgba(37,99,235,.30)}
+main{max-width:480px}
+@media (min-width:900px){ main{max-width:560px} }
+#home{overflow:hidden;gap:9px;min-height:0}
+.shophead{position:relative;display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:18px;background:linear-gradient(135deg,rgba(124,77,255,.28),rgba(37,99,235,.18));border:1px solid var(--gl-b);overflow:hidden;flex:none}
+.shophead .wv{position:absolute;inset:auto 0 0 0;height:26px;opacity:.5;pointer-events:none}
+.shophead .wv svg{width:200%;height:100%;animation:wvx 9s linear infinite}
+@keyframes wvx{to{transform:translateX(50%)}}
+.shophead .lg{position:relative;width:46px;height:46px;border-radius:15px;flex:none;display:grid;place-items:center;font-size:22px;font-weight:900;font-style:normal;color:#fff;background:linear-gradient(135deg,#8B5CF6,#2563EB);box-shadow:0 6px 18px rgba(99,70,230,.45),inset 0 1px 0 rgba(255,255,255,.3);overflow:hidden}
+.shophead .tt{position:relative;min-width:0;flex:1}
+.shophead .dept{font-size:11px;letter-spacing:.3px}
+.shophead .shop,#home .shophead .shop{font-size:19px;font-weight:800;margin:1px 0 0;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shophead .chip{position:relative;padding:5px 10px;font-size:11.5px;gap:6px;flex:none;max-width:44%;text-align:start}
+.shophead .chip .dot{width:8px;height:8px}
+#chat{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:9px;padding:4px 2px 6px;scroll-behavior:smooth}
+.mrow{display:flex;gap:8px;align-items:flex-end;max-width:100%}
+.mrow.u{justify-content:flex-start;flex-direction:row-reverse}
+.av2{width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;background:linear-gradient(135deg,#8B5CF6,#2563EB);color:#fff}
+.av2 svg{width:16px;height:16px}
+.bub{max-width:86%;padding:10px 13px;border-radius:16px;font-size:14.5px;line-height:1.85;white-space:pre-wrap;word-break:break-word;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);color:#F3F0FF;border-end-start-radius:5px;backdrop-filter:blur(6px)}
+.mrow.u .bub{background:linear-gradient(135deg,#7C4DFF,#4F46E5);border-color:transparent;color:#fff;border-end-start-radius:16px;border-end-end-radius:5px}
+.bub b{color:#fff}
+.typing{display:inline-flex;gap:4px;padding:6px 2px}.typing i{width:7px;height:7px;border-radius:50%;background:#C9B8FF;animation:tp 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 0 0;width:100%}
+.qb{display:flex;align-items:center;gap:8px;text-align:start;padding:10px 11px;min-height:46px;border-radius:14px;border:1px solid rgba(185,160,255,.35);background:rgba(124,77,255,.14);color:#F3EEFF;font-size:13px;font-weight:700;line-height:1.4;cursor:pointer}
+.qb:active{transform:scale(.97)}.qb .e{font-size:18px;flex:none}
+.qb:disabled{opacity:.5}
+.qstrip{display:flex;gap:7px;overflow-x:auto;padding:2px 1px 4px;flex:none;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.qstrip::-webkit-scrollbar{display:none}
+.qstrip .qb{min-height:36px;padding:6px 12px;border-radius:99px;white-space:nowrap;font-size:12.5px}
+.opts{display:flex;flex-direction:column;gap:7px;margin-top:8px;width:100%}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:start;padding:10px 12px;min-height:46px;border-radius:13px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:#fff;font-size:13.5px;font-weight:700;cursor:pointer}
+.opt small{color:#C9B8FF;font-weight:700;white-space:nowrap}
+.opt:active{transform:scale(.98)}
+.pc{width:100%;margin-top:8px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.98),#F2EEFF);color:#1B1340;overflow:hidden;box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.pc .pr{display:flex;gap:12px;padding:12px;align-items:center}
+.pc .im{width:72px;height:72px;border-radius:13px;flex:none;background:#E8E1FF;display:grid;place-items:center;color:#7C4DFF;overflow:hidden}
+.pc .im img{width:100%;height:100%;object-fit:cover;display:block}
+.pc .im svg{width:34px;height:34px}
+.pc .in{min-width:0;flex:1}
+.pc .nm2{font-size:14.5px;font-weight:800;line-height:1.5;margin:0 0 2px;word-break:break-word}
+.pc .ds{font-size:12px;color:#5B5380;line-height:1.6;margin:0 0 4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc .pp{font-size:19px;font-weight:900;color:#4F2BD0}
+.pc .pp.na{font-size:13px;font-weight:700;color:#6B6290}
+.st{display:inline-flex;align-items:center;gap:5px;margin-inline-start:8px;padding:2px 9px;border-radius:99px;font-size:11.5px;font-weight:800;vertical-align:middle}
+.st.ok{background:#DCFCE7;color:#15803D}.st.no{background:#FEE2E2;color:#B91C1C}
+.pc .pa{display:flex;gap:8px;padding:0 12px 12px;flex-wrap:wrap}
+.pa a,.pa button,.ibtn{flex:1;min-width:120px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 10px;min-height:42px;border-radius:11px;border:0;font-size:12.5px;font-weight:800;text-decoration:none;cursor:pointer}
+.pa .w,.ibtn.w{background:#25D366;color:#053B1B}
+.pa .g{background:#EDE7FF;color:#4F2BD0}
+.ibtn{flex:none;margin-top:8px;width:100%}.ibtn.c{background:linear-gradient(135deg,#14A36F,#0E8A5B);color:#fff}.ibtn svg{width:18px;height:18px;flex:none}
+.acts{display:flex;flex-direction:column;gap:8px;flex:none}
+.callwrap{max-width:none;margin:0}
+.callbtn{height:56px;font-size:17px;gap:10px}
+.callbtn .ico{width:34px;height:34px}.callbtn .ico svg{width:19px;height:19px}
+.callbtn .lbl{align-items:center;line-height:1.15}
+.wabtn{display:flex;align-items:center;justify-content:center;gap:9px;height:48px;border-radius:99px;background:linear-gradient(180deg,#2BE073,#18B955);color:#04301A;font-weight:800;font-size:14.5px;text-decoration:none;box-shadow:0 8px 22px rgba(37,211,102,.32),inset 0 2px 0 rgba(255,255,255,.35)}
+.wabtn:active{transform:scale(.98)}
+.wabtn svg{width:22px;height:22px;flex:none}
+.qf{display:flex;gap:8px;flex:none}
+.qf input{flex:1;min-width:0;height:46px;padding:0 16px;border-radius:99px;border:1px solid var(--gl-b);background:rgba(255,255,255,.09);color:#fff;font-size:15px;outline:none;font-family:inherit}
+.qf input::placeholder{color:#A99AD8}.qf input:focus{border-color:var(--cy);background:rgba(255,255,255,.13)}
+.qf button{width:46px;height:46px;border-radius:50%;border:0;flex:none;background:linear-gradient(135deg,#8B5CF6,#4F46E5);color:#fff;display:grid;place-items:center;cursor:pointer}
+.qf button svg{width:21px;height:21px;transform:scaleX(-1)}
+.qf button:disabled{opacity:.5}
+.mini{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:none;min-height:0}
+.mini .hint{font-size:11px;line-height:1.5;margin:0}
+#nmBox{flex:none}
+#nmBox .link{font-size:11.5px;padding:2px 6px;min-height:0}
+#nmBox .nm{max-width:150px;padding:6px 10px;font-size:13px}
+#err{flex:none;padding:9px 12px;font-size:13px}
+#home .err0{display:none}
+@media (max-height:700px){ .foot .ft,.mini .hint{display:none} .mini{justify-content:center} }
+@media (max-height:680px){ .top{padding:6px 12px}.shophead{padding:7px 10px}.shophead .lg{width:38px;height:38px;font-size:18px}.callbtn{height:50px}.wabtn{height:42px}.qf input,.qf button{height:42px}.qf button{width:42px}.bub{font-size:14px;line-height:1.7} .brand small{display:none} }
+@media (prefers-reduced-motion:reduce){ .shophead .wv svg,.typing i{animation:none} #chat{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+<div class="deco" aria-hidden="true"><div class="shelf"></div><div class="glow1"></div><div class="glow2"></div></div>
+<canvas id="net" aria-hidden="true"></canvas>
+<audio id="remote" autoplay playsinline></audio>
+<main>
+  <header class="top">
+    <div class="brand"><i>G</i><div>Gomla4U<small>مركز خدمة العملاء</small></div></div>
+    <div class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>اتصال مشفّر</div>
+  </header>
+
+  <!-- شاشة المحل: شات خدمة العملاء + أزرار الاتصال وواتساب -->
+  <section class="scr" id="home">
+   <div class="shophead">
+    <div class="wv" aria-hidden="true"><svg viewBox="0 0 400 26" preserveAspectRatio="none"><path d="M0 13Q25 1 50 13T100 13T150 13T200 13T250 13T300 13T350 13T400 13" fill="none" stroke="#C9B8FF" stroke-width="1.6" stroke-opacity=".8"/><path d="M0 13Q25 22 50 13T100 13T150 13T200 13T250 13T300 13T350 13T400 13" fill="none" stroke="#7DD3FC" stroke-width="1.2" stroke-opacity=".6"/></svg></div>
+    <i class="lg" id="logo">م</i>
+    <div class="tt"><div class="dept">مساعد العملاء</div><h1 class="shop" id="shop">…</h1></div>
+    <span class="chip" id="avail"><span class="dot"></span><span id="availTx">بنجهّز الاتصال…</span></span>
+   </div>
+   <div id="chat" role="log" aria-live="polite" aria-label="محادثة مع مساعد المحل"></div>
+   <div class="qstrip hide" id="qstrip" aria-label="أسئلة سريعة"></div>
+   <div class="msg hide" id="err" role="alert"></div>
+   <div class="acts">
+    <div class="callwrap idle" id="cw"><button class="callbtn" id="callBtn" disabled aria-label="اتصل بالمحل الآن"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></span><span class="lbl">اتصل بالمحل الآن</span></button></div>
+    <a class="wabtn hide" id="waBtn" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 14.9L2 22l5.25-1.38A9.9 9.9 0 1 0 12.04 2zm0 1.8a8.1 8.1 0 1 1-4.3 15l-.3-.18-3.1.82.83-3.02-.2-.31A8.1 8.1 0 0 1 12.04 3.8zM8.6 7.5c-.2 0-.5.07-.75.35-.26.28-1 1-1 2.4s1.03 2.8 1.17 3c.15.2 2 3.2 4.95 4.35 2.45.97 2.95.78 3.48.73.53-.05 1.7-.7 1.94-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.2-.55-.34-.29-.15-1.7-.84-1.97-.93-.26-.1-.46-.15-.65.14-.2.29-.74.93-.9 1.12-.17.2-.34.22-.63.07-.29-.14-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.6-2-.17-.3-.02-.45.12-.6.13-.13.29-.34.43-.5.14-.17.19-.29.29-.48.1-.2.05-.36-.02-.5-.07-.15-.65-1.58-.9-2.16-.23-.56-.47-.49-.65-.5h-.55z"/></svg>تواصل مع صاحب المحل عبر واتساب</a>
+   </div>
+   <div class="mini">
+    <div id="nmBox"><button class="link" id="nmLink" type="button">إضافة اسمك للمكالمة (اختياري)</button><input class="nm hide" id="nm" maxlength="40" placeholder="اسمك" autocomplete="name"></div>
+    <div class="hint">المكالمة مجانية وبدون رصيد، ومش بتتسجّل.</div>
+   </div>
+   <form class="qf" id="qf" autocomplete="off"><input id="q" maxlength="120" placeholder="اكتب اسم المنتج أو سؤالك…" enterkeyhint="send" aria-label="اكتب سؤالك"><button type="submit" id="qsend" aria-label="إرسال"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 21 3l-6.5 18-3-7.5z"/><path d="M11.5 13.5 21 3"/></svg></button></form>
+  </section>
+
+  <!-- شاشة المكالمة -->
+  <section class="scr hide" id="call">
+   <div class="live">
+    <div class="livebar" id="lb"><span class="dot"></span><span id="lbTx">مكالمة جارية</span><span class="q" id="qual" title="جودة الاتصال"><i></i><i></i><i></i></span></div>
+    <div class="avatar rip" id="av">م</div>
+    <div><div class="dept">خدمة العملاء</div><h2 class="shop" id="cshop" style="font-size:24px"></h2></div>
+    <div class="timer" id="timer"></div>
+    <div class="status" id="status"></div>
+    <div class="diag" id="diag"></div>
+    <button class="btn2 p hide" id="unmute" type="button">🔊 اضغط لتشغيل الصوت</button>
+    <div class="meters" id="meters"><span>صوتك</span><div class="mt"><b id="mylvl"></b></div><span>صوت المحل</span><div class="mt"><b id="rmlvl"></b></div></div>
+    <div class="wave ring" id="wave"><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b><b></b></div>
+    <div class="ctl">
+      <div><button class="rb" id="muteBtn" type="button" aria-label="كتم الميكروفون" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button><div class="endlbl" id="muteLbl">كتم</div></div>
+      <div><button class="endbtn" id="endBtn" aria-label="إنهاء المكالمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg></button><div class="endlbl" id="endLbl">إنهاء</div></div>
+    </div>
+   </div>
+  </section>
+
+  <!-- بعد المكالمة -->
+  <section class="scr hide" id="done">
+   <div class="card">
+    <div class="avatar" style="background:linear-gradient(135deg,#34D399,#2DE2E6)">✓</div>
+    <h2 class="shop" style="font-size:24px" id="doneT">انتهت المكالمة</h2>
+    <p class="desc" id="doneD"></p>
+    <button class="btn2 p" id="back">رجوع لشاشة المحل</button>
+   </div>
+  </section>
+
+  <pre class="rep hide" id="repOut" title="اضغط للإغلاق"></pre>
+  <div class="foot"><button class="link" id="rep" type="button" style="padding:2px 6px;min-height:0;font-size:11.5px">📋 تقرير الصوت (للدعم)</button><span class="ft"><br>Gomla4U · مكالمة صوتية مباشرة · بدون تسجيل</span></div>
+</main>
+<script>
+(function(){
+'use strict';
+const SUPA='https://buvixsokavrxuwpikefl.supabase.co', KEY='sb_publishable_UzXzPaiuLgDhjVtsFVXeYQ_XlpDbUvN';
+const $=id=>document.getElementById(id);
+const TOKEN=(new URLSearchParams(location.search).get('s')||'').trim();
+let shopName='المحل', ice=[{urls:['stun:stun.l.google.com:19302']}], avail=false, S=null; /* S = حالة المكالمة الحالية */
+const T=(k,v)=>{ try{ return v===undefined?localStorage.getItem(k):localStorage.setItem(k,v); }catch(_){ return null; } };
+
+/* ---------- RPC ---------- */
+async function rpc(name,args,keep){
+  const r=await fetch(SUPA+'/rest/v1/rpc/'+name,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(args||{}),keepalive:!!keep});
+  let j=null; try{ j=await r.json(); }catch(_){}
+  if(!r.ok){ const e=new Error((j&&(j.message||j.hint))||('HTTP '+r.status)); e.code=(j&&j.message)||''; throw e; }
+  return j;
+}
+
+/* ---------- خلفية الشبكة (خفيفة) ---------- */
+(function(){ const c=$('net'), x=c.getContext('2d'); let w,h,P=[],raf,on=true;
+  function size(){ const d=Math.min(devicePixelRatio||1,2); w=c.width=innerWidth*d; h=c.height=innerHeight*d; x.setTransform(1,0,0,1,0,0); P=[]; const n=Math.round(Math.min(46,innerWidth*innerHeight/22000)); for(let i=0;i<n;i++) P.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.25*d,vy:(Math.random()-.5)*.25*d}); }
+  function draw(){ if(!on) return; x.clearRect(0,0,w,h); const L=150*(devicePixelRatio||1);
+    for(let i=0;i<P.length;i++){ const p=P[i]; p.x+=p.vx; p.y+=p.vy; if(p.x<0||p.x>w)p.vx*=-1; if(p.y<0||p.y>h)p.vy*=-1;
+      for(let j=i+1;j<P.length;j++){ const q=P[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.hypot(dx,dy); if(d<L){ x.strokeStyle='rgba(185,160,255,'+(.22*(1-d/L))+')'; x.lineWidth=1; x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke(); } }
+      x.fillStyle='rgba(214,200,255,.7)'; x.beginPath(); x.arc(p.x,p.y,1.6*(devicePixelRatio||1),0,7); x.fill(); }
+    raf=requestAnimationFrame(draw); }
+  addEventListener('resize',size); document.addEventListener('visibilitychange',()=>{ on=!document.hidden; if(on) draw(); else cancelAnimationFrame(raf); });
+  size(); if(!matchMedia('(prefers-reduced-motion:reduce)').matches) draw();
+})();
+
+/* ---------- شاشة المحل ---------- */
+function show(id){ ['home','call','done'].forEach(s=>$(s).classList.toggle('hide',s!==id)); }
+function lbar(up,t){ const b=$('lb'); b.classList.toggle('up',!!up); $('lbTx').textContent=t; }
+function showErr(m,info){ const e=$('err'); e.textContent=m||''; e.classList.toggle('hide',!m); e.classList.toggle('info',!!info); }
+let busyFlag=false;
+function paintAvail(){ const ok=avail&&!busyFlag; const a=$('avail'); a.className='chip '+(ok?'on':'off'); $('availTx').textContent=ok?'المحل متاح للرد دلوقتي':(avail&&busyFlag?'المحل على مكالمة تانية دلوقتي':'المحل غير متاح حالياً'); $('callBtn').disabled=!ok||!!S; $('cw').classList.toggle('idle',!ok||!!S); }
+let infoBusy=false;
+async function loadInfo(){
+  if(infoBusy||S) return; infoBusy=true;
+  try{
+    if(!TOKEN){ showErr('رابط المحل غير مكتمل. اطلب من المحل يبعتلك الرابط الصحيح.'); $('shop').textContent='رابط غير صالح'; avail=false; paintAvail(); return; }
+    const d=await rpc('call_shop_info',{p_token:TOKEN});
+    if(!d||!d.ok){ $('shop').textContent='المحل مش متاح'; showErr('الرابط ده غير صالح أو المكالمات متوقفة عند المحل.'); avail=false; paintAvail(); return; }
+    shopName=d.name||'المحل'; if(Array.isArray(d.ice)&&d.ice.length) ice=d.ice; $('shop').textContent=shopName; $('logo').textContent=(shopName.trim()[0]||'م'); avail=!!d.available; busyFlag=!!d.busy; paintAvail(); if(!$('err').classList.contains('info')||avail) showErr('');
+  }catch(e){ $('availTx').textContent='مفيش اتصال بالإنترنت'; $('avail').className='chip off'; $('callBtn').disabled=true; }
+  finally{ infoBusy=false; }
+}
+$('nmLink').onclick=()=>{ $('nmLink').classList.add('hide'); const n=$('nm'); n.classList.remove('hide'); n.value=T('gm_call_name')||''; n.focus(); };
+{ const sv=T('gm_call_name'); if(sv){ $('nmLink').textContent='الاسم: '+sv+' (تعديل)'; } }
+
+/* ---------- WebRTC ---------- */
+const mmss=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+function gather(pc,ms){ return new Promise(res=>{ if(pc.iceGatheringState==='complete') return res(); const t=setTimeout(done,ms); function done(){ clearTimeout(t); pc.removeEventListener('icegatheringstatechange',chk); res(); } function chk(){ if(pc.iceGatheringState==='complete') done(); } pc.addEventListener('icegatheringstatechange',chk); }); }
+/* تشخيص الصوت: بيوضّح لو المايك مش بيبعت أو الصوت مش واصل أو المتصفح منع التشغيل */
+function diag(s){
+  const pc=s.pc, el=$('remote'), d=$('diag'); let last={rx:0,tx:0,en:0}, still=0, waited=0;
+  s.dg=setInterval(async()=>{ if(S!==s||pc.connectionState!=='connected') return;
+    try{ const st=await pc.getStats(); let rx=0,tx=0,en=null; st.forEach(r=>{ if(r.type==='inbound-rtp'&&r.kind==='audio'){ rx+=r.bytesReceived||0; if(r.totalAudioEnergy!=null) en=(en||0)+r.totalAudioEnergy; } if(r.type==='outbound-rtp'&&r.kind==='audio') tx+=r.bytesSent||0; });
+      let rtt=null; st.forEach(r=>{ if(r.type==='candidate-pair'&&(r.nominated||r.selected)&&r.currentRoundTripTime!=null) rtt=r.currentRoundTripTime; }); if(rtt!=null) $('qual').className='q '+(rtt<0.15?'l3':rtt<0.4?'l2':'l1');
+      const mic=s.stream&&s.stream.getAudioTracks()[0]; const micOk=mic&&mic.readyState==='live'&&!mic.muted;
+      if(el.srcObject&&el.paused){ el.play().catch(()=>{ $('unmute').classList.remove('hide'); }); } else $('unmute').classList.add('hide');
+      still=(rx>last.rx)?0:still+1; if(en!=null&&en>last.en+2e-5){ s.heard=true; s.heardAt=Date.now(); } last={rx,tx,en:en||0}; s.rx=rx; s.tx=tx; s.en=en; waited++;
+      if(!micOk){ d.className='diag warn'; d.textContent='الميكروفون عندك مش شغّال. اتأكد إنه مش مستخدم في تطبيق أو تبويب تاني.'; }
+      else if(rx===0&&still>=3){ d.className='diag warn'; d.textContent='الاتصال تمّ بس مفيش بيانات صوت واصلة من المحل. ممكن الشبكة أو الميكروفون عند المحل.'; }
+      else if(en==null){ d.className='diag'; d.textContent='الاتصال شغّال (المتصفح ده مبيقيسش مستوى الصوت الوارد).'; }
+      else if(s.heard){ d.className='diag good'; d.textContent='وصلنا صوت من المحل فعلًا ✓'; }
+      else if(waited>=8){ d.className='diag warn'; d.textContent='الاتصال شغّال لكن لسه مسمعناش صوت من المحل. اطلب منهم يتكلموا، وتأكد إن صوت موبايلك مرفوع.'; }
+      else { d.className='diag'; d.textContent='الاتصال شغّال… مستنيين صوت المحل'; }
+    }catch(_){} },1000);
+}
+$('muteBtn').onclick=()=>{ if(!S||!S.stream) return; const on=!$('muteBtn').classList.contains('on'); $('muteBtn').classList.toggle('on',on); $('muteBtn').setAttribute('aria-pressed',String(on)); $('muteLbl').textContent=on?'إلغاء الكتم':'كتم'; S.stream.getAudioTracks().forEach(t=>t.enabled=!on); };
+$('unmute').onclick=()=>{ const el=$('remote'); el.muted=false; el.volume=1; el.play().then(()=>$('unmute').classList.add('hide')).catch(()=>{}); };
+function setStatus(t){ $('status').textContent=t; }
+function cleanup(){
+  if(!S) return; const s=S; window.__last=s; S=null;
+  clearInterval(s.poll); clearInterval(s.dg); clearInterval(s.tick); clearTimeout(s.to); clearInterval(s.lv);
+  try{ s.pc&&s.pc.close(); }catch(_){}
+  try{ s.stream&&s.stream.getTracks().forEach(t=>t.stop()); }catch(_){}   /* الميكروفون يتقفل فوراً */
+  try{ s.ac&&s.ac.close(); s.ac=null; }catch(_){}
+  $('remote').srcObject=null;
+}
+function finish(title,desc,okIcon){
+  const dur=S&&S.t0?Math.round((Date.now()-S.t0)/1000):0;
+  cleanup(); show('done'); $('doneT').textContent=title; $('doneD').textContent=desc||(dur?'مدة المكالمة '+mmss(dur):'');
+  document.querySelector('#done .avatar').textContent=okIcon===false?'!':'✓';
+  document.querySelector('#done .avatar').style.background=okIcon===false?'linear-gradient(135deg,#FB7185,#F59E0B)':'linear-gradient(135deg,#34D399,#2DE2E6)';
+}
+
+/* ---- تشخيص: سجل أحداث + إحصاء مرشّحات ICE (بدون أي بيانات اعتماد) ---- */
+function evt(s,m){ try{ (s.log=s.log||[]).push(((Date.now()-(s.t00||Date.now()))/1000).toFixed(1)+'s '+m); }catch(_){} }
+function cands(sdp){ const c={}; (String(sdp||'').match(/^a=candidate:.*$/gm)||[]).forEach(l=>{ const m=/ typ (\w+)/.exec(l); if(m) c[m[1]]=(c[m[1]]||0)+1; }); const k=Object.keys(c); return k.length?k.map(x=>x+'='+c[x]).join(' '):'none'; }
+function iceDesc(a){ return (a||[]).map(x=>[].concat(x.urls||[]).map(u=>String(u).split(':')[0]).filter((v,i,r)=>r.indexOf(v)===i).join('/')+(x.username?'(temp-cred)':'')).join(', ')||'none'; }
+const FAILMSG={
+  failed:['تعذّر توصيل الصوت','الاتصال المباشر بين الموبايلين ماتكوّنش. غالبًا الشبكة (بيانات موبايل أو واي فاي) بتمنعه. جرّب تدخل من نفس الواي فاي اللي عليه المحل، أو تواصل مع المحل عبر واتساب.'],
+  timeout:['تعذّر توصيل الصوت','انتهت مهلة الاتصال قبل ما الصوت يتوصّل. غالبًا الشبكة بتمنع الاتصال المباشر بين الموبايلين. جرّب من واي فاي تاني، أو تواصل مع المحل عبر واتساب.'],
+  disconnected:['انقطع الاتصال','النت عندك أو عند المحل ضعيف. جرّب تتصل تاني.'],
+  peer:['اتقفل الاتصال قبل ما الصوت يتوصّل','المكالمة اتقفلت قبل ما الصوت يتوصّل (ممكن المحل قفلها، أو الشبكة منعت الاتصال المباشر بين الموبايلين). جرّب تتصل تاني، أو تواصل مع المحل عبر واتساب.']
+};
+/* فشل ICE: بنلتقط تقرير لحظة الفشل قبل ما الاتصال يتقفل، عشان زر التقرير يفضل يشتغل بعد الفشل */
+async function failIce(s,kind){
+  if(S!==s||s.failing) return; s.failing=true; evt(s,'FAIL '+kind+' ice='+(s.pc&&s.pc.iceConnectionState)+' conn='+(s.pc&&s.pc.connectionState));
+  try{ s.snapTxt=await report(); }catch(_){}
+  if(S!==s) return; rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{});
+  const M=FAILMSG[kind]||FAILMSG.failed; finish(M[0],M[1],false);
+}
+async function endByUser(){ if(!S) return; const s=S; const ringing=!s.connected; try{ await rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true); }catch(_){} finish(ringing?'اتلغى الاتصال':'انتهت المكالمة',ringing?'لو لسه محتاج المحل، جرّب تتصل تاني.':''); }
+const MAP={NOT_AVAILABLE:'المحل مش متاح للرد دلوقتي. جرّب بعد شوية.',BUSY:'المحل على مكالمة تانية دلوقتي. جرّب بعد دقيقة.',RATE_LIMIT:'محاولات كتير ورا بعض. استنى دقيقة وجرّب تاني.',NOT_FOUND:'الرابط ده غير صالح أو المكالمات متوقفة عند المحل.',BAD_OFFER:'حصلت مشكلة في بدء الاتصال. جرّب تاني.'};
+async function startCall(){
+  if(S) return; showErr('');
+  if(!window.isSecureContext||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.RTCPeerConnection){ showErr('المتصفح ده مش بيدعم المكالمات الصوتية، أو الصفحة مش مفتوحة برابط آمن (https). افتح الرابط من Chrome.'); return; }
+  const nm=($('nm').value||'').trim().slice(0,40)||T('gm_call_name')||''; if(nm) T('gm_call_name',nm);
+  S={connected:false}; paintAvail();
+  const s=S;
+  let stream;
+  try{ stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false}); }
+  catch(e){ S=null; paintAvail(); const n=e&&e.name; showErr(n==='NotAllowedError'||n==='SecurityError'?'محتاجين إذن الميكروفون عشان تتكلم مع المحل. اسمح بالميكروفون من أيقونة 🔒 جنب الرابط ثم جرّب تاني.':n==='NotFoundError'?'مفيش ميكروفون شغّال على الجهاز.':'تعذّر تشغيل الميكروفون.'); return; }
+  s.stream=stream;
+  $('cshop').textContent=shopName; $('av').textContent=(shopName.trim()[0]||'م'); $('av').className='avatar rip'; $('timer').textContent=''; setStatus('بنتصل بالمحل…'); lbar(false,'جاري الاتصال…'); $('qual').className='q'; $('muteBtn').classList.remove('on'); $('muteBtn').setAttribute('aria-pressed','false'); $('muteLbl').textContent='كتم'; $('wave').className='wave ring'; show('call');
+  try{
+    s.t00=Date.now(); s.log=[]; evt(s,'mic ok');
+    const pc=new RTCPeerConnection({iceServers:ice}); s.pc=pc; evt(s,'pc created ice='+iceDesc(ice));
+    stream.getTracks().forEach(t=>pc.addTrack(t,stream));
+    pc.oniceconnectionstatechange=()=>evt(s,'ice='+pc.iceConnectionState); pc.onicegatheringstatechange=()=>evt(s,'gather='+pc.iceGatheringState); pc.onsignalingstatechange=()=>evt(s,'sig='+pc.signalingState); pc.onicecandidateerror=e=>evt(s,'candErr '+e.errorCode+' '+String(e.url||'').slice(0,50));
+    pc.ontrack=e=>{ const a=$('remote'); a.muted=false; a.volume=1; a.srcObject=e.streams[0]; evt(s,'ontrack '+e.track.kind+' muted='+e.track.muted); const pr=a.play&&a.play(); if(pr&&pr.then) pr.then(()=>evt(s,'play ok')).catch(er=>{ evt(s,'play FAIL '+(er&&er.name)); $('unmute').classList.remove('hide'); }); levels(e.streams[0]); };
+    pc.onconnectionstatechange=()=>{ if(S!==s) return; const st=pc.connectionState; evt(s,'conn='+st);
+      if(st==='connected'){ clearTimeout(s.iceT); if(!s.connected){ s.connected=true; s.t0=Date.now(); diag(s); lbar(true,'مكالمة جارية'); $('av').className='avatar'; setStatus('متصل'); $('wave').className='wave'; s.tick=setInterval(()=>{ $('timer').textContent=mmss(Math.round((Date.now()-s.t0)/1000)); },500); $('timer').textContent='00:00'; } clearTimeout(s.dc); setStatus('متصل'); }
+      else if(st==='disconnected'){ setStatus('الاتصال ضعيف… بنحاول نرجّعه'); clearTimeout(s.dc); s.dc=setTimeout(()=>{ if(S===s&&pc.connectionState!=='connected') failIce(s,'disconnected'); },10000); }
+      else if(st==='failed'){ failIce(s,'failed'); } };
+    const offer=await pc.createOffer({offerToReceiveAudio:true}); await pc.setLocalDescription(offer); const g0=Date.now(); await gather(pc,5000); evt(s,'gather done '+(Date.now()-g0)+'ms local cands: '+cands(pc.localDescription.sdp));
+    if(S!==s) return;
+    const r=await rpc('call_start',{p_token:TOKEN,p_offer:{type:'offer',sdp:pc.localDescription.sdp},p_name:nm||null});
+    if(S!==s){ rpc('call_end_caller',{p_id:r.id,p_secret:r.secret},true).catch(()=>{}); return; }
+    s.id=r.id; s.secret=r.secret; evt(s,'offer sent id='+String(r.id).slice(0,8)); setStatus('بيرنّ عند المحل…');
+    s.to=setTimeout(()=>{ if(S===s&&!s.connected&&!s.answered){ rpc('call_end_caller',{p_id:s.id,p_secret:s.secret},true).catch(()=>{}); finish('محدش رد','المحل مارداش دلوقتي. جرّب تتصل تاني بعد شوية.',false); } },46000);
+    let busyPoll=false;
+    s.poll=setInterval(async()=>{ if(S!==s||busyPoll) return; busyPoll=true; try{
+      const p=await rpc('call_poll',{p_id:s.id,p_secret:s.secret}); if(S!==s) return;
+      if(p.status==='answered'&&p.answer&&!s.answered){ s.answered=true; clearTimeout(s.to); setStatus('بنوصّل الصوت…'); evt(s,'answer received remote cands: '+cands(p.answer.sdp)); await pc.setRemoteDescription({type:'answer',sdp:p.answer.sdp}); evt(s,'answer applied');
+        s.iceT=setTimeout(()=>{ if(S===s&&!s.connected) failIce(s,'timeout'); },window.__ICE_MS||20000); }
+      else if(p.status==='rejected'){ finish('المحل مش قادر يرد','المحل رفض المكالمة دلوقتي. جرّب بعد شوية.',false); }
+      else if(p.status==='missed'||p.status==='cancelled'){ finish('محدش رد','المحل مارداش دلوقتي. جرّب تاني بعد شوية.',false); }
+      else if(p.status==='ended'||p.status==='gone'){ if(s.connected) finish('انتهت المكالمة',''); else if(s.answered) failIce(s,'peer'); else finish('اتقفل الاتصال',''); }
+    }catch(e){ evt(s,'poll/apply ERR '+(e&&e.message)); s.fail=(s.fail||0)+1; if(s.fail>=8){ finish('انقطع الاتصال بالإنترنت','اتأكد من النت وجرّب تاني.',false); } else if(S===s) setStatus('مشكلة في الشبكة… بنحاول'); } finally{ busyPoll=false; if(S===s&&s.fail&&s.connected) s.fail=0; } },1000);
+  }catch(e){
+    evt(s,'setup ERR '+(e&&e.message)); const code=String(e&&(e.code||e.message)||''); const k=Object.keys(MAP).find(x=>code.includes(x));
+    const m=k?MAP[k]:'تعذّر بدء المكالمة. اتأكد من النت وجرّب تاني.';
+    cleanup(); show('home'); showErr(m,k==='BUSY'||k==='NOT_AVAILABLE'); loadInfo();
+  }
+}
+/* موجة الصوت: من مستوى صوت التاجر الفعلي */
+function ctx(s){ if(!s.ac){ const AC=window.AudioContext||window.webkitAudioContext; s.ac=new AC(); } if(s.ac.state==='suspended') s.ac.resume().catch(()=>{}); return s.ac; }
+function an(s,stream){ const ac=ctx(s); const a=ac.createAnalyser(); a.fftSize=64; ac.createMediaStreamSource(stream).connect(a); return a; }
+function levels(stream){
+  const s=S; if(!s) return; try{
+    const ar=an(s,stream); s.ar=ar; const al=s.stream?an(s,s.stream):null;
+    const dr=new Uint8Array(ar.frequencyBinCount), dl=al?new Uint8Array(al.frequencyBinCount):null; const bars=[...document.querySelectorAll('#wave b')];
+    const avg=d=>{ let t=0; for(let i=0;i<d.length;i++) t+=d[i]; return t/d.length/255; };
+    s.lv=setInterval(()=>{ ar.getByteFrequencyData(dr); bars.forEach((b,i)=>{ const v=dr[Math.min(dr.length-1,i+1)]/255; b.style.height=(8+v*52)+'px'; });
+      $('rmlvl').style.width=Math.max(2,Math.min(100,avg(dr)*400))+'%'; if(al){ al.getByteFrequencyData(dl); $('mylvl').style.width=Math.max(2,Math.min(100,avg(dl)*400))+'%'; } },90);
+  }catch(_){}
+}
+/* تقرير تشخيص الصوت: بيتنسخ ويتعرض عشان يتبعت للدعم */
+async function report(){
+  if(!S&&window.__last&&window.__last.snapTxt) return window.__last.snapTxt+'\n(تقرير لحظة الفشل)'; const L=[]; const s=S||window.__last; L.push('Gomla4U call report (customer) '+new Date().toISOString()); L.push('UA: '+navigator.userAgent);
+  L.push('secure='+window.isSecureContext+' visible='+document.visibilityState);
+  if(!s||!s.pc){ L.push('no active call'); return L.join('\n'); }
+  const pc=s.pc; L.push('call='+String(s.id||'').slice(0,8)+' heard='+!!s.heard+' answered='+!!s.answered); L.push('conn='+pc.connectionState+' ice='+pc.iceConnectionState+' sig='+pc.signalingState+' gather='+pc.iceGatheringState);
+  try{ const cf=pc.getConfiguration(); L.push('ICE servers: '+((cf.iceServers||[]).map(x=>[].concat(x.urls).join(',')).join(' | ')||'none')); L.push('LOCAL cands: '+cands(pc.localDescription&&pc.localDescription.sdp)+' | REMOTE cands: '+cands(pc.remoteDescription&&pc.remoteDescription.sdp)); }catch(_){}
+  try{ const st=await pc.getStats(); const by={}; st.forEach(r=>by[r.id]=r); st.forEach(r=>{
+    if(r.type==='inbound-rtp'&&r.kind==='audio') L.push('IN  bytes='+r.bytesReceived+' packets='+r.packetsReceived+' lost='+r.packetsLost+' jitter='+r.jitter+' level='+r.audioLevel+' energy='+r.totalAudioEnergy);
+    if(r.type==='outbound-rtp'&&r.kind==='audio') L.push('OUT bytes='+r.bytesSent+' packets='+r.packetsSent);
+    if(r.type==='candidate-pair'&&(r.nominated||r.selected)){ const l=by[r.localCandidateId], m=by[r.remoteCandidateId]; L.push('PAIR '+(l?l.candidateType+'/'+l.protocol:'?')+' <-> '+(m?m.candidateType+'/'+m.protocol:'?')+' rtt='+r.currentRoundTripTime); } }); }catch(e){ L.push('stats err '+e.message); }
+  const t=s.stream&&s.stream.getAudioTracks()[0]; L.push('MIC '+(t?('label='+t.label+' enabled='+t.enabled+' muted='+t.muted+' state='+t.readyState):'none'));
+  const a=$('remote'); L.push('AUDIO paused='+a.paused+' muted='+a.muted+' vol='+a.volume+' ready='+a.readyState+' hasStream='+!!a.srcObject+' tracks='+(a.srcObject?a.srcObject.getAudioTracks().map(x=>x.readyState+'/'+x.muted).join(','):'-'));
+  L.push('ACTX '+(s.ac?s.ac.state:'none')+' | myLevel='+$('mylvl').style.width+' remoteLevel='+$('rmlvl').style.width);
+  L.push('LOG:'); (s.log||[]).forEach(x=>L.push('  '+x));
+  return L.join('\n');
+}
+$('repOut').onclick=()=>$('repOut').classList.add('hide');
+$('rep').onclick=async()=>{ const o=$('repOut'); if(!o.classList.contains('hide')){ o.classList.add('hide'); return; } const t=await report(); o.textContent=t; o.classList.remove('hide'); try{ await navigator.clipboard.writeText(t); }catch(_){} };
+$('callBtn').onclick=startCall;
+$('endBtn').onclick=endByUser;
+$('back').onclick=()=>{ show('home'); $('err').classList.add('hide'); loadInfo(); };
+addEventListener('pagehide',()=>{ if(S&&S.id){ try{ rpc('call_end_caller',{p_id:S.id,p_secret:S.secret},true); }catch(_){} } cleanup(); });
+window.__call={get state(){return S;},startCall,loadInfo};
+loadInfo(); setInterval(()=>{ if(!document.hidden) loadInfo(); },15000);
+})();
+</script>
+<script>
+/* ===== شات العميل (إضافة): بحث في منتجات المحل صاحب اللينك فقط، بدون أي كتابة أو عمليات مالية =====
+   مش بيلمس منطق المكالمة. بيكلّم دوال القراءة shop_* بس (storefront.sql). */
+(function(){
+'use strict';
+const SUPA='https://buvixsokavrxuwpikefl.supabase.co', KEY='sb_publishable_UzXzPaiuLgDhjVtsFVXeYQ_XlpDbUvN';
+const $=id=>document.getElementById(id);
+const TOKEN=(new URLSearchParams(location.search).get('s')||'').trim();
+const chat=$('chat'), inp=$('q'), sendBtn=$('qsend');
+let info=null, shop='المحل', wa=null, mode='search', last=null, busy=false, off=false, started=false;
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- شبكة ---------- */
+async function rpc(name,args){
+  const ac=new AbortController(), t=setTimeout(()=>ac.abort(),12000);
+  try{
+    const r=await fetch(SUPA+'/rest/v1/rpc/'+name,{method:'POST',signal:ac.signal,headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(args||{})});
+    let j=null; try{ j=await r.json(); }catch(_){}
+    if(!r.ok){ const e=new Error((j&&(j.message||j.hint))||('HTTP '+r.status)); e.status=r.status; e.code=(j&&j.code)||''; throw e; }
+    return j;
+  } finally{ clearTimeout(t); }
+}
+const missingFn=e=>e&&(e.code==='PGRST202'||e.status===404||/Could not find the function|does not exist/i.test(e.message||''));
+
+/* ---------- عرض ---------- */
+const SVG_HEAD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="2.5" y="13" width="4" height="6.5" rx="1.8"/><rect x="17.5" y="13" width="4" height="6.5" rx="1.8"/></svg>';
+const SVG_BOX='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>';
+const SVG_CALL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h3.2l1.7 4.3-2.1 1.4a11 11 0 0 0 5.2 5.2l1.4-2.1L19 14.5V18a2 2 0 0 1-2.2 2A15.5 15.5 0 0 1 3 6.2 2 2 0 0 1 5 4z"/></svg>';
+function el(tag,cls,txt){ const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; }
+function scroll(){ requestAnimationFrame(()=>{ chat.scrollTop=chat.scrollHeight; }); }
+function trimChat(){ while(chat.children.length>70) chat.removeChild(chat.firstChild); }
+function botRow(){ const r=el('div','mrow'); const a=el('span','av2'); a.innerHTML=SVG_HEAD; const b=el('div','bub'); r.append(a,b); chat.appendChild(r); trimChat(); return b; }
+function say(text){ const b=botRow(); b.textContent=text; scroll(); return b; }
+function userSay(text){ const r=el('div','mrow u'); r.appendChild(el('div','bub',text)); chat.appendChild(r); trimChat(); scroll(); if(!started){ started=true; $('qstrip').classList.remove('hide'); } }
+function typing(){ const b=botRow(); b.innerHTML='<span class="typing"><i></i><i></i><i></i></span>'; scroll(); const row=b.parentNode; return ()=>row.remove(); }
+const price=p=>{ const n=Number(p); return (isFinite(n)&&n>0)?n.toLocaleString('en-US',{maximumFractionDigits:2})+' ج.م':null; };
+const waDigits=()=>/^\d{10,15}$/.test(wa||'')?wa:null;
+function waUrl(extra){ const d=waDigits(); if(!d) return null; const t='أهلًا، وصلت لحضرتك من صفحة '+shop+' على جملة فور يو وعايز أستفسر عن '+(extra?('المنتج: '+extra):'أحد المنتجات')+'.'; return 'https://wa.me/'+d+'?text='+encodeURIComponent(t); }
+function safeImg(u){ try{ const x=new URL(String(u||'')); return x.protocol==='https:'?x.href:null; }catch(_){ return null; } }
+
+/* ---------- أزرار الأسئلة الجاهزة ---------- */
+const QS=[['search','🛍️','أبحث عن منتج'],['price','💰','أريد معرفة سعر منتج'],['avail','📦','ما المنتجات المتاحة؟'],['alt','🔄','أبحث عن بديل لمنتج'],['info','🕒','معلومات المحل ومواعيد العمل'],['contact','👤','أريد التواصل مع صاحب المحل']];
+const QSHORT={search:'ابحث عن منتج',price:'سعر منتج',avail:'المنتجات المتاحة',alt:'بديل لمنتج',info:'مواعيد المحل',contact:'تواصل مع المحل'};
+function qBtn(k,strip){ const b=el('button','qb'); b.type='button'; b.dataset.k=k; const q=QS.find(x=>x[0]===k); if(!strip){ b.appendChild(el('span','e',q[1])); b.appendChild(el('span','',q[2])); } else b.textContent=q[1]+' '+QSHORT[k]; return b; }
+function fillStrip(){ const s=$('qstrip'); s.textContent=''; QS.forEach(q=>s.appendChild(qBtn(q[0],true))); }
+
+/* ---------- أزرار التواصل داخل الشات ---------- */
+function contactBtns(parent,extra){
+  const u=waUrl(extra);
+  if(u){ const a=el('a','ibtn w'); a.href=u; a.target='_blank'; a.rel='noopener noreferrer'; a.appendChild(document.createTextNode('تواصل مع صاحب المحل عبر واتساب')); parent.appendChild(a); }
+  const c=el('button','ibtn c'); c.type='button'; c.dataset.call='1'; c.innerHTML=SVG_CALL; c.appendChild(document.createTextNode('اتصل بالمحل الآن')); parent.appendChild(c);
+}
+
+/* ---------- بطاقة منتج ---------- */
+function card(b,p){
+  last=p; const c=el('div','pc'); const pr=el('div','pr'); const im=el('div','im'); const u=safeImg(p.image);
+  if(u){ const i=document.createElement('img'); i.alt=p.name||''; i.loading='lazy'; i.decoding='async'; i.referrerPolicy='no-referrer'; i.src=u; i.onerror=()=>{ im.textContent=''; im.innerHTML=SVG_BOX; }; im.appendChild(i); } else im.innerHTML=SVG_BOX;
+  const inn=el('div','in'); inn.appendChild(el('p','nm2',p.name||'')); if(p.description) inn.appendChild(el('p','ds',p.description));
+  const line=el('div'); const pp=price(p.price); const pe=el('span','pp'+(pp?'':' na'),pp||'السعر عند المحل'); line.appendChild(pe);
+  line.appendChild(el('span','st '+(p.in_stock?'ok':'no'),p.in_stock?'✓ متوفر':'غير متوفر حاليًا')); inn.appendChild(line);
+  pr.append(im,inn); c.appendChild(pr);
+  const pa=el('div','pa'); const u2=waUrl(p.name);
+  if(u2){ const a=el('a','w','اسأل عن المنتج على واتساب'); a.href=u2; a.target='_blank'; a.rel='noopener noreferrer'; pa.appendChild(a); }
+  const g=el('button','g',p.in_stock?'منتجات مشابهة':'شوف البدائل المتاحة'); g.type='button'; g.dataset.alt=p.id; pa.appendChild(g);
+  c.appendChild(pa); b.appendChild(c); scroll();
+}
+const seen=new Map(); const keep=items=>items.forEach(p=>seen.set(p.id,p));
+function options(b,items,alt){
+  const o=el('div','opts'); items.forEach(p=>{ const x=el('button','opt'); x.type='button'; x.dataset.id=p.id; if(alt) x.dataset.altmode='1'; x.appendChild(el('span','',p.name)); const pp=price(p.price); x.appendChild(el('small','',(p.in_stock?'':'غير متوفر · ')+(pp||''))); o.appendChild(x); }); b.appendChild(o); scroll();
+}
+
+/* ---------- فهم الكلام (مطابقة كلمات ومرادفات، بدون أي خدمة خارجية) ---------- */
+const norm=t=>String(t||'').toLowerCase().replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/[ىئ]/g,'ي').replace(/ؤ/g,'و').replace(/[ً-ٰٟـ]/g,'').replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[؟?!.,،؛:;"'()\[\]{}«»\\\/]+/g,' ').replace(/\s+/g,' ').trim();
+const STOP=new Set('عندكم عندك عندكو عايز عاوز عاوزه عايزه محتاج محتاجه ابغي ابغى بكام بكم كام سعر سعره سعرها اسعار ثمن متوفر متوفره موجود موجوده هل في فيه ده دي دا هذا هذه ازاي اللي الي انا ممكن لو سمحت من علي على عن مع يا ايه اي ابحث ابحثلي دورلي دور لاقي لقيت اشتري اطلب نفسي منتج المنتج منتجات حاجه حاجات شيء حابب اعرف اسأل اسال عايزين عاوزين كنت بدور بدوّر بس كمان تاني برضو او وكمان والله طيب ياريت يعني بتاع بتاعكم عليه عليها'.split(' '));
+const SYN=[['شاحن','شواحن','شاحنات','شاحنه','charger','chargers'],['كابل','كابلات','كيبل','كيبلات','cable','cables','سلك'],['سماعه','سماعات','هيدفون','headphone','headphones','earphone','earbuds','ايربودز','airpods'],['موبايل','موبايلات','هاتف','جوال','mobile','smartphone'],['جراب','جرابات','كفر','اغطيه','case','cover'],['ايفون','iphone'],['سامسونج','سامسونغ','samsung'],['هواوي','huawei'],['شاومي','xiaomi','ريدمي','redmi'],['اوبو','oppo'],['ريلمي','realme'],['شاشه','سكرينه','سكرين','screen','protector','حمايه'],['باور','power'],['بطاريه','بطاريات','battery'],['ماوس','mouse','فاره'],['كيبورد','keyboard'],['فلاش','فلاشه','flash'],['لايتنج','لايتننج','lightning']];
+const PHR=[[/(تايب|تيب|type)\s*-?\s*(سي|c)\b/g,'§tc',['تايب سي','تيب سي','type c','typec','type-c','usb c','usb-c','usbc']],[/باور\s*بانك|power\s*bank|powerbank/g,'§pb',['باور بانك','power bank','powerbank','شاحن متنقل','بطاريه متنقله']]];
+function toQuery(n){
+  let s=' '+n+' '; PHR.forEach(p=>{ s=s.replace(p[0],' '+p[1]+' '); });
+  const groups=[], used=new Set();
+  s.split(' ').filter(Boolean).forEach(t=>{
+    let alts=null; const ph=PHR.find(p=>p[1]===t);
+    if(ph) alts=ph[2];
+    else{
+      if(STOP.has(t)||(t.length>2&&t[0]==='و'&&STOP.has(t.slice(1)))) return; if(t.length<2) return;
+      let b=t.length>3&&t.startsWith('ال')?t.slice(2):t; if(STOP.has(b)) return;
+      const e=SYN.find(g=>g.includes(b)||g.includes(t)); alts=e?e.slice():[b];
+      if(!e&&b.length>4&&b.endsWith('ات')) alts.push(b.slice(0,-2));
+    }
+    alts=alts.map(a=>a.replace(/[,|]/g,' ').trim()).filter(a=>a.length>=2||/^\d$/.test(a));
+    if(!alts.length) return; const key=alts[0]; if(used.has(key)) return; used.add(key); groups.push(alts);
+  });
+  const g=groups.slice(0,6); return {groups:g,str:g.map(a=>a.join('|')).join(',')};
+}
+const RX={
+  hello:/^(ا?هلا|اهلا|مرحبا|مرحبتين|هاي|هلو|السلام عليكم|سلام عليكم|صباح الخير|مساء الخير|ازيك|ازيكم|يا هلا)( .{0,12})?$/,
+  thanks:/(شكرا|تسلم|متشكر|الله يكرمك|ميرسي)/,
+  hours:/(مواعيد|ساعات (العمل|الشغل)|بتفتح|بتقفل|تفتحوا|تقفلوا|فاتحين|مفتوح|الدوام|امتي (تفتح|تقفل|بتفتحوا|بتقفلوا))/,
+  addr:/(عنوان|لوكيشن|موقعكم|موقع المحل|مكانكم|مكان المحل|فين المحل|فينكم|فين مكان|ازاي اجيلكم|اجيلكم)/,
+  contact:/(واتس|whats|تواصل|صاحب المحل|صاحب المتجر|اكلم|كلم|مكالم|اتصل|رقم (المحل|صاحب|التواصل|الواتس|التليفون|الموبايل)|رقمكم|رقم تليفون)/,
+  cats:/(ايه المنتجات|المنتجات المتاح|المنتجات المتوفر|عندكم ايه|ايه المتاح|ايه اللي عندكم|اقسام|تصنيفات|كل المنتجات|المتاح عندكم)/,
+  alt:/(بديل|بدائل|شبه|حاجه تانيه|حاجه مشابهه|مشابه)/,
+  priceq:/(سعر|بكام|بكم|كام ثمن|ثمن|كام)/,
+  stockq:/(متوفر|موجود|فيه|عندكم|لسه)/
+};
+
+/* ---------- ردود ---------- */
+async function reply(build){ const rm=typing(); try{ await sleep(260); } finally{ rm(); } await build(); }
+function failMsg(e){
+  const b=botRow();
+  b.textContent=missingFn(e)?'خدمة البحث في منتجات المحل لسه مش متفعّلة. تقدر تتواصل مع المحل مباشرة:':'حصلت مشكلة في الوصول لبيانات المحل دلوقتي. جرّب تاني بعد شوية، أو تواصل مع المحل مباشرة:';
+  contactBtns(b); scroll();
+}
+function notFound(raw){
+  const b=botRow(); const w=String(raw||'').trim().slice(0,40);
+  b.appendChild(document.createTextNode('مش لاقي «'+w+'» في منتجات المحل دلوقتي. جرّب تكتب الاسم بشكل تاني، أو شوف الأقسام المتاحة، أو اسأل صاحب المحل مباشرة.'));
+  const o=el('div','opts'); const x=el('button','opt'); x.type='button'; x.dataset.k='avail'; x.appendChild(el('span','','📦 شوف الأقسام المتاحة')); o.appendChild(x); b.appendChild(o);
+  contactBtns(b,null); scroll();
+}
+function clarify(){
+  const b=botRow(); b.textContent='ممكن توضّحلي أكتر؟ اكتب اسم المنتج اللي محتاجه (مثال: شاحن سامسونج)، أو اختار من الأسئلة الجاهزة تحت.'; scroll();
+}
+async function search(raw,kind){
+  const q=toQuery(norm(raw));
+  if(!q.groups.length){
+    if(last&&(RX.priceq.test(norm(raw))||RX.stockq.test(norm(raw)))) return showOne(last,kind||(RX.priceq.test(norm(raw))?'price':'search'));
+    return clarify();
+  }
+  const r=await rpc('shop_search_products',{p_token:TOKEN,p_q:q.str,p_limit:12});
+  if(!r||!r.ok) throw new Error('NOT_OK');
+  let items=Array.isArray(r.items)?r.items:[]; if(!items.length) return notFound(raw);
+  const best=Math.max.apply(null,items.map(i=>i.score||0)); items=items.filter(i=>(i.score||0)===best); keep(items);
+  const exact=best>=(r.groups||q.groups.length);
+  if(items.length===1) return showOne(items[0],kind,!exact);
+  const b=botRow(); const shown=items.slice(0,6);
+  b.appendChild(document.createTextNode((exact?'لقيت '+items.length+' منتجات مناسبة. تقصد أنهي؟':'مفيش مطابق بالظبط، دي أقرب منتجات عندنا. تقصد أنهي؟')+(r.total>shown.length||items.length>shown.length?'\nولو كتبت تفاصيل أدق (الماركة أو الموديل) هضيّق النتائج.':'')));
+  options(b,shown,kind==='alt');
+}
+function showOne(p,kind,approx){
+  const b=botRow(); const pp=price(p.price);
+  if(kind==='alt'){ b.textContent='تمام، هدورلك على بدائل متاحة لـ «'+p.name+'»…'; scroll(); return alternatives(p); }
+  let t=approx?'مش لاقي بالظبط اللي كتبته، أقرب منتج عندنا:\n':'';
+  if(kind==='price') t+=pp?('سعر «'+p.name+'»: '+pp+(p.in_stock?' — ومتوفر ✅':' — لكنه غير متوفر حاليًا')):('«'+p.name+'» موجود في المحل بس السعر مش مسجّل. اسأل صاحب المحل مباشرة.');
+  else t+=p.in_stock?('«'+p.name+'» متوفر عندنا ✅'+(pp?' وسعره '+pp:'')):('«'+p.name+'» غير متوفر حاليًا'+(pp?' (سعره المسجّل '+pp+')':'')+'. ممكن أوريك بدائل متاحة.');
+  b.textContent=t; card(b,p);
+}
+async function alternatives(p){
+  const args={p_token:TOKEN,p_exclude:p.id,p_limit:6,p_instock:true};
+  if(p.category_id) args.p_cat=p.category_id; else { const q=toQuery(norm(p.name)); if(q.groups.length) args.p_q=q.groups[0].join('|'); }
+  const r=(args.p_cat||args.p_q)?await rpc('shop_search_products',args):{ok:true,items:[]};
+  const items=(r&&r.items)||[]; keep(items); const b=botRow();
+  if(!items.length){ b.appendChild(document.createTextNode('مفيش بدائل متوفرة مسجّلة دلوقتي لـ «'+p.name+'». اسأل صاحب المحل مباشرة، يمكن عنده حاجة مناسبة.')); contactBtns(b,p.name); scroll(); return; }
+  b.appendChild(document.createTextNode('دي بدائل متاحة قريبة من «'+p.name+'»:')); options(b,items.slice(0,6));
+}
+async function categories(){
+  const r=await rpc('shop_categories',{p_token:TOKEN}); const b=botRow();
+  if(!Array.isArray(r)||!r.length){ b.textContent='لسه مفيش أقسام مسجّلة. اكتب اسم المنتج اللي محتاجه وأدورلك عليه.'; scroll(); return; }
+  b.appendChild(document.createTextNode('دي أقسام المحل المتاحة. اختار قسم وأوريك المنتجات المتوفرة فيه:'));
+  const o=el('div','opts'); r.forEach(c=>{ const x=el('button','opt'); x.type='button'; x.dataset.cat=c.id; x.dataset.cn=c.name||''; x.appendChild(el('span','',c.name||'قسم')); x.appendChild(el('small','',(c.n||0)+' منتج')); o.appendChild(x); }); b.appendChild(o); scroll();
+}
+async function inCategory(id,name){
+  const r=await rpc('shop_search_products',{p_token:TOKEN,p_cat:id,p_instock:true,p_limit:8}); const items=(r&&r.items)||[]; keep(items); const b=botRow();
+  if(!items.length){ b.textContent='مفيش منتجات متوفرة في قسم «'+name+'» دلوقتي.'; scroll(); return; }
+  b.appendChild(document.createTextNode('المتوفر في «'+name+'»:'+(r.total>items.length?'\nفيه منتجات أكتر، اكتب اسم المنتج لو بتدور على حاجة معينة.':''))); options(b,items);
+}
+function showInfo(){
+  const b=botRow(); const L=[]; const a=info&&info.address, h=info&&info.hours;
+  if(a) L.push('📍 العنوان: '+a); if(h) L.push('🕒 مواعيد العمل: '+h);
+  if(!L.length){ b.appendChild(document.createTextNode('صاحب المحل لسه ما سجّلش العنوان ولا المواعيد هنا. تقدر تسأله مباشرة:')); contactBtns(b); }
+  else { b.appendChild(document.createTextNode(L.join('\n')+((!a||!h)?'\n(باقي البيانات لسه مش مسجّلة، اسأل صاحب المحل مباشرة.)':''))); contactBtns(b); }
+  scroll();
+}
+function showContact(){
+  const b=botRow(); b.appendChild(document.createTextNode(waDigits()?'تقدر تتواصل مع صاحب المحل بالطريقة اللي تريحك:':'رقم واتساب مش متاح حاليًا. تقدر تتصل بالمحل مباشرة من هنا:')); contactBtns(b); scroll();
+}
+
+/* ---------- تنفيذ الأزرار والنصوص ---------- */
+const PROMPT={search:'اكتب اسم المنتج اللي بتدور عليه (مثال: شاحن سامسونج تايب سي).',price:'اكتب اسم المنتج وأقولك سعره المسجّل.',alt:'اكتب اسم المنتج وأدورلك على بدائل متاحة.'};
+const PH={search:'اكتب اسم المنتج أو سؤالك…',price:'اسم المنتج اللي عايز تعرف سعره…',alt:'اسم المنتج اللي عايز له بديل…'};
+function setMode(m){ mode=m; inp.placeholder=PH[m]||PH.search; }
+async function guarded(fn){
+  if(busy) return; busy=true; sendBtn.disabled=true;
+  try{ await reply(fn); }
+  catch(e){ failMsg(e); }
+  finally{ busy=false; sendBtn.disabled=false; }
+}
+function doKey(k){
+  if(off) return; const q=QS.find(x=>x[0]===k); userSay(q[2]);
+  if(PROMPT[k]){ setMode(k); guarded(async()=>{ say(PROMPT[k]); }).then(()=>{ try{ inp.focus(); }catch(_){} }); return; }
+  setMode('search');
+  if(k==='avail') guarded(categories); else if(k==='info') guarded(async()=>showInfo()); else if(k==='contact') guarded(async()=>showContact());
+}
+function handleText(raw){
+  if(off) return; const n=norm(raw); if(!n) return; userSay(raw.trim()); const m=mode; setMode('search');
+  guarded(async()=>{
+    if(RX.hello.test(n)) return void say('أهلًا بيك في '+shop+' 👋 اكتب اسم المنتج اللي بتدور عليه، أو اختار من الأسئلة الجاهزة.');
+    if(RX.thanks.test(n)&&n.split(' ').length<=4) return void say('العفو! لو محتاج أي حاجة تانية أنا هنا 🙌');
+    if(RX.hours.test(n)||RX.addr.test(n)) return showInfo();
+    if(RX.contact.test(n)) return showContact();
+    if(RX.cats.test(n)) return categories();
+    if(m==='alt'||RX.alt.test(n)){
+      const q=toQuery(n); if(!q.groups.length&&last) return alternatives(last);
+      return search(raw,'alt');
+    }
+    return search(raw,m==='price'||(RX.priceq.test(n)&&!/(متوفر|موجود)/.test(n))?'price':'search');
+  });
+}
+chat.addEventListener('click',e=>{
+  const t=e.target.closest('button'); if(!t) return;
+  if(t.dataset.k){ doKey(t.dataset.k); return; }
+  if(t.dataset.call){ const cb=$('callBtn'); if(cb&&!cb.disabled) cb.click(); else guarded(async()=>say('المحل مش متاح للرد على المكالمات دلوقتي. جرّب واتساب أو ارجع بعد شوية.')); return; }
+  if(t.dataset.cat){ if(busy) return; userSay(t.dataset.cn||'القسم'); const id=t.dataset.cat, nm=t.dataset.cn||''; guarded(()=>inCategory(id,nm)); return; }
+  if(t.dataset.id){ const p=seen.get(t.dataset.id); if(!p||busy) return; userSay(p.name); if(t.dataset.altmode) guarded(()=>alternatives(p)); else guarded(async()=>showOne(p,'search')); return; }
+  if(t.dataset.alt){ const p=seen.get(t.dataset.alt)||last; if(!p||busy) return; userSay(p.in_stock?'منتجات مشابهة':'شوف البدائل المتاحة'); guarded(()=>alternatives(p)); }
+});
+$('qstrip').addEventListener('click',e=>{ const t=e.target.closest('button[data-k]'); if(t) doKey(t.dataset.k); });
+$('qf').addEventListener('submit',e=>{ e.preventDefault(); const v=inp.value; if(!v.trim()||busy) return; inp.value=''; handleText(v); });
+
+/* ---------- الإقلاع ---------- */
+function disable(msg){ off=true; inp.disabled=true; sendBtn.disabled=true; inp.placeholder=msg; }
+async function init(){
+  fillStrip();
+  if(!TOKEN){ say('رابط المحل غير مكتمل. اطلب من المحل يبعتلك الرابط الصحيح.'); disable('الشات غير متاح'); return; }
+  try{
+    info=await rpc('shop_public_info',{p_token:TOKEN});
+    if(!info||!info.ok){ say('الرابط ده غير صالح أو الصفحة متوقفة عند المحل.'); disable('الشات غير متاح'); return; }
+    shop=info.name||shop; wa=info.whatsapp||null; $('shop').textContent=shop; $('logo').textContent=(shop.trim()[0]||'م');
+    const u=waUrl(null); if(u){ const a=$('waBtn'); a.href=u; a.classList.remove('hide'); }
+    const b=botRow(); b.textContent='أهلًا بيك في '+shop+' 👋\n\nنورتنا! أنا هنا أساعدك تلاقي المنتج اللي بتدور عليه، وأجاوبك عن الأسعار والمنتجات المتاحة ومعلومات المحل.\n\nتحب أساعدك في إيه؟';
+    const g=el('div','qgrid'); QS.forEach(q=>g.appendChild(qBtn(q[0],false))); b.appendChild(g); chat.scrollTop=0;
+  }catch(e){
+    for(let i=0;i<20&&$('shop').textContent.trim()==='…';i++) await sleep(150);
+    const nm=$('shop').textContent.trim(); if(nm&&nm!=='…') shop=nm;
+    if(missingFn(e)){ say('أهلًا بيك في '+shop+' 👋\nخدمة البحث في المنتجات لسه مش متفعّلة عند المحل، بس تقدر تتصل بالمحل مباشرة من الزر تحت.'); disable('البحث غير متاح حاليًا'); }
+    else { const b=botRow(); b.textContent='مقدرتش أوصل لبيانات المحل دلوقتي. اتأكد من النت وجرّب تاني.'; const r=el('button','ibtn c'); r.type='button'; r.textContent='🔄 إعادة المحاولة'; r.onclick=()=>{ chat.textContent=''; started=false; init(); }; b.appendChild(r); }
+  }
+}
+window.__store={init,toQuery,norm,get shop(){return shop;}};
+init();
+})();
+</script>
+</body>
+</html>
